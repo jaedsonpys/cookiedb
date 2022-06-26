@@ -20,6 +20,10 @@ class JSONHandler:
         with open(filepath, 'w') as writer:
             writer.write(file_content)
 
+    def exists_database(self, database: str) -> bool:
+        database_path = os.path.join(self._database_local, database)
+        return os.path.isfile(database_path)
+
     def encrypt_json(self, obj: dict) -> str:
         dict_str = json.dumps(obj)
         encrypted_dict = self._fernet.encrypt(dict_str.encode())
