@@ -60,11 +60,16 @@ class JSONHandler:
         return database
 
     def update_database(self, database: str, items: dict):
+        database_path = os.path.join(self._database_local, database)
+
         database = self.get_database(database)
         update_time = datetime.now().replace(microsecond=0)
 
         database['items'] = items
         database['updated_at'] = str(update_time)
+
+        encrypted_json = self.encrypt_json(database)
+        self._save_file(encrypted_json, database_path)
 
 
 if __name__ == '__main__':
