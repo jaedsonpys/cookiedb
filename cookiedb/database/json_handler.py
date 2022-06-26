@@ -16,8 +16,8 @@ class JSONHandler:
         self._database_local = database_local
 
     @staticmethod
-    def _save_file(file_content: str, local: str) -> None:
-        with open(local, 'w') as writer:
+    def _save_file(file_content: str, filepath: str) -> None:
+        with open(filepath, 'w') as writer:
             writer.write(file_content)
 
     def encrypt_json(self, obj: dict) -> str:
