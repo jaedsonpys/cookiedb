@@ -1,12 +1,13 @@
 import json
 import os
 
+from typing import Union
 from datetime import datetime
 from cryptography.fernet import Fernet
 
 
 class JSONHandler:
-    def __init__(self, enc_key: str):
+    def __init__(self, enc_key: Union[bytes, str]):
         self._fernet = Fernet(enc_key)
 
     @staticmethod
