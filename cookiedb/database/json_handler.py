@@ -39,4 +39,4 @@ class JSONHandler:
 
 if __name__ == '__main__':
     handler = JSONHandler(Fernet.generate_key())
-    handler.create_json_database('MyDatabase', './')
+    handler.create_json_database('MyDatabase', '../databases-test')
