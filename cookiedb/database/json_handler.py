@@ -12,7 +12,7 @@ class JSONHandler:
 
     @staticmethod
     def _save_file(file_content: str, local: str) -> None:
-        with open(local, 'r') as writer:
+        with open(local, 'w') as writer:
             writer.write(file_content)
 
     def encrypt_json(self, obj: dict) -> str:
