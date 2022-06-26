@@ -46,12 +46,17 @@ class JSONHandler:
 
         return database
 
-    def get_database(self, database: str) -> dict:
+    def get_database(self, database: str) -> Union[None, dict]:
         database_path = os.path.join(self._database_local, database)
-        with open(database_path, 'rb') as reader:
-            encrypted_data = reader.read()
 
-        database = self.decrypt_json(encrypted_data)
+        try:
+            with open(database_path, 'rb') as reader:
+                encrypted_data = reader.read()
+        except FileNotFoundError:
+            database = None
+        else:
+            database = self.decrypt_json(encrypted_data)
+
         return database
 
     def update_database(self, database: str, items: dict):
