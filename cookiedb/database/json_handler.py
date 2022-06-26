@@ -19,3 +19,17 @@ class JSONHandler:
         dict_str = json.dumps(obj)
         encrypted_dict = self._fernet.encrypt(dict_str.encode())
         return encrypted_dict.decode()
+
+    def create_json_database(self, name: str, local: str):
+        database_path = os.path.join(local, name)
+        created_time = str(datetime.now().replace(microsecond=0))
+
+        database = {
+            'name': name,
+            'created_at': created_time,
+            'updated_at': created_time,
+            'items': {}
+        }
+
+        encrypted_data = self.encrypt_json(database)
+        self._save_file(encrypted_data, database_path)
