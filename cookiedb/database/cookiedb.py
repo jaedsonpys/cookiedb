@@ -56,3 +56,13 @@ class CookieDB:
                 items = items.setdefault(i, {})
 
         self._auto_commit()
+
+
+if __name__ == '__main__':
+    database = CookieDB(database_local='../databases-test')
+    database.open('MyDatabase')
+
+    database.create_item('languages/python', {
+        'name': 'Python',
+        'ext': '.py'
+    })
