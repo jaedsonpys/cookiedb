@@ -54,6 +54,13 @@ class JSONHandler:
         database = self.decrypt_json(encrypted_data)
         return database
 
+    def update_database(self, database: str, items: dict):
+        database = self.get_database(database)
+        update_time = datetime.now().replace(microsecond=0)
+
+        database['items'] = items
+        database['updated_at'] = str(update_time)
+
 
 if __name__ == '__main__':
     handler = JSONHandler(Fernet.generate_key(), '../databases-test')
