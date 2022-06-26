@@ -54,3 +54,5 @@ class CookieDB:
                 items = items.setdefault(i, value)
             else:
                 items = items.setdefault(i, {})
+
+        self._auto_commit()
