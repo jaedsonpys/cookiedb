@@ -8,7 +8,8 @@ class CookieDB:
     def __init__(
         self,
         key: str = None,
-        database_local: str = None
+        database_local: str = None,
+        autocommit: bool = False
     ):
         self._json_handler = None
         self._open_database = None
@@ -22,6 +23,11 @@ class CookieDB:
 
         self._key = key
         self._database_local = database_local
+        self._autocommit = autocommit
+
+    def _auto_commit(self):
+        if self._autocommit:
+            self.commit()
 
     def open(self, database_name: str) -> None:
         self._json_handler = JSONHandler(self._key, self._database_local)
