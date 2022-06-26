@@ -75,3 +75,6 @@ class JSONHandler:
 if __name__ == '__main__':
     handler = JSONHandler(Fernet.generate_key(), '../databases-test')
     handler.create_json_database('MyDatabase')
+    handler.update_database('MyDatabase', {'users': {'name': 'Jaedson'}})
+
+    print(handler.get_database('MyDatabase'))
