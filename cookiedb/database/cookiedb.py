@@ -10,7 +10,7 @@ class CookieDB:
     ):
         self._json_handler = None
         self._open_database = None
-        self._temp_database = None
+        self._temp_items = None
 
         if not database_local:
             database_local = './'
@@ -29,3 +29,10 @@ class CookieDB:
             raise DatabaseNotFoundError(f'Database {database_name} not found.')
         else:
             self._open_database = database_name
+
+    def commit(self) -> bool:
+        if self._temp_items is None:
+            return False
+
+        self._json_handler.update_database(self._open_database, self._temp_items)
+        return False
