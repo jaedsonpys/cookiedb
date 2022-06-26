@@ -33,3 +33,8 @@ class JSONHandler:
 
         encrypted_data = self.encrypt_json(database)
         self._save_file(encrypted_data, database_path)
+
+
+if __name__ == '__main__':
+    handler = JSONHandler(Fernet.generate_key())
+    handler.create_json_database('MyDatabase', './')
