@@ -46,6 +46,14 @@ class JSONHandler:
 
         return database
 
+    def get_database(self, database: str) -> dict:
+        database_path = os.path.join(self._database_local, database)
+        with open(database_path, 'rb') as reader:
+            encrypted_data = reader.read()
+
+        database = self.decrypt_json(encrypted_data)
+        return database
+
 
 if __name__ == '__main__':
     handler = JSONHandler(Fernet.generate_key(), '../databases-test')
