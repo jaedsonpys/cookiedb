@@ -146,24 +146,3 @@ class CookieDB:
                     item = db_item
 
         return item
-
-
-if __name__ == '__main__':
-    database = CookieDB(database_local='../databases-test')
-    database.create_database('MyDatabase', if_not_exists=True)
-    database.open('MyDatabase')
-
-    database.create_item('languages/python', {
-        'name': 'Python',
-        'ext': '.py'
-    })
-
-    # commit database changes
-    database.commit()
-
-    # get items
-    languages = database.get_item('languages')
-    print(languages)
-
-    python_lang = database.get_item('languages/python')
-    print(python_lang)
