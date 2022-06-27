@@ -73,7 +73,7 @@ class CookieDB:
         database_items = database.get('items')
 
         for i in path_split:
-            if i is not '':
+            if i != '':
                 if not item:
                     db_item = database_items.get(i)
                     item = db_item
