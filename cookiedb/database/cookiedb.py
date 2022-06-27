@@ -5,6 +5,18 @@ from .json_handler import JSONHandler
 from .exceptions import DatabaseNotFoundError, DatabaseExistsError, NoOpenDatabaseError
 
 from typing import Union, Any
+from functools import wraps
+
+
+def required_database(method):
+    @wraps(method)
+    def wrapper(ref, *args, **kwargs):
+        if ref.get_opened_database() is None:
+            raise NoOpenDatabaseError('No open database.')
+        else:
+            return method(ref, *args, **kwargs)
+
+    return wrapper
 
 
 class CookieDB:
@@ -48,9 +60,8 @@ class CookieDB:
         if self._autocommit:
             self.commit()
 
-    def _database_required(self):
-        if self._open_database is None:
-            raise NoOpenDatabaseError('No open database.')
+    def get_opened_database(self):
+        return self._open_database
 
     def open(self, database_name: str) -> None:
         """
@@ -88,6 +99,7 @@ class CookieDB:
             if not if_not_exists:
                 raise DatabaseExistsError(f'Database {database_name} already exists.')
 
+    @required_database
     def commit(self) -> bool:
         """
         Save changes made to the database.
@@ -95,14 +107,13 @@ class CookieDB:
         :return: Returns "True" if there were changes to commit.
         """
 
-        self._database_required()
-
         if self._temp_items is None:
             return False
 
         self._json_handler.update_database(self._open_database, self._temp_items)
         return False
 
+    @required_database
     def create_item(self, path: Union[str, int], value: Any) -> None:
         """
         Creates an item in the database.
@@ -115,8 +126,6 @@ class CookieDB:
         :param value: Item value;
         :return: None.
         """
-
-        self._database_required()
 
         items = self._temp_items
         path_list = path.split('/')
@@ -134,6 +143,7 @@ class CookieDB:
 
         self._auto_commit()
 
+    @required_database
     def get_item(self, path: Union[str, int]) -> Any:
         """
         Get a database item from the path.
@@ -142,8 +152,6 @@ class CookieDB:
         :return: Returns the obtained value.
         None if nothing is found.
         """
-
-        self._database_required()
 
         path_list = path.split('/')
         last_items = {}
