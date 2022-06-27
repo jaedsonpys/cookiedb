@@ -111,10 +111,15 @@ class CookieDB:
         """
 
         items = self._temp_items
-        path_split = path.split('/')
+        path_list = path.split('/')
+        path_list_filtered = []
 
-        for c, i in enumerate(path_split):
-            if c == (len(path_split) - 1):
+        for i in path_list:
+            if i != '':
+                path_list_filtered.append(i)
+
+        for c, i in enumerate(path_list_filtered):
+            if c == (len(path_list_filtered) - 1):
                 items = items.setdefault(i, value)
             else:
                 items = items.setdefault(i, {})
