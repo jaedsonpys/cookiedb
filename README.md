@@ -25,6 +25,36 @@ To install **CookieDB**, use the `pip` package manager:
 pip install cookiedb
 ```
 
+## Demonstration of use
+
+**Simple usage demo**, see full example in
+[examples/example.py](https://github.com/jaedsonpys/cookiedb/blob/master/examples/example.py):
+
+```python
+from cookiedb import CookieDB
+
+database = CookieDB()
+
+database.create_database('MyDatabase')
+database.open('MyDatabase')
+
+database.create_item('languages', {
+    'python': {
+        'name': 'Python',
+        'ext': '.py'
+    },
+    'cpp': {
+        'name': 'C++',
+        'ext': '.cpp'
+    }
+})
+
+database.commit()
+
+languages = database.get_item('languages')
+print(f'All languages: {languages}')
+```
+
 ## License
 
 ```
