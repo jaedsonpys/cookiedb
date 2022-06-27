@@ -25,12 +25,13 @@ class CookieDB:
         self._database_local = database_local
         self._autocommit = autocommit
 
+        self._json_handler = JSONHandler(self._key, self._database_local)
+
     def _auto_commit(self):
         if self._autocommit:
             self.commit()
 
     def open(self, database_name: str) -> None:
-        self._json_handler = JSONHandler(self._key, self._database_local)
         database = self._json_handler.exists_database(database_name)
 
         if not database:
@@ -42,7 +43,7 @@ class CookieDB:
         if not self._json_handler.exists_database(database_name):
             self._json_handler.create_json_database(database_name)
         else:
-            raise DatabaseExistsError
+            raise DatabaseExistsError(f'Database {database_name} already exists.')
 
     def commit(self) -> bool:
         if self._temp_items is None:
@@ -66,6 +67,7 @@ class CookieDB:
 
 if __name__ == '__main__':
     database = CookieDB(database_local='../databases-test')
+    database.create_database('MyDatabase')
     database.open('MyDatabase')
 
     database.create_item('languages/python', {
