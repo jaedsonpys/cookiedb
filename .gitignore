@@ -1,4 +1,4 @@
-*.txt
+project.txt
 venv
 __pycache__
 cookiedb/databases-test
