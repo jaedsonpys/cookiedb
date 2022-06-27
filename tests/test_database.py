@@ -1,7 +1,7 @@
 import os
 
 from pyseqtest import SeqTest
-from cookiedb import CookieDB
+from cookiedb import CookieDB, exceptions
 
 
 class TestDatabase(SeqTest):
@@ -59,6 +59,13 @@ class TestDatabase(SeqTest):
 
         self.is_true(os.path.isfile('./databases/MyDatabase'), msg_error='"MyDatabase" not created')
         self.is_true(os.path.isfile('./databases/PySGIDatabase'), msg_error='"PySGIDatabase" not created')
+
+    def test_open_database(self):
+        try:
+            self.cookiedb.open('MyDatabase')
+            self.cookiedb.open('PySGIDatabase')
+        except exceptions.DatabaseNotFoundError as error:
+            self.is_true(False, msg_error='DatabaseNotFoundError exception')
 
     def test_create_items_1(self):
         self.cookiedb.create_item('languages/programming', self.programming_languages)
