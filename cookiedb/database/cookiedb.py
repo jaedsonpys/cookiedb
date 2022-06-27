@@ -1,5 +1,5 @@
-from json_handler import JSONHandler
-from exceptions import DatabaseNotFoundError, DatabaseExistsError
+from .json_handler import JSONHandler
+from .exceptions import DatabaseNotFoundError, DatabaseExistsError
 
 from typing import Union, Any
 
