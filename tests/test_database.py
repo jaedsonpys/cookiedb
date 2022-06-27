@@ -51,6 +51,37 @@ class TestDatabase(SeqTest):
             }
         }
 
+        self.users = [
+            {
+                'name': 'Jaedson',
+                'age': 15,
+                'email': 'test@mail.com',
+                'languages': [
+                    'python', 'javascript',
+                    'cpp', 'css', 'html',
+                    'typescript'
+                ]
+            },
+            {
+                'name': 'Pedro',
+                'age': 24,
+                'email': 'test@mail.com',
+                'languages': [
+                    'javascript', 'css', 'html',
+                    'typescript'
+                ]
+            },
+            {
+                'name': 'Maria',
+                'age': 17,
+                'email': 'test@mail.com',
+                'languages': [
+                    'javascript', 'css', 'html',
+                    'golang'
+                ]
+            }
+        ]
+
         self.cookiedb = CookieDB(database_local='./databases', autocommit=True)
 
     def test_create_database(self):
