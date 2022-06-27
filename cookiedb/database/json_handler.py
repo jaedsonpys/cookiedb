@@ -24,7 +24,7 @@ class JSONHandler:
             writer.write(file_content)
 
     def exists_database(self, database: str) -> bool:
-        database_path = os.path.join(self._database_local, database)
+        database_path = os.path.join(self._database_local, database + '.cookiedb')
         return os.path.isfile(database_path)
 
     def encrypt_json(self, obj: dict) -> str:
@@ -38,7 +38,7 @@ class JSONHandler:
         return json_data
 
     def create_json_database(self, name: str) -> dict:
-        database_path = os.path.join(self._database_local, name)
+        database_path = os.path.join(self._database_local, name + '.cookiedb')
         created_time = str(datetime.now().replace(microsecond=0))
 
         database = {
@@ -54,7 +54,7 @@ class JSONHandler:
         return database
 
     def get_database(self, database: str) -> Union[None, dict]:
-        database_path = os.path.join(self._database_local, database)
+        database_path = os.path.join(self._database_local, database + '.cookiedb')
 
         try:
             with open(database_path, 'rb') as reader:
@@ -67,7 +67,7 @@ class JSONHandler:
         return database
 
     def update_database(self, database: str, items: dict):
-        database_path = os.path.join(self._database_local, database)
+        database_path = os.path.join(self._database_local, database + '.cookiedb')
 
         database = self.get_database(database)
         update_time = datetime.now().replace(microsecond=0)

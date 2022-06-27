@@ -88,8 +88,8 @@ class TestDatabase(SeqTest):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
         self.cookiedb.create_database('PySGIDatabase', if_not_exists=True)
 
-        self.is_true(os.path.isfile('./databases/MyDatabase'), msg_error='"MyDatabase" not created')
-        self.is_true(os.path.isfile('./databases/PySGIDatabase'), msg_error='"PySGIDatabase" not created')
+        self.is_true(os.path.isfile('./databases/MyDatabase.cookiedb'), msg_error='"MyDatabase" not created')
+        self.is_true(os.path.isfile('./databases/PySGIDatabase.cookiedb'), msg_error='"PySGIDatabase" not created')
 
     def test_open_database(self):
         try:
