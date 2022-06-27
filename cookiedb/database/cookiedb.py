@@ -130,19 +130,19 @@ class CookieDB:
         None if nothing is found.
         """
 
-        path_split = path.split('/')
+        path_list = path.split('/')
         item = {}
 
         database = self._json_handler.get_database(self._open_database)
         database_items = database.get('items')
 
-        for i in path_split:
+        for i in path_list:
             if i != '':
                 if not item:
                     db_item = database_items.get(i)
                     item = db_item
-                else:
-                    db_item = item.get(i)
-                    item = db_item
+
+                db_item = item.get(i)
+                item = db_item
 
         return item
