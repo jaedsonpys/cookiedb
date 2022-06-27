@@ -1,3 +1,6 @@
+# Copyright (C) 2022 by Jaedson Silva
+# This code is licensed under MIT license (see LICENSE.txt for details)
+
 import json
 import os
 
