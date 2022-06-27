@@ -20,15 +20,12 @@
 
 ## Aditions
 
-- [`d8d4b95`](https://github.com/jaedsonpys/cookiedb/commit/d8d4b95dca40ab1dac096e85a19878ffaa11c7ac):
-Adding ".cookiedb" extension to CookieDB files;
-- [`a009f6a`](https://github.com/jaedsonpys/cookiedb/commit/a009f6a2aa000eb00bdf776088389f2d3aa84b13):
-Creating unit test using PySeqTest.
+- [`d8d4b95`](https://github.com/jaedsonpys/cookiedb/commit/d8d4b95dca40ab1dac096e85a19878ffaa11c7ac): Adding ".cookiedb" extension to CookieDB files;
+- [`a009f6a`](https://github.com/jaedsonpys/cookiedb/commit/a009f6a2aa000eb00bdf776088389f2d3aa84b13): Creating unit test using PySeqTest.
 
 ## Fixs
 
-- [`f2ff9dc`](https://github.com/jaedsonpys/cookiedb/commit/f2ff9dcdd203acf8b973c74e45197e79fbecdec8):
-Adding empty character filter from "path_list".
+- [`f2ff9dc`](https://github.com/jaedsonpys/cookiedb/commit/f2ff9dcdd203acf8b973c74e45197e79fbecdec8): Adding empty character filter from "path_list".
 
 # 1.1.0
 
@@ -37,7 +34,5 @@ Adding empty character filter from "path_list".
 
 ## Aditions
 
-- [`938a0e3`](https://github.com/jaedsonpys/cookiedb/commit/938a0e3ff0617fe86a8e052b72e5bdb65dbfe8e9):
-Creating `NoOpenDatabaseError` class in exceptions.py;
-- [`4ad55de`](https://github.com/jaedsonpys/cookiedb/commit/4ad55def9d49c9ab7651b34934499a116ce6e114):
-Creating decorator to check if there is an open database.
+- [`938a0e3`](https://github.com/jaedsonpys/cookiedb/commit/938a0e3ff0617fe86a8e052b72e5bdb65dbfe8e9): Creating `NoOpenDatabaseError` class in exceptions.py;
+- [`4ad55de`](https://github.com/jaedsonpys/cookiedb/commit/4ad55def9d49c9ab7651b34934499a116ce6e114): Creating decorator to check if there is an open database.
