@@ -55,9 +55,9 @@ class CookieDB:
         :return: None.
         """
 
-        database = self._json_handler.exists_database(database_name)
+        database_exists = self._json_handler.exists_database(database_name)
 
-        if not database:
+        if not database_exists:
             raise DatabaseNotFoundError(f'Database {database_name} not found.')
         else:
             self._open_database = database_name
