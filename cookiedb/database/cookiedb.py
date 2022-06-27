@@ -64,6 +64,24 @@ class CookieDB:
 
         self._auto_commit()
 
+    def get_item(self, path: Union[str, int]) -> Any:
+        path_split = path.split('/')
+        item = {}
+
+        database = self._json_handler.get_database(self._open_database)
+        database_items = database.get('items')
+
+        for i in path_split:
+            if i is not '':
+                if not item:
+                    db_item = database_items.get(i)
+                    item = db_item
+                else:
+                    db_item = item.get(i)
+                    item = db_item
+
+        return item
+
 
 if __name__ == '__main__':
     database = CookieDB(database_local='../databases-test')
