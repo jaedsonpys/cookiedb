@@ -13,7 +13,45 @@ class TestDatabase(SeqTest):
         if not os.path.isdir('./databases'):
             os.mkdir('./databases')
 
-        self.cookiedb = CookieDB(database_local='./databases')
+        self.programming_languages = {
+            'python': {
+                'extension': '.py',
+                'name': 'Python'
+            },
+            'javascript': {
+                'extension': '.js',
+                'name': 'JavaScript'
+            },
+            'cpp': {
+                'extension': '.cpp',
+                'name': 'C++'
+            },
+            'typescript': {
+                'extension': '.ts',
+                'name': 'TypeScript'
+            },
+            'csharp': {
+                'extension': '.cs',
+                'name': 'C#'
+            }
+        }
+
+        self.markup_languages = {
+            'html': {
+                'extension': '.html',
+                'name': 'HTML'
+            },
+            'xhtml': {
+                'extension': '.xhtml',
+                'name': 'XHTML'
+            },
+            'xml': {
+                'extension': '.xml',
+                'name': 'XML'
+            }
+        }
+
+        self.cookiedb = CookieDB(database_local='./databases', autocommit=True)
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
