@@ -92,3 +92,13 @@ if __name__ == '__main__':
         'name': 'Python',
         'ext': '.py'
     })
+
+    # commit database changes
+    database.commit()
+
+    # get items
+    languages = database.get_item('languages')
+    print(languages)
+
+    python_lang = database.get_item('languages/python')
+    print(python_lang)
