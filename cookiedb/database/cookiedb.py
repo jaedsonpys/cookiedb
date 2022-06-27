@@ -131,18 +131,18 @@ class CookieDB:
         """
 
         path_list = path.split('/')
-        item = {}
+        last_items = {}
 
         database = self._json_handler.get_database(self._open_database)
         database_items = database.get('items')
 
         for i in path_list:
             if i != '':
-                if not item:
+                if not last_items:
                     db_item = database_items.get(i)
-                    item = db_item
+                    last_items = db_item
+                else:
+                    sub_item = last_items.get(i)
+                    last_items = sub_item
 
-                db_item = item.get(i)
-                item = db_item
-
-        return item
+        return last_items
