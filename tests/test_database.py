@@ -109,6 +109,13 @@ class TestDatabase(SeqTest):
         self.is_true(languages_db == self.programming_languages, msg_error='"languages/programming" not equal values')
         self.is_true(markup_languages == self.markup_languages, msg_error='"languages/markup" not equal values')
 
+    def test_create_items_2(self):
+        self.cookiedb.create_item('users/', self.users)
+
+    def test_get_items_2(self):
+        users_db = self.cookiedb.get_item('users/')
+        self.is_true(users_db == self.users, msg_error='"users/" not equal values')
+
 
 if __name__ == '__main__':
     TestDatabase().run()
