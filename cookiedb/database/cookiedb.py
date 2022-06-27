@@ -2,7 +2,7 @@
 # This code is licensed under MIT license (see LICENSE.txt for details)
 
 from .json_handler import JSONHandler
-from .exceptions import DatabaseNotFoundError, DatabaseExistsError
+from .exceptions import DatabaseNotFoundError, DatabaseExistsError, NoOpenDatabaseError
 
 from typing import Union, Any
 
@@ -48,6 +48,10 @@ class CookieDB:
         if self._autocommit:
             self.commit()
 
+    def _database_required(self):
+        if self._open_database is None:
+            raise NoOpenDatabaseError('No open database.')
+
     def open(self, database_name: str) -> None:
         """
         Stores the name of the database if it exists,
@@ -91,6 +95,8 @@ class CookieDB:
         :return: Returns "True" if there were changes to commit.
         """
 
+        self._database_required()
+
         if self._temp_items is None:
             return False
 
@@ -109,6 +115,8 @@ class CookieDB:
         :param value: Item value;
         :return: None.
         """
+
+        self._database_required()
 
         items = self._temp_items
         path_list = path.split('/')
@@ -134,6 +142,8 @@ class CookieDB:
         :return: Returns the obtained value.
         None if nothing is found.
         """
+
+        self._database_required()
 
         path_list = path.split('/')
         last_items = {}
