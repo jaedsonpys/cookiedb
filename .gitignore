@@ -7,3 +7,6 @@ cookiedb/databases-test
 *.egg-info
 dist
 build
+
+# tests
+tests/databases
