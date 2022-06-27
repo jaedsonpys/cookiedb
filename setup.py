@@ -1,7 +1,9 @@
 from setuptools import setup
 from cookiedb import __version__
 
-with open('DOCS/database/0-1-0.md', 'r') as reader:
+doc_version = __version__.replace('.', '-')
+
+with open(f'DOCS/database/{doc_version}.md', 'r') as reader:
     full_doc = reader.read()
 
 setup(
