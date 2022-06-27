@@ -11,6 +11,20 @@ See a little about:
 - Easy access to data;
 - Data search by path.
 
+## Documentation
+
+All **CookieDB** documentation is in the directory
+[DOCS/](https://github.com/jaedsonpys/cookiedb/tree/master/DOCS) on GitHub,
+there you go find database documentation and other functionality.
+
+## Installation
+
+To install **CookieDB**, use the `pip` package manager:
+
+```
+pip install cookiedb
+```
+
 ## License
 
 ```
