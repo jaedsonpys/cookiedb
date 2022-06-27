@@ -1,5 +1,5 @@
 from json_handler import JSONHandler
-from exceptions import DatabaseNotFoundError
+from exceptions import DatabaseNotFoundError, DatabaseExistsError
 
 from typing import Union, Any
 
@@ -37,6 +37,12 @@ class CookieDB:
             raise DatabaseNotFoundError(f'Database {database_name} not found.')
         else:
             self._open_database = database_name
+
+    def create_database(self, database_name):
+        if not self._json_handler.exists_database(database_name):
+            self._json_handler.create_json_database(database_name)
+        else:
+            raise DatabaseExistsError
 
     def commit(self) -> bool:
         if self._temp_items is None:
