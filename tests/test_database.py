@@ -60,6 +60,10 @@ class TestDatabase(SeqTest):
         self.is_true(os.path.isfile('./databases/MyDatabase'), msg_error='"MyDatabase" not created')
         self.is_true(os.path.isfile('./databases/PySGIDatabase'), msg_error='"PySGIDatabase" not created')
 
+    def test_create_items_1(self):
+        self.cookiedb.create_item('languages/programming', self.programming_languages)
+        self.cookiedb.create_item('languages/markup', self.markup_languages)
+
 
 if __name__ == '__main__':
     TestDatabase().run()
