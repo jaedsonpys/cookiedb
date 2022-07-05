@@ -11,19 +11,17 @@ See a little about:
 - Easy access to data;
 - Data search by path.
 
-## Documentation
-
-All **CookieDB** documentation is in the directory
-[DOCS/](https://github.com/jaedsonpys/cookiedb/tree/master/DOCS) on GitHub,
-there you go find database documentation and other functionality.
-
-## Installation
-
 To install **CookieDB**, use the `pip` package manager:
 
 ```
 pip install cookiedb
 ```
+
+## Documentation
+
+All **CookieDB** documentation is in the directory
+[DOCS/](https://github.com/jaedsonpys/cookiedb/tree/master/DOCS) on GitHub,
+there you go find database documentation and other functionality.
 
 ## Demonstration of use
 
@@ -58,8 +56,9 @@ print(f'All languages: {languages}')
 ## License
 
 ```
-MIT License © 2022 by Jaedson Silva
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
 ```
 
-This code is licensed under MIT license (see [LICENSE.txt](https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE)
+This code is licensed under GPL v3 license (see [LICENSE.txt](https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE)
 for details)
