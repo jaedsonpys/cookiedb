@@ -36,3 +36,13 @@
 
 - [`938a0e3`](https://github.com/jaedsonpys/cookiedb/commit/938a0e3ff0617fe86a8e052b72e5bdb65dbfe8e9): Creating `NoOpenDatabaseError` class in exceptions.py;
 - [`4ad55de`](https://github.com/jaedsonpys/cookiedb/commit/4ad55def9d49c9ab7651b34934499a116ce6e114): Creating decorator to check if there is an open database.
+
+# 1.2.0
+
+- [CookieDB 1.2.0 in PyPi](https://pypi.org/project/cookiedb/1.2.0/)
+- [CookieDB 1.2.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v1.2.0)
+
+## Aditions
+
+- [`3b51b74`](https://github.com/jaedsonpys/cookiedb/commit/3b51b7411bebcc1b5fd10431542f47ac4eda958f): Adding method to delete items from database;
+- [`0fbb070`](https://github.com/jaedsonpys/cookiedb/commit/0fbb0706a67bfaca50a1961c9f321d400368fd12): Adding license notice to files.
