@@ -1,17 +1,15 @@
 import os
 
-from pyseqtest import SeqTest
+import bupytest
 from cookiedb import CookieDB, exceptions
 
 
-class TestDatabase(SeqTest):
+class TestDatabase(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
-        self.cookiedb: CookieDB
 
-    def setup(self):
-        if not os.path.isdir('./databases'):
-            os.mkdir('./databases')
+        if not os.path.isdir('./tests/databases'):
+            os.mkdir('./tests/databases')
 
         self.programming_languages = {
             'python': {
@@ -82,21 +80,21 @@ class TestDatabase(SeqTest):
             }
         ]
 
-        self.cookiedb = CookieDB(database_local='./databases', autocommit=True)
+        self.cookiedb = CookieDB(database_local='./tests/databases', autocommit=True)
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
         self.cookiedb.create_database('PySGIDatabase', if_not_exists=True)
 
-        self.is_true(os.path.isfile('./databases/MyDatabase.cookiedb'), msg_error='"MyDatabase" not created')
-        self.is_true(os.path.isfile('./databases/PySGIDatabase.cookiedb'), msg_error='"PySGIDatabase" not created')
+        self.assert_true(os.path.isfile('./tests/databases/MyDatabase.cookiedb'), message='"MyDatabase" not created')
+        self.assert_true(os.path.isfile('./tests/databases/PySGIDatabase.cookiedb'), message='"PySGIDatabase" not created')
 
     def test_open_database(self):
         try:
             self.cookiedb.open('MyDatabase')
             self.cookiedb.open('PySGIDatabase')
         except exceptions.DatabaseNotFoundError as error:
-            self.is_true(False, msg_error='DatabaseNotFoundError exception')
+            self.assert_true(False, message='DatabaseNotFoundError exception')
 
     def test_create_items_1(self):
         self.cookiedb.create_item('languages/programming', self.programming_languages)
@@ -106,16 +104,16 @@ class TestDatabase(SeqTest):
         languages_db = self.cookiedb.get_item('languages/programming')
         markup_languages = self.cookiedb.get_item('languages/markup')
 
-        self.is_true(languages_db == self.programming_languages, msg_error='"languages/programming" not equal values')
-        self.is_true(markup_languages == self.markup_languages, msg_error='"languages/markup" not equal values')
+        self.assert_true(languages_db == self.programming_languages, message='"languages/programming" not equal values')
+        self.assert_true(markup_languages == self.markup_languages, message='"languages/markup" not equal values')
 
     def test_create_items_2(self):
         self.cookiedb.create_item('users/', self.users)
 
     def test_get_items_2(self):
         users_db = self.cookiedb.get_item('users/')
-        self.is_true(users_db == self.users, msg_error='"users/" not equal values')
+        self.assert_true(users_db == self.users, message='"users/" not equal values')
 
 
 if __name__ == '__main__':
-    TestDatabase().run()
+    bupytest.this()

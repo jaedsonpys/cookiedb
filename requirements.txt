@@ -1,1 +1,3 @@
 cryptography
+bupytest
+argeasy
