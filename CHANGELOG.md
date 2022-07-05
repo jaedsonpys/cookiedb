@@ -3,7 +3,7 @@
 # 0.1.0
 
 - [CookieDB 0.1.0 in PyPi](https://pypi.org/project/cookiedb/0.1.0/)
-- [CookieDB 0.1.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/0.1.0)
+- [CookieDB 0.1.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v0.1.0)
 
 ## Aditions
 
@@ -16,7 +16,7 @@
 # 1.0.0
 
 - [CookieDB 1.0.0 in PyPi](https://pypi.org/project/cookiedb/1.0.0/)
-- [CookieDB 1.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/1.0.0)
+- [CookieDB 1.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v1.0.0)
 
 ## Aditions
 
@@ -30,7 +30,7 @@
 # 1.1.0
 
 - [CookieDB 1.1.0 in PyPi](https://pypi.org/project/cookiedb/1.1.0/)
-- [CookieDB 1.1.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/1.1.0)
+- [CookieDB 1.1.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v1.1.0)
 
 ## Aditions
 
