@@ -118,10 +118,15 @@ class TestDatabase(bupytest.UnitTest):
         users_db = self.cookiedb.get_item('users/')
         self.assert_true(users_db == self.users, message='"users/" not equal values')
 
-    def test_delete_item(self):
+    def test_delete_item_1(self):
         self.cookiedb.delete('languages/programming/python')
         python_lang = self.cookiedb.get_item('languages/programming/python')
         self.assert_false(python_lang, message='"languages/programming/python" not deleted')
+
+    def test_delete_item_2(self):
+        self.cookiedb.delete('languages/markup')
+        markup_langs = self.cookiedb.get_item('languages/markup')
+        self.assert_false(markup_langs, message='"languages/markup" not deleted')
 
 
 if __name__ == '__main__':
