@@ -1,7 +1,6 @@
 project.txt
 venv
 __pycache__
-cookiedb/databases-test
 
 # setup
 *.egg-info
@@ -10,3 +9,6 @@ build
 
 # tests
 tests/databases
+
+# ide
+.idea
