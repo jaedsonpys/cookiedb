@@ -1,6 +1,10 @@
 import os
+import sys
 
 import bupytest
+
+sys.path.insert(0, './')
+
 from cookiedb import CookieDB, exceptions
 
 
