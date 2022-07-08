@@ -1,10 +1,8 @@
 from setuptools import setup
 from cookiedb import __version__
 
-doc_version = __version__.replace('.', '-')
-
-with open(f'DOCS/database/{doc_version}.md', 'r') as reader:
-    full_doc = reader.read()
+with open(f'README.md', 'r') as reader:
+    readme = reader.read()
 
 setup(
     author='Jaedson Silva',
@@ -13,7 +11,7 @@ setup(
     description='CookieDB is a noSQL document database.',
     version=__version__,
     long_description_content_type='text/markdown',
-    long_description=full_doc,
+    long_description=readme,
     python_requires='>=3.6',
     license='GPL',
     packages=['cookiedb', 'cookiedb/database'],
