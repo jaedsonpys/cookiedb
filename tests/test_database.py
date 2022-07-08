@@ -97,7 +97,7 @@ class TestDatabase(bupytest.UnitTest):
         try:
             self.cookiedb.open('MyDatabase')
             self.cookiedb.open('PySGIDatabase')
-        except exceptions.DatabaseNotFoundError as error:
+        except exceptions.DatabaseNotFoundError:
             self.assert_true(False, message='DatabaseNotFoundError exception')
 
     def test_add_items_1(self):
@@ -105,8 +105,8 @@ class TestDatabase(bupytest.UnitTest):
         self.cookiedb.add('languages/markup', self.markup_languages)
 
     def test_get_items_1(self):
-        languages_db = self.cookiedb.get_item('languages/programming')
-        markup_languages = self.cookiedb.get_item('languages/markup')
+        languages_db = self.cookiedb.get('languages/programming')
+        markup_languages = self.cookiedb.get('languages/markup')
 
         self.assert_true(languages_db == self.programming_languages, message='"languages/programming" not equal values')
         self.assert_true(markup_languages == self.markup_languages, message='"languages/markup" not equal values')
@@ -115,17 +115,17 @@ class TestDatabase(bupytest.UnitTest):
         self.cookiedb.add('users/', self.users)
 
     def test_get_items_2(self):
-        users_db = self.cookiedb.get_item('users/')
+        users_db = self.cookiedb.get('users/')
         self.assert_true(users_db == self.users, message='"users/" not equal values')
 
     def test_delete_item_1(self):
         self.cookiedb.delete('languages/programming/python')
-        python_lang = self.cookiedb.get_item('languages/programming/python')
+        python_lang = self.cookiedb.get('languages/programming/python')
         self.assert_false(python_lang, message='"languages/programming/python" not deleted')
 
     def test_delete_item_2(self):
         self.cookiedb.delete('languages/markup')
-        markup_langs = self.cookiedb.get_item('languages/markup')
+        markup_langs = self.cookiedb.get('languages/markup')
         self.assert_false(markup_langs, message='"languages/markup" not deleted')
 
 
