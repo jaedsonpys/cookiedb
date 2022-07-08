@@ -29,16 +29,16 @@ class JSONHandler:
         database_local: str
     ):
         self._fernet = Fernet(enc_key)
-        self._database_local = database_local
+        self._document_local = database_local
 
     @staticmethod
     def _save_file(file_content: str, filepath: str) -> None:
         with open(filepath, 'w') as writer:
             writer.write(file_content)
 
-    def exists_database(self, database: str) -> bool:
-        database_path = os.path.join(self._database_local, database + '.cookiedb')
-        return os.path.isfile(database_path)
+    def exists_document(self, database: str) -> bool:
+        document_path = os.path.join(self._document_local, database + '.cookiedb')
+        return os.path.isfile(document_path)
 
     def encrypt_json(self, obj: dict) -> str:
         dict_str = json.dumps(obj)
@@ -50,51 +50,51 @@ class JSONHandler:
         json_data = json.loads(decrypted_json)
         return json_data
 
-    def create_json_database(self, name: str) -> dict:
-        database_path = os.path.join(self._database_local, name + '.cookiedb')
+    def create_document(self, name: str) -> dict:
+        document_path = os.path.join(self._document_local, name + '.cookiedb')
         created_time = str(datetime.now().replace(microsecond=0))
 
-        database = {
+        document = {
             'name': name,
             'created_at': created_time,
             'updated_at': created_time,
             'items': {}
         }
 
-        encrypted_data = self.encrypt_json(database)
-        self._save_file(encrypted_data, database_path)
+        encrypted_data = self.encrypt_json(document)
+        self._save_file(encrypted_data, document_path)
 
-        return database
+        return document
 
-    def get_database(self, database: str) -> Union[None, dict]:
-        database_path = os.path.join(self._database_local, database + '.cookiedb')
+    def get_document(self, database: str) -> Union[None, dict]:
+        document_path = os.path.join(self._document_local, database + '.cookiedb')
 
         try:
-            with open(database_path, 'rb') as reader:
+            with open(document_path, 'rb') as reader:
                 encrypted_data = reader.read()
         except FileNotFoundError:
-            database = None
+            document = None
         else:
-            database = self.decrypt_json(encrypted_data)
+            document = self.decrypt_json(encrypted_data)
 
-        return database
+        return document
 
-    def update_database(self, database: str, items: dict):
-        database_path = os.path.join(self._database_local, database + '.cookiedb')
+    def update_document(self, database: str, items: dict):
+        document_path = os.path.join(self._document_local, database + '.cookiedb')
 
-        database = self.get_database(database)
+        document = self.get_document(database)
         update_time = datetime.now().replace(microsecond=0)
 
-        database['items'] = items
-        database['updated_at'] = str(update_time)
+        document['items'] = items
+        document['updated_at'] = str(update_time)
 
-        encrypted_json = self.encrypt_json(database)
-        self._save_file(encrypted_json, database_path)
+        encrypted_json = self.encrypt_json(document)
+        self._save_file(encrypted_json, document_path)
 
 
 if __name__ == '__main__':
-    handler = JSONHandler(Fernet.generate_key(), '../databases-test')
-    handler.create_json_database('MyDatabase')
-    handler.update_database('MyDatabase', {'users': {'name': 'Jaedson'}})
+    handler = JSONHandler(Fernet.generate_key(), './')
+    handler.create_document('MyDatabase')
+    handler.update_document('MyDatabase', {'users': {'name': 'Jaedson'}})
 
-    print(handler.get_database('MyDatabase'))
+    print(handler.get_document('MyDatabase'))
