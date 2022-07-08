@@ -127,7 +127,7 @@ class CookieDB:
         return False
 
     @required_database
-    def create_item(self, path: str, value: Any) -> None:
+    def add(self, path: str, value: Any) -> None:
         """
         Creates an item in the database.
         Each path separated by "/" is a key in the JSON file.
