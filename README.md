@@ -7,7 +7,7 @@ See a little about:
 
 - Store information in various types of data;
 - Encrypted database;
-- `autocommit` options and encryption key definition;
+- `autocommit` option and encryption key definition;
 - Easy access to data;
 - Data search by path.
 
