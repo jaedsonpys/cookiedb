@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .json_handler import JSONHandler
+from ._document import JSONHandler
 from .exceptions import DatabaseNotFoundError, DatabaseExistsError, NoOpenDatabaseError
 
 from typing import Union, Any
