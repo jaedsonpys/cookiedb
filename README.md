@@ -60,5 +60,5 @@ GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
 ```
 
-This code is licensed under GPL v3 license (see [LICENSE.txt](https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE)
+This code is licensed under GPL v3 license (see [LICENSE](https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE)
 for details)
