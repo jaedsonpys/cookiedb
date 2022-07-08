@@ -24,7 +24,7 @@ from functools import wraps
 def required_database(method):
     @wraps(method)
     def decorator(ref, *args, **kwargs):
-        if ref.get_opened_database() is None:
+        if ref.checkout() is None:
             raise NoOpenDatabaseError('No open database.')
         else:
             return method(ref, *args, **kwargs)
@@ -73,7 +73,7 @@ class CookieDB:
         if self._autocommit:
             self.commit()
 
-    def get_opened_database(self):
+    def checkout(self):
         return self._open_database
 
     def open(self, database_name: str) -> None:
