@@ -16,6 +16,7 @@ setup(
     license='GPL',
     packages=['cookiedb', 'cookiedb/database'],
     install_requires=['cryptography'],
+    url='https://github.com/jaedsonpys/cookiedb',
     project_urls={
         'Source code': 'https://github.com/jaedsonpys/cookiedb',
         'License': 'https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE',
@@ -29,7 +30,7 @@ setup(
         'Intended Audience :: Science/Research',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3',
         'Topic :: Database',
         'Topic :: Database :: Database Engines/Servers'
     ],
