@@ -17,7 +17,7 @@
 from ._document import JSONHandler
 from .exceptions import DatabaseNotFoundError, DatabaseExistsError, NoOpenDatabaseError
 
-from typing import Union, Any
+from typing import Any
 from functools import wraps
 
 
