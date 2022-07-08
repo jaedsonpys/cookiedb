@@ -23,13 +23,13 @@ from functools import wraps
 
 def required_database(method):
     @wraps(method)
-    def wrapper(ref, *args, **kwargs):
+    def decorator(ref, *args, **kwargs):
         if ref.get_opened_database() is None:
             raise NoOpenDatabaseError('No open database.')
         else:
             return method(ref, *args, **kwargs)
 
-    return wrapper
+    return decorator
 
 
 class CookieDB:
