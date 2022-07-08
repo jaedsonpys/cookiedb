@@ -46,3 +46,17 @@
 
 - [`3b51b74`](https://github.com/jaedsonpys/cookiedb/commit/3b51b7411bebcc1b5fd10431542f47ac4eda958f): Adding method to delete items from database;
 - [`0fbb070`](https://github.com/jaedsonpys/cookiedb/commit/0fbb0706a67bfaca50a1961c9f321d400368fd12): Adding license notice to files.
+
+# 2.0.0
+
+- [CookieDB 2.0.0 in PyPi](https://pypi.org/project/cookiedb/2.0.0/)
+- [CookieDB 2.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v2.0.0)
+
+## Improvements
+
+- [`b832f56`](https://github.com/jaedsonpys/cookiedb/commit/b832f56): Renaming "wrapper" function to "decorator";
+- [`60d27d5`](https://github.com/jaedsonpys/cookiedb/commit/60d27d5): Renaming `CookieDB.get_opened_database` method to `checkout`;
+- [`cdac90f`](https://github.com/jaedsonpys/cookiedb/commit/cdac90f): Removing `Union[str, int]` from writing and reading methods;
+- [`6ec1aff`](https://github.com/jaedsonpys/cookiedb/commit/6ec1aff): Renaming `CookieDB.create_item` method to `add`;
+- [`6be7f84`](https://github.com/jaedsonpys/cookiedb/commit/6be7f84): Renaming `CookieDB.get_item` method to `get`;
+- [`6be7f84`](https://github.com/jaedsonpys/cookiedb/commit/6be7f84): Renaming `CookieDB.get_item` method to `get`.
