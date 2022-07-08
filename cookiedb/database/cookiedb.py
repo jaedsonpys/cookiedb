@@ -157,7 +157,7 @@ class CookieDB:
         self._auto_commit()
 
     @required_database
-    def get_item(self, path: str) -> Any:
+    def get(self, path: str) -> Any:
         """
         Get a database item from the path.
 
