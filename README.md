@@ -36,7 +36,7 @@ database = CookieDB()
 database.create_database('MyDatabase')
 database.open('MyDatabase')
 
-database.create_item('languages', {
+database.add('languages', {
     'python': {
         'name': 'Python',
         'ext': '.py'
@@ -49,7 +49,7 @@ database.create_item('languages', {
 
 database.commit()
 
-languages = database.get_item('languages')
+languages = database.get('languages')
 print(f'All languages: {languages}')
 ```
 
