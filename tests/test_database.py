@@ -100,9 +100,9 @@ class TestDatabase(bupytest.UnitTest):
         except exceptions.DatabaseNotFoundError as error:
             self.assert_true(False, message='DatabaseNotFoundError exception')
 
-    def test_create_items_1(self):
-        self.cookiedb.create_item('languages/programming', self.programming_languages)
-        self.cookiedb.create_item('languages/markup', self.markup_languages)
+    def test_add_items_1(self):
+        self.cookiedb.add('languages/programming', self.programming_languages)
+        self.cookiedb.add('languages/markup', self.markup_languages)
 
     def test_get_items_1(self):
         languages_db = self.cookiedb.get_item('languages/programming')
@@ -111,8 +111,8 @@ class TestDatabase(bupytest.UnitTest):
         self.assert_true(languages_db == self.programming_languages, message='"languages/programming" not equal values')
         self.assert_true(markup_languages == self.markup_languages, message='"languages/markup" not equal values')
 
-    def test_create_items_2(self):
-        self.cookiedb.create_item('users/', self.users)
+    def test_add_items_2(self):
+        self.cookiedb.add('users/', self.users)
 
     def test_get_items_2(self):
         users_db = self.cookiedb.get_item('users/')
