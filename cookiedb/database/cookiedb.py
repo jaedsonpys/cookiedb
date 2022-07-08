@@ -53,7 +53,7 @@ class CookieDB:
         time a database method is called.
         """
 
-        self._json_handler = None
+        self._document = None
         self._open_database = None
         self._temp_items = {}
 
@@ -67,7 +67,7 @@ class CookieDB:
         self._database_local = database_local
         self._autocommit = autocommit
 
-        self._json_handler = JSONHandler(self._key, self._database_local)
+        self._document = JSONHandler(self._key, self._database_local)
 
     def _auto_commit(self):
         if self._autocommit:
@@ -86,7 +86,7 @@ class CookieDB:
         :return: None.
         """
 
-        database_exists = self._json_handler.exists_database(database_name)
+        database_exists = self._document.exists_document(database_name)
 
         if not database_exists:
             raise DatabaseNotFoundError(f'Database {database_name} not found.')
@@ -106,8 +106,8 @@ class CookieDB:
         :return: None.
         """
 
-        if not self._json_handler.exists_database(database_name):
-            self._json_handler.create_json_database(database_name)
+        if not self._document.exists_document(database_name):
+            self._document.create_document(database_name)
         else:
             if not if_not_exists:
                 raise DatabaseExistsError(f'Database {database_name} already exists.')
@@ -123,7 +123,7 @@ class CookieDB:
         if self._temp_items is None:
             return False
 
-        self._json_handler.update_database(self._open_database, self._temp_items)
+        self._document.update_document(self._open_database, self._temp_items)
         return False
 
     @required_database
@@ -169,7 +169,7 @@ class CookieDB:
         path_list = path.split('/')
         last_items = {}
 
-        database = self._json_handler.get_database(self._open_database)
+        database = self._document.get_document(self._open_database)
         database_items = database.get('items')
 
         for i in path_list:
@@ -184,7 +184,7 @@ class CookieDB:
         return last_items
 
     def delete(self, path: str) -> bool:
-        database = self._json_handler.get_database(self._open_database)
+        database = self._document.get_document(self._open_database)
         database_items = database.get('items')
 
         df = database_items
@@ -202,4 +202,4 @@ class CookieDB:
             else:
                 df = df.setdefault(i, {})
 
-        self._json_handler.update_database(self._open_database, database_items)
+        self._document.update_document(self._open_database, database_items)
