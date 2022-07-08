@@ -127,7 +127,7 @@ class CookieDB:
         return False
 
     @required_database
-    def create_item(self, path: Union[str, int], value: Any) -> None:
+    def create_item(self, path: str, value: Any) -> None:
         """
         Creates an item in the database.
         Each path separated by "/" is a key in the JSON file.
@@ -157,7 +157,7 @@ class CookieDB:
         self._auto_commit()
 
     @required_database
-    def get_item(self, path: Union[str, int]) -> Any:
+    def get_item(self, path: str) -> Any:
         """
         Get a database item from the path.
 
