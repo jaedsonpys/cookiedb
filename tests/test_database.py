@@ -7,7 +7,7 @@ sys.path.insert(0, './')
 
 from cookiedb import CookieDB, exceptions
 
-PROGRAMMING_LANGS = {
+programming_languages = {
     'python': {
         'extension': '.py',
         'name': 'Python'
@@ -101,14 +101,14 @@ class TestDatabase(bupytest.UnitTest):
             self.assert_true(False, message='DatabaseNotFoundError exception')
 
     def test_add_items_1(self):
-        self.cookiedb.add('languages/programming', PROGRAMMING_LANGS)
+        self.cookiedb.add('languages/programming', programming_languages)
         self.cookiedb.add('languages/markup', MARKUP_LANGS)
 
     def test_get_items_1(self):
         languages_db = self.cookiedb.get('languages/programming')
         markup_languages = self.cookiedb.get('languages/markup')
 
-        self.assert_true(languages_db == PROGRAMMING_LANGS, message='"languages/programming" not equal values')
+        self.assert_true(languages_db == programming_languages, message='"languages/programming" not equal values')
         self.assert_true(markup_languages == MARKUP_LANGS, message='"languages/markup" not equal values')
 
     def test_add_items_2(self):
@@ -120,6 +120,8 @@ class TestDatabase(bupytest.UnitTest):
 
     def test_delete_item_1(self):
         self.cookiedb.delete('languages/programming/python')
+        programming_languages.pop('python')
+        
         python_lang = self.cookiedb.get('languages/programming/python')
         self.assert_false(python_lang, message='"languages/programming/python" not deleted')
 
@@ -141,9 +143,10 @@ class TestDatabasePersistence(bupytest.UnitTest):
 
     def test_get_previous_data(self):
         previous_data = self.cookiedb.get('languages/programming')
+
         self.assert_expected(
             previous_data,
-            PROGRAMMING_LANGS,
+            programming_languages,
             message='Incorrect "languages/programming" data'
         )
 
