@@ -90,11 +90,3 @@ class JSONHandler:
 
         encrypted_json = self.encrypt_json(document)
         self._save_file(encrypted_json, document_path)
-
-
-if __name__ == '__main__':
-    handler = JSONHandler(Fernet.generate_key(), './')
-    handler.create_document('MyDatabase')
-    handler.update_document('MyDatabase', {'users': {'name': 'Jaedson'}})
-
-    print(handler.get_document('MyDatabase'))
