@@ -47,8 +47,6 @@ database.add('languages', {
     }
 })
 
-database.commit()
-
 languages = database.get('languages')
 print(f'All languages: {languages}')
 ```
