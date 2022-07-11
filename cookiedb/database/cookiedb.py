@@ -54,7 +54,6 @@ class CookieDB:
 
         self._document = None
         self._open_database = None
-        self._temp_items = {}
 
         if not database_local:
             database_local = './'
@@ -105,18 +104,6 @@ class CookieDB:
         else:
             if not if_not_exists:
                 raise DatabaseExistsError(f'Database {database_name} already exists.')
-
-    @required_database
-    def _commit(self) -> bool:
-        if self._temp_items is None:
-            return False
-
-        document = self._document.get_document(self._open_database)
-        database_items = document['items']
-        database_items.update(self._temp_items)
-
-        self._document.update_document(self._open_database, database_items)
-        return False
 
     def _get_database_items(self):
         database = self._document.get_document(self._open_database)
