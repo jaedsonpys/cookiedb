@@ -20,7 +20,7 @@ while True:
     creation_date = input('Creation date: ')
     extension = input('Extension: ')
 
-    confirm = input('\nAdd this language? [y/n]').strip()
+    confirm = input('\nAdd this language? [y/n]: ').strip()
     confirm = confirm.lower()
 
     while confirm not in ('y', 'n'):
