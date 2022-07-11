@@ -36,8 +36,7 @@ class CookieDB:
     def __init__(
         self,
         key: str = None,
-        database_local: str = None,
-        autocommit: bool = False
+        database_local: str = None
     ):
         """
         Initializes the **JSONHandler** class and prepares the
@@ -65,13 +64,8 @@ class CookieDB:
 
         self._key = key
         self._database_local = database_local
-        self._autocommit = autocommit
 
         self._document = JSONHandler(self._key, self._database_local)
-
-    def _auto_commit(self):
-        if self._autocommit:
-            self.commit()
 
     def checkout(self):
         return self._open_database
@@ -113,13 +107,7 @@ class CookieDB:
                 raise DatabaseExistsError(f'Database {database_name} already exists.')
 
     @required_database
-    def commit(self) -> bool:
-        """
-        Save changes made to the database.
-
-        :return: Returns "True" if there were changes to commit.
-        """
-
+    def _commit(self) -> bool:
         if self._temp_items is None:
             return False
 
@@ -162,7 +150,7 @@ class CookieDB:
             else:
                 items = items.setdefault(i, {})
 
-        self._auto_commit()
+        self._commit()
 
     @required_database
     def get(self, path: str) -> Any:

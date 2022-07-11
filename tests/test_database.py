@@ -84,7 +84,7 @@ class TestDatabase(bupytest.UnitTest):
         if not os.path.isdir('./tests/databases'):
             os.mkdir('./tests/databases')
 
-        self.cookiedb = CookieDB(database_local='./tests/databases', autocommit=True)
+        self.cookiedb = CookieDB(database_local='./tests/databases')
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
@@ -134,7 +134,7 @@ class TestDatabase(bupytest.UnitTest):
 class TestDatabasePersistence(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
-        self.cookiedb = CookieDB(database_local='./tests/databases', autocommit=True)
+        self.cookiedb = CookieDB(database_local='./tests/databases')
         self.cookiedb.open('PySGIDatabase')
 
     def test_add_new_data(self):
