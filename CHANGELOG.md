@@ -60,3 +60,12 @@
 - [`6ec1aff`](https://github.com/jaedsonpys/cookiedb/commit/6ec1aff): Renaming `CookieDB.create_item` method to `add`;
 - [`6be7f84`](https://github.com/jaedsonpys/cookiedb/commit/6be7f84): Renaming `CookieDB.get_item` method to `get`;
 - [`6be7f84`](https://github.com/jaedsonpys/cookiedb/commit/6be7f84): Renaming `CookieDB.get_item` method to `get`.
+
+# 2.0.1
+
+- [CookieDB 2.0.1 in PyPi](https://pypi.org/project/cookiedb/2.0.1/)
+- [CookieDB 2.0.1 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v2.0.1)
+
+## Fix
+
+- [`1efebcf`](https://github.com/jaedsonpys/cookiedb/commit/1efebcf): Fixing database persistence error when committing new data;
