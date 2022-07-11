@@ -136,7 +136,9 @@ class CookieDB:
         :return: None.
         """
 
-        items = self._temp_items
+        database_items = self._get_database_items()
+        items = database_items
+
         path_list = path.split('/')
         path_list_filtered = []
 
@@ -146,11 +148,11 @@ class CookieDB:
 
         for c, i in enumerate(path_list_filtered):
             if c == (len(path_list_filtered) - 1):
-                items = items.setdefault(i, value)
+                items[i] = value
             else:
                 items = items.setdefault(i, {})
 
-        self._commit()
+        self._document.update_document(self._open_database, database_items)
 
     @required_database
     def get(self, path: str) -> Any:
