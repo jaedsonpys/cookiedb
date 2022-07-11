@@ -129,5 +129,40 @@ class TestDatabase(bupytest.UnitTest):
         self.assert_false(markup_langs, message='"languages/markup" not deleted')
 
 
+class TestDatabasePersistence(bupytest.UnitTest):
+    def __init__(self):
+        super().__init__()
+        self.cookiedb = CookieDB(database_local='./tests/databases', autocommit=True)
+        self.cookiedb.open('PySGIDatabase')
+
+    def test_add_new_data(self):
+        self.cookiedb.add('test/a', {'foo': 'bar'})
+        self.cookiedb.add('test/b', {'bar': 'foo'})
+
+    def test_get_previous_data(self):
+        previous_data = self.cookiedb.get('languages/programming')
+        self.assert_expected(
+            previous_data,
+            PROGRAMMING_LANGS,
+            message='Incorrect "languages/programming" data'
+        )
+
+    def test_get_new_data(self):
+        test_a = self.cookiedb.get('test/a')
+        test_b = self.cookiedb.get('test/b')
+
+        self.assert_expected(
+            test_a,
+            {'foo': 'bar'},
+            message='Incorrect "test/a" data'
+        )
+
+        self.assert_expected(
+            test_b,
+            {'bar': 'foo'},
+            message='Incorrect "test/b" data'
+        )
+
+
 if __name__ == '__main__':
     bupytest.this()
