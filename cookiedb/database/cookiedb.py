@@ -130,6 +130,10 @@ class CookieDB:
         self._document.update_document(self._open_database, database_items)
         return False
 
+    def _get_database_items(self):
+        database = self._document.get_document(self._open_database)
+        return database.get('items')
+
     @required_database
     def add(self, path: str, value: Any) -> None:
         """
