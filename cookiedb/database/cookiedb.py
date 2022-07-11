@@ -177,8 +177,7 @@ class CookieDB:
         path_list = path.split('/')
         last_items = {}
 
-        database = self._document.get_document(self._open_database)
-        database_items = database.get('items')
+        database_items = self._get_database_items()
 
         for i in path_list:
             if i != '':
@@ -192,9 +191,7 @@ class CookieDB:
         return last_items
 
     def delete(self, path: str) -> bool:
-        database = self._document.get_document(self._open_database)
-        database_items = database.get('items')
-
+        database_items = self._get_database_items()
         df = database_items
 
         path_list = path.split('/')
