@@ -1,6 +1,6 @@
 from cookiedb import CookieDB
 
-db = CookieDB(autocommit=True)
+db = CookieDB()
 db.create_database('languages', if_not_exists=True)
 db.open('languages')
 
