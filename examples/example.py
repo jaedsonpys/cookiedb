@@ -19,9 +19,6 @@ database.add('languages', {
     }
 })
 
-# commit database changes
-database.commit()
-
 # get items
 languages = database.get('languages')
 print(f'All languages: {languages}')
@@ -29,5 +26,5 @@ print(f'All languages: {languages}')
 python_lang = database.get('languages/python')
 print(f'Python language: {python_lang}')
 
-javascript_ext = database.get_item('languages/javascript/ext')
+javascript_ext = database.get('languages/javascript/ext')
 print(f'JavaScript file extension: {javascript_ext}')
