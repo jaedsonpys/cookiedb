@@ -69,3 +69,13 @@
 ## Fix
 
 - [`1efebcf`](https://github.com/jaedsonpys/cookiedb/commit/1efebcf): Fixing database persistence error when committing new data;
+
+# 3.0.0
+
+- [CookieDB 3.0.0 in PyPi](https://pypi.org/project/cookiedb/3.0.0/)
+- [CookieDB 3.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v3.0.0)
+
+## Improvements
+
+- [`57c6019`](https://github.com/jaedsonpys/cookiedb/commit/57c6019): Adding `CookieDB._get_database_items` method;
+- [`0c10824`](https://github.com/jaedsonpys/cookiedb/commit/0c10824): Removing commit option for user;
