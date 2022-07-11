@@ -123,7 +123,11 @@ class CookieDB:
         if self._temp_items is None:
             return False
 
-        self._document.update_document(self._open_database, self._temp_items)
+        document = self._document.get_document(self._open_database)
+        database_items = document['items']
+        database_items.update(self._temp_items)
+
+        self._document.update_document(self._open_database, database_items)
         return False
 
     @required_database
