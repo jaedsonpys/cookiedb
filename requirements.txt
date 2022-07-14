@@ -1,3 +1,5 @@
-cryptography
-bupytest
-argeasy
+argeasy==1.2.0
+bupytest==0.3.1
+cffi==1.15.0
+cryptography==37.0.2
+pycparser==2.21
