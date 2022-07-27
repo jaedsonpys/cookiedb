@@ -96,6 +96,6 @@
 - [CookieDB 3.0.2 in PyPi](https://pypi.org/project/cookiedb/3.0.2/)
 - [CookieDB 3.0.2 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v3.0.2)
 
-## Improvements
+## Fix
 
 - [`df37f99`](https://github.com/jaedsonpys/cookiedb/commit/df37f99): Removing `autocommit` from README.md.
