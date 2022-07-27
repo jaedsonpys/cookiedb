@@ -109,6 +109,10 @@ class CookieDB:
         database = self._document.get_document(self._open_database)
         return database.get('items')
 
+    def _filter_path_list(self, path_list: list) -> str:
+        path_list_filtered = [i for i in path_list if i != '']
+        return path_list_filtered
+
     @required_database
     def add(self, path: str, value: Any) -> None:
         """
