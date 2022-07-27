@@ -87,6 +87,6 @@
 
 ## Improvements
 
-- [`fc2eefe`](https://github.com/jaedsonpys/cookiedb/commit/fc2eefe): Update `CookieD.add` method docstring;
+- [`fc2eefe`](https://github.com/jaedsonpys/cookiedb/commit/fc2eefe): Update `CookieDB.add` method docstring;
 - [`9540c14`](https://github.com/jaedsonpys/cookiedb/commit/9540c14): Adding method to filter item path;
 - [`a491c86`](https://github.com/jaedsonpys/cookiedb/commit/a491c86): Filter empty string in `CookieDB.get` method.
