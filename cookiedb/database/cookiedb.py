@@ -127,15 +127,10 @@ class CookieDB:
         database_items = self._get_database_items()
         items = database_items
 
-        path_list = path.split('/')
-        path_list_filtered = []
+        path_list = self._filter_path_list(path.split('/'))
 
-        for i in path_list:
-            if i != '':
-                path_list_filtered.append(i)
-
-        for c, i in enumerate(path_list_filtered):
-            if c == (len(path_list_filtered) - 1):
+        for c, i in enumerate(path_list):
+            if c == (len(path_list) - 1):
                 items[i] = value
             else:
                 items = items.setdefault(i, {})
