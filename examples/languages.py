@@ -8,7 +8,7 @@ data = {}
 
 while True:
     print('-' * 20)
-    print('Add languages to database (999 in "name" to list):\n')
+    print('Add languages to database (999 in "name" to list):')
     print('-' * 20)
 
     name = input('Name: ')
