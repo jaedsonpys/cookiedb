@@ -17,4 +17,4 @@
 from .database import CookieDB
 from .database import exceptions
 
-__version__ = '3.0.1'
+__version__ = '3.0.2'
