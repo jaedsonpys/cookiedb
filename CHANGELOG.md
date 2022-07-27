@@ -68,7 +68,7 @@
 
 ## Fix
 
-- [`1efebcf`](https://github.com/jaedsonpys/cookiedb/commit/1efebcf): Fixing database persistence error when committing new data;
+- [`1efebcf`](https://github.com/jaedsonpys/cookiedb/commit/1efebcf): Fixing database persistence error when committing new data.
 
 # 3.0.0
 
@@ -78,4 +78,15 @@
 ## Improvements
 
 - [`57c6019`](https://github.com/jaedsonpys/cookiedb/commit/57c6019): Adding `CookieDB._get_database_items` method;
-- [`0c10824`](https://github.com/jaedsonpys/cookiedb/commit/0c10824): Removing commit option for user;
+- [`0c10824`](https://github.com/jaedsonpys/cookiedb/commit/0c10824): Removing commit option for user.
+
+# 3.0.1
+
+- [CookieDB 3.0.1 in PyPi](https://pypi.org/project/cookiedb/3.0.1/)
+- [CookieDB 3.0.1 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v3.0.1)
+
+## Improvements
+
+- [`fc2eefe`](https://github.com/jaedsonpys/cookiedb/commit/fc2eefe): Update `CookieD.add` method docstring;
+- [`9540c14`](https://github.com/jaedsonpys/cookiedb/commit/9540c14): Adding method to filter item path;
+- [`a491c86`](https://github.com/jaedsonpys/cookiedb/commit/a491c86): Filter empty string in `CookieDB.get` method.
