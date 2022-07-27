@@ -115,9 +115,6 @@ class CookieDB:
         Creates an item in the database.
         Each path separated by "/" is a key in the JSON file.
 
-        Values can be of type `str`, `int`,
-        `float`, `dict`, `list`, or `tuple`.
-
         :param path: Item path;
         :param value: Item value;
         :return: None.
