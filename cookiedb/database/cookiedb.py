@@ -147,19 +147,18 @@ class CookieDB:
         None if nothing is found.
         """
 
-        path_list = path.split('/')
+        path_list = self._filter_path_list(path.split('/'))
         last_items = {}
 
         database_items = self._get_database_items()
 
         for i in path_list:
-            if i != '':
-                if not last_items:
-                    db_item = database_items.get(i)
-                    last_items = db_item
-                else:
-                    sub_item = last_items.get(i)
-                    last_items = sub_item
+            if not last_items:
+                db_item = database_items.get(i)
+                last_items = db_item
+            else:
+                sub_item = last_items.get(i)
+                last_items = sub_item
 
         return last_items
 
