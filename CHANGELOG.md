@@ -109,3 +109,13 @@
 
 - [`8cbc837`](https://github.com/jaedsonpys/cookiedb/commit/8cbc837): Avoiding exception by deleting the item only if it exists;
 - [`e1fc339`](https://github.com/jaedsonpys/cookiedb/commit/e1fc339): Adding docstring to `CookieDB.delete` method.
+
+# 4.0.0
+
+- [CookieDB 4.0.0 in PyPi](https://pypi.org/project/cookiedb/4.0.0/)
+- [CookieDB 4.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.0.0)
+
+## Fix
+
+- [`f3804c1`](https://github.com/jaedsonpys/cookiedb/commit/f3804c1): Creating `InvalidDatabaseKeyError` exception;
+- [`1aa48c2`](https://github.com/jaedsonpys/cookiedb/commit/1aa48c2): Checking database encrypt key in `open` method.
