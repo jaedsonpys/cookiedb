@@ -34,5 +34,5 @@ setup(
         'Topic :: Database',
         'Topic :: Database :: Database Engines/Servers'
     ],
-    keywords=['database', 'noSQL', 'document', 'JSON', 'cookiedb']
+    keywords=['database', 'noSQL', 'document', 'JSON', 'sql']
 )
