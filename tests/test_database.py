@@ -2,6 +2,7 @@ import os
 import sys
 
 import bupytest
+from cryptography.fernet import Fernet
 
 sys.path.insert(0, './')
 
@@ -85,10 +86,16 @@ class TestDatabase(bupytest.UnitTest):
             os.mkdir('./tests/databases')
 
         self.cookiedb = CookieDB(database_local='./tests/databases')
+        self.cookiedb_2 = CookieDB(
+            key=Fernet.generate_key(),
+            database_local='./tests/databases'
+        )
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
         self.cookiedb.create_database('PySGIDatabase', if_not_exists=True)
+
+        self.cookiedb_2.create_database('TestKeyDatabase', if_not_exists=True)
 
         self.assert_true(os.path.isfile('./tests/databases/MyDatabase.cookiedb'), message='"MyDatabase" not created')
         self.assert_true(os.path.isfile('./tests/databases/PySGIDatabase.cookiedb'), message='"PySGIDatabase" not created')
@@ -103,6 +110,12 @@ class TestDatabase(bupytest.UnitTest):
     def test_add_items_1(self):
         self.cookiedb.add('languages/programming', programming_languages)
         self.cookiedb.add('languages/markup', MARKUP_LANGS)
+
+    def test_invalid_key_exception(self):
+        try:
+            self.cookiedb_2.open('PySGIDatabase')
+        except exceptions.InvalidDatabaseKeyError:
+            self.assert_true(True, message='CookieDB not detected invalid key')
 
     def test_get_items_1(self):
         languages_db = self.cookiedb.get('languages/programming')
