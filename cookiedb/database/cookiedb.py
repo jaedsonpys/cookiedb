@@ -15,17 +15,19 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from ._document import JSONHandler
-from .exceptions import DatabaseNotFoundError, DatabaseExistsError, NoOpenDatabaseError
+from . import exceptions
 
 from typing import Any
 from functools import wraps
+
+import cryptography.fernet
 
 
 def required_database(method):
     @wraps(method)
     def decorator(ref, *args, **kwargs):
         if ref.checkout() is None:
-            raise NoOpenDatabaseError('No open database.')
+            raise exceptions.NoOpenDatabaseError('No open database.')
         else:
             return method(ref, *args, **kwargs)
 
@@ -82,9 +84,14 @@ class CookieDB:
         database_exists = self._document.exists_document(database_name)
 
         if not database_exists:
-            raise DatabaseNotFoundError(f'Database {database_name} not found.')
+            raise exceptions.DatabaseNotFoundError(f'Database {database_name} not found.')
         else:
             self._open_database = database_name
+
+        try:
+            self._document.get_document(database_name)
+        except cryptography.fernet.InvalidToken:
+            raise exceptions.InvalidDatabaseKeyError('Invalid database key')
 
     def create_database(self, database_name, if_not_exists: bool = False) -> None:
         """
@@ -103,7 +110,7 @@ class CookieDB:
             self._document.create_document(database_name)
         else:
             if not if_not_exists:
-                raise DatabaseExistsError(f'Database {database_name} already exists.')
+                raise exceptions.DatabaseExistsError(f'Database {database_name} already exists.')
 
     def _get_database_items(self):
         database = self._document.get_document(self._open_database)
