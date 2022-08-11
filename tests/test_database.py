@@ -93,17 +93,13 @@ class TestDatabase(bupytest.UnitTest):
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
-        self.cookiedb.create_database('PySGIDatabase', if_not_exists=True)
-
         self.cookiedb_2.create_database('TestKeyDatabase', if_not_exists=True)
 
         self.assert_true(os.path.isfile('./tests/databases/MyDatabase.cookiedb'), message='"MyDatabase" not created')
-        self.assert_true(os.path.isfile('./tests/databases/PySGIDatabase.cookiedb'), message='"PySGIDatabase" not created')
 
     def test_open_database(self):
         try:
             self.cookiedb.open('MyDatabase')
-            self.cookiedb.open('PySGIDatabase')
         except exceptions.DatabaseNotFoundError:
             self.assert_true(False, message='DatabaseNotFoundError exception')
 
@@ -113,7 +109,7 @@ class TestDatabase(bupytest.UnitTest):
 
     def test_invalid_key_exception(self):
         try:
-            self.cookiedb_2.open('PySGIDatabase')
+            self.cookiedb_2.open('MyDatabase')
         except exceptions.InvalidDatabaseKeyError:
             self.assert_true(True, message='CookieDB not detected invalid key')
 
@@ -148,7 +144,7 @@ class TestDatabasePersistence(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
         self.cookiedb = CookieDB(database_local='./tests/databases')
-        self.cookiedb.open('PySGIDatabase')
+        self.cookiedb.open('MyDatabase')
 
     def test_add_new_data(self):
         self.cookiedb.add('test/a', {'foo': 'bar'})
