@@ -170,7 +170,8 @@ class CookieDB:
 
         for c, i in enumerate(path_list):
             if c == (len(path_list) - 1):
-                df = df.pop(i)
+                if i in df:
+                    df = df.pop(i)
             else:
                 df = df.setdefault(i, {})
 
