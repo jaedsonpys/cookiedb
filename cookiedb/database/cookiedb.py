@@ -162,7 +162,17 @@ class CookieDB:
 
         return last_items
 
-    def delete(self, path: str) -> bool:
+    def delete(self, path: str) -> None:
+        """Delete a item from database.
+
+        If the item does not exist, nothing will
+        be returned and no exception will be thrown.
+
+        :param path: Item path
+        :type path: str
+        :return: None
+        """
+
         database_items = self._get_database_items()
         df = database_items
 
