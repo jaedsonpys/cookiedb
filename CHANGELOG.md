@@ -99,3 +99,13 @@
 ## Fix
 
 - [`df37f99`](https://github.com/jaedsonpys/cookiedb/commit/df37f99): Removing `autocommit` from README.md.
+
+# 3.0.3
+
+- [CookieDB 3.0.3 in PyPi](https://pypi.org/project/cookiedb/3.0.3/)
+- [CookieDB 3.0.3 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v3.0.3)
+
+## Fix
+
+- [`8cbc837`](https://github.com/jaedsonpys/cookiedb/commit/8cbc837): Avoiding exception by deleting the item only if it exists;
+- [`e1fc339`](https://github.com/jaedsonpys/cookiedb/commit/e1fc339): Adding docstring to `CookieDB.delete` method.
