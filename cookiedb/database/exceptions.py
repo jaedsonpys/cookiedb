@@ -27,3 +27,8 @@ class DatabaseExistsError(Exception):
 class NoOpenDatabaseError(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+
+class InvalidDatabaseKeyError(Exception):
+    def __init__(self, message):
+        super().__init__(message)
