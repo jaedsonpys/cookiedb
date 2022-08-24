@@ -119,3 +119,13 @@
 
 - [`f3804c1`](https://github.com/jaedsonpys/cookiedb/commit/f3804c1): Creating `InvalidDatabaseKeyError` exception;
 - [`1aa48c2`](https://github.com/jaedsonpys/cookiedb/commit/1aa48c2): Checking database encrypt key in `open` method.
+
+# 4.1.0
+
+- [CookieDB 4.1.0 in PyPi](https://pypi.org/project/cookiedb/4.1.0/)
+- [CookieDB 4.1.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.1.0)
+
+## Aditions
+
+- [`0f3f795`](https://github.com/jaedsonpys/cookiedb/commit/0f3f795): Creating `ItemNotExistsError` exception;
+- [`8dad755`](https://github.com/jaedsonpys/cookiedb/commit/8dad755): Adding `CookieDB.update` method to update existent items.
