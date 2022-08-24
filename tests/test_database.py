@@ -127,6 +127,12 @@ class TestDatabase(bupytest.UnitTest):
         users_db = self.cookiedb.get('users/')
         self.assert_true(users_db == USERS, message='"users/" not equal values')
 
+    def test_update_item(self):
+        self.cookiedb.update('languages/programming/python/name', 'CPython')
+        language_name = self.cookiedb.get('languages/programming/python/name')
+
+        self.assert_expected('CPython', language_name, message='Language name not updated')
+
     def test_delete_item_1(self):
         self.cookiedb.delete('languages/programming/python')
         programming_languages.pop('python')
