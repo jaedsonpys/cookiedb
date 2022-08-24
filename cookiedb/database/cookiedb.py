@@ -193,3 +193,31 @@ class CookieDB:
                 df = df.setdefault(i, {})
 
         self._document.update_document(self._open_database, database_items)
+
+    def update(self, path: str, value: Any) -> None:
+        """Update a item from database.
+
+        If the item does not exist, an
+        exception will be thrown.
+
+        :param path: Item path
+        :type path: str
+        :raises exceptions.ItemNotExistsError: 
+        Raised if item does not exist
+        """
+
+        if self.get(path):
+            database_items = self._get_database_items()
+            items = database_items
+
+            path_list = self._filter_path_list(path.split('/'))
+
+            for c, i in enumerate(path_list):
+                if c == (len(path_list) - 1):
+                    items[i] = value
+                else:
+                    items = items.setdefault(i, {})
+
+            self._document.update_document(self._open_database, database_items)
+        else:
+            raise exceptions.ItemNotExistsError(f'Item "{path}" not exists')
