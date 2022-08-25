@@ -93,6 +93,18 @@ class CookieDB:
         except cryptography.fernet.InvalidToken:
             raise exceptions.InvalidDatabaseKeyError('Invalid database key')
 
+    def close(self) -> None:
+        """Close a open database.
+
+        An exception `NoOpenDatabaseError` will be thrown
+        if no database is open.
+        """
+
+        if self._open_database:
+            self._open_database = None
+        else:
+            raise exceptions.NoOpenDatabaseError('No open database.')
+
     def create_database(self, database_name, if_not_exists: bool = False) -> None:
         """
         Create a database at the location specified
