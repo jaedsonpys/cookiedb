@@ -97,11 +97,27 @@ class TestDatabase(bupytest.UnitTest):
 
         self.assert_true(os.path.isfile('./tests/databases/MyDatabase.cookiedb'), message='"MyDatabase" not created')
 
+    def test_close_database_1(self):
+        try:
+            self.cookiedb.close()
+        except exceptions.NoOpenDatabaseError:
+            self.assert_true(True, message='NoOpenDatabaseError exception')
+        else:
+            self.assert_true(False, message='"NoOpenDatabaseError" exception was not thrown')
+
     def test_open_database(self):
         try:
             self.cookiedb.open('MyDatabase')
         except exceptions.DatabaseNotFoundError:
             self.assert_true(False, message='DatabaseNotFoundError exception')
+
+    def test_close_database_2(self):
+        try:
+            self.cookiedb.close()
+        except exceptions.NoOpenDatabaseError:
+            self.assert_true(False, message='Non open database')
+
+        self.cookiedb.open('MyDatabase')
 
     def test_add_items_1(self):
         self.cookiedb.add('languages/programming', programming_languages)
