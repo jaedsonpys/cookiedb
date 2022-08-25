@@ -130,7 +130,7 @@
 - [`0f3f795`](https://github.com/jaedsonpys/cookiedb/commit/0f3f795): Creating `ItemNotExistsError` exception;
 - [`8dad755`](https://github.com/jaedsonpys/cookiedb/commit/8dad755): Adding `CookieDB.update` method to update existent items.
 
-# 4.1.0
+# 4.2.0
 
 - [CookieDB 4.2.0 in PyPi](https://pypi.org/project/cookiedb/4.2.0/)
 - [CookieDB 4.2.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.2.0)
