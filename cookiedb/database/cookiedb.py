@@ -218,7 +218,7 @@ class CookieDB:
         Raised if item does not exist
         """
 
-        if self.get(path):
+        if self.get(path) is not None:
             database_items = self._get_database_items()
             items = database_items
 
