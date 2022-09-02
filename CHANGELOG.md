@@ -138,3 +138,12 @@
 ## Aditions
 
 - [`06cf483`](https://github.com/jaedsonpys/cookiedb/commit/06cf483): Adding method to close a open database.
+
+# 4.2.1
+
+- [CookieDB 4.2.1 in PyPi](https://pypi.org/project/cookiedb/4.2.1/)
+- [CookieDB 4.2.1 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.2.1)
+
+## Fix
+
+- [`5439611`](https://github.com/jaedsonpys/cookiedb/commit/5439611): Changing condition to True if path getting is not None.
