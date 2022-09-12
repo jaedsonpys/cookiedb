@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .database import CookieDB
-from .database import exceptions
+from .cookiedb import CookieDB
+from . import exceptions
 
 __version__ = '4.2.1'
