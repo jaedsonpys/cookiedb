@@ -167,3 +167,12 @@
 
 - [`443bea6`](https://github.com/jaedsonpys/cookiedb/commit/443bea6): Updating project requirements;
 - [`72da046`](https://github.com/jaedsonpys/cookiedb/commit/72da046): Import `fernet` from `_document.py` file.
+
+# 4.2.4
+
+- [CookieDB 4.2.4 in PyPi](https://pypi.org/project/cookiedb/4.2.4/)
+- [CookieDB 4.2.4 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.2.4)
+
+## Improvements
+
+- [`9f8eb8e`](https://github.com/jaedsonpys/cookiedb/commit/9f8eb8e): Removing `python_requires` from setup script.
