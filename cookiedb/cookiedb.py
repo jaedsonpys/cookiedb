@@ -15,12 +15,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from ._document import JSONHandler
+from ._document import fernet
 from . import exceptions
 
 from typing import Any
 from functools import wraps
-
-from cryptography import fernet
 
 
 def required_database(method):

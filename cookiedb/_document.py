@@ -20,7 +20,7 @@ import os
 from typing import Union
 from datetime import datetime
 
-from cryptography.fernet import Fernet
+from cryptography import fernet
 
 
 class JSONHandler:
@@ -29,7 +29,7 @@ class JSONHandler:
         enc_key: Union[bytes, str],
         database_local: str
     ):
-        self._fernet = Fernet(enc_key)
+        self._fernet = fernet.Fernet(enc_key)
         self._document_local = database_local
 
     @staticmethod
