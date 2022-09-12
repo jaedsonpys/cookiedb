@@ -20,7 +20,7 @@ from . import exceptions
 from typing import Any
 from functools import wraps
 
-import cryptography.fernet
+from cryptography import fernet
 
 
 def required_database(method):
@@ -90,7 +90,7 @@ class CookieDB:
 
         try:
             self._document.get_document(database_name)
-        except cryptography.fernet.InvalidToken:
+        except fernet.InvalidToken:
             raise exceptions.InvalidDatabaseKeyError('Invalid database key')
 
     def close(self) -> None:
