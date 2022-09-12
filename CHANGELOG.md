@@ -156,3 +156,4 @@
 ## Improvements
 
 - [`3859228`](https://github.com/jaedsonpys/cookiedb/commit/3859228): Removing CookieDB files from `database/` directory;
+- [`31258a3`](https://github.com/jaedsonpys/cookiedb/commit/31258a3): Changing `cryptography` import in cookiedb.py.
