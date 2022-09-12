@@ -12,7 +12,6 @@ setup(
     version=__version__,
     long_description_content_type='text/markdown',
     long_description=readme,
-    python_requires='>=3.6',
     license='GPL',
     packages=['cookiedb'],
     install_requires=['cryptography==37.0.2'],
