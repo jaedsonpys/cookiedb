@@ -176,3 +176,12 @@
 ## Improvements
 
 - [`9f8eb8e`](https://github.com/jaedsonpys/cookiedb/commit/9f8eb8e): Removing `python_requires` from setup script.
+
+# 4.2.5
+
+- [CookieDB 4.2.5 in PyPi](https://pypi.org/project/cookiedb/4.2.5/)
+- [CookieDB 4.2.5 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.2.5)
+
+## Fix
+
+- [`46ae46c`](https://github.com/jaedsonpys/cookiedb/commit/46ae46c): Adding version manually in setup script.
