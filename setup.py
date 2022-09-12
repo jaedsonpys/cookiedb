@@ -15,7 +15,7 @@ setup(
     python_requires='>=3.6',
     license='GPL',
     packages=['cookiedb', 'cookiedb/database'],
-    install_requires=['cryptography'],
+    install_requires=['cryptography==37.0.2'],
     url='https://github.com/jaedsonpys/cookiedb',
     project_urls={
         'Source code': 'https://github.com/jaedsonpys/cookiedb',
