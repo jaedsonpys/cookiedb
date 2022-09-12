@@ -147,3 +147,12 @@
 ## Fix
 
 - [`5439611`](https://github.com/jaedsonpys/cookiedb/commit/5439611): Changing condition to True if path getting is not None.
+
+# 4.2.2
+
+- [CookieDB 4.2.2 in PyPi](https://pypi.org/project/cookiedb/4.2.2/)
+- [CookieDB 4.2.2 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.2.2)
+
+## Improvements
+
+- [`3859228`](https://github.com/jaedsonpys/cookiedb/commit/3859228): Removing CookieDB files from `database/` directory;
