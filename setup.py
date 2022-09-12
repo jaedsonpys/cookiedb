@@ -1,5 +1,4 @@
 from setuptools import setup
-from cookiedb import __version__
 
 with open(f'README.md', 'r') as reader:
     readme = reader.read()
@@ -9,12 +8,12 @@ setup(
     author_email='imunknowuser@protonmail.com',
     name='cookiedb',
     description='CookieDB is a noSQL document database.',
-    version=__version__,
+    version='4.2.5',
     long_description_content_type='text/markdown',
     long_description=readme,
     license='GPL',
-    packages=['cookiedb'],
     install_requires=['cryptography==37.0.2'],
+    packages=['cookiedb'],
     url='https://github.com/jaedsonpys/cookiedb',
     project_urls={
         'Source code': 'https://github.com/jaedsonpys/cookiedb',
