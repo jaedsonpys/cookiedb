@@ -47,15 +47,13 @@ class CookieDB:
         :param database_local: Database directory.
         """
 
-        self._document = None
-        self._open_database = None
-
         if not database_local:
             database_local = './'
 
         if not key:
             key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
 
+        self._open_database = None
         self._document = JSONHandler(key, database_local)
 
     def checkout(self) -> str:
