@@ -185,3 +185,12 @@
 ## Fix
 
 - [`46ae46c`](https://github.com/jaedsonpys/cookiedb/commit/46ae46c): Adding version manually in setup script.
+
+# 4.2.6
+
+- [CookieDB 4.2.6 in PyPi](https://pypi.org/project/cookiedb/4.2.6/)
+- [CookieDB 4.2.6 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.2.6)
+
+## Fix
+
+- [`9f4e7de`](https://github.com/jaedsonpys/cookiedb/commit/9f4e7de): Updating and adding docstring to `checkout()` method.
