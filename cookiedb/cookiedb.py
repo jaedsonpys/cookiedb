@@ -43,14 +43,8 @@ class CookieDB:
         Initializes the **JSONHandler** class and prepares the
         encryption key.
 
-        All changes are saved in a temporary dictionary until
-        a commit is made, so if `autocommit` is not enabled,
-        use the `CookieDB.commit()` method.
-
         :param key: Encryption key;
-        :param database_local: Database directory;
-        :param autocommit: If "True", changes will be saved every
-        time a database method is called.
+        :param database_local: Database directory.
         """
 
         self._document = None
@@ -67,7 +61,13 @@ class CookieDB:
 
         self._document = JSONHandler(self._key, self._database_local)
 
-    def checkout(self):
+    def checkout(self) -> str:
+        """Return opened databsase name
+
+        :return: Database name
+        :rtype: str
+        """
+
         return self._open_database
 
     def open(self, database_name: str) -> None:
