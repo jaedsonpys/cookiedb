@@ -56,10 +56,7 @@ class CookieDB:
         if not key:
             key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
 
-        self._key = key
-        self._database_local = database_local
-
-        self._document = JSONHandler(self._key, self._database_local)
+        self._document = JSONHandler(key, database_local)
 
     def checkout(self) -> str:
         """Return opened databsase name
