@@ -8,7 +8,7 @@ setup(
     author_email='imunknowuser@protonmail.com',
     name='cookiedb',
     description='CookieDB is a noSQL document database.',
-    version='4.2.5',
+    version='4.2.6',
     long_description_content_type='text/markdown',
     long_description=readme,
     license='GPL',
