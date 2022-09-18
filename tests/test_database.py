@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 
 import bupytest
 from cryptography.fernet import Fernet
@@ -82,8 +83,10 @@ class TestDatabase(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
 
-        if not os.path.isdir('./tests/databases'):
-            os.mkdir('./tests/databases')
+        if os.path.isdir('./tests/databases'):
+            shutil.rmtree('./tests/databases')
+
+        os.mkdir('./tests/databases')
 
         self.cookiedb = CookieDB(database_local='./tests/databases')
         self.cookiedb_2 = CookieDB(
