@@ -193,3 +193,13 @@
 ## Fix
 
 - [`9f4e7de`](https://github.com/jaedsonpys/cookiedb/commit/9f4e7de): Updating and adding docstring to `checkout()` method.
+
+# 4.2.7
+
+- [CookieDB 4.2.7 in PyPi](https://pypi.org/project/cookiedb/4.2.7/)
+- [CookieDB 4.2.7 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v4.2.7)
+
+## Fix
+
+- [`f3dab3b`](https://github.com/jaedsonpys/cookiedb/commit/f3dab3b): Updating `cryptography` version in requirements;
+- [`5933f5e`](https://github.com/jaedsonpys/cookiedb/commit/5933f5e): Updating `cryptography` version in setup script.
