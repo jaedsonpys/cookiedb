@@ -15,7 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import hashlib
-from base64 import urlsafe_b64encode
+import binascii
+from base64 import urlsafe_b64encode, urlsafe_b64decode
 from functools import wraps
 from typing import Any
 
@@ -32,6 +33,12 @@ def required_database(method):
             return method(ref, *args, **kwargs)
 
     return decorator
+
+
+def generate_fernet_key(text: str):
+    key_hash = hashlib.md5(text.encode()).hexdigest()
+    key = urlsafe_b64encode(key_hash.encode()).decode()
+    return key
 
 
 class CookieDB:
@@ -54,8 +61,13 @@ class CookieDB:
         if not key:
             key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
         else:
-            key_hash = hashlib.md5(key.encode()).hexdigest()
-            key = urlsafe_b64encode(key_hash.encode()).decode()
+            try:
+                decoded_key = urlsafe_b64decode(key)
+            except binascii.Error:
+                key = generate_fernet_key(key)
+            else:
+                if len(decoded_key) != 32 or len(key) != 44:
+                    key = generate_fernet_key()
 
         self._open_database = None
         self._document = JSONHandler(key, database_local)
