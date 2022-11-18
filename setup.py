@@ -12,7 +12,7 @@ setup(
     long_description_content_type='text/markdown',
     long_description=readme,
     license='GPL',
-    install_requires=['cryptography==37.0.2'],
+    install_requires=['cryptography==38.0.3'],
     packages=['cookiedb'],
     url='https://github.com/jaedsonpys/cookiedb',
     project_urls={
