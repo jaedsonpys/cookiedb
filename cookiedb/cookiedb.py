@@ -14,12 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from ._document import JSONHandler
-from ._document import fernet
-from . import exceptions
-
-from typing import Any
+import hashlib
+from base64 import urlsafe_b64encode
 from functools import wraps
+from typing import Any
+
+from . import exceptions
+from ._document import JSONHandler, fernet
 
 
 def required_database(method):
@@ -43,7 +44,7 @@ class CookieDB:
         Initializes the **JSONHandler** class and prepares the
         encryption key.
 
-        :param key: Encryption key;
+        :param key: Encryption key (or password);
         :param database_local: Database directory.
         """
 
@@ -52,6 +53,9 @@ class CookieDB:
 
         if not key:
             key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
+        else:
+            key_hash = hashlib.md5(key.encode()).hexdigest()
+            key = urlsafe_b64encode(key_hash.encode()).decode()
 
         self._open_database = None
         self._document = JSONHandler(key, database_local)
