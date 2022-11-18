@@ -1,5 +1,5 @@
 argeasy==2.0.1
 bupytest==1.0.3
 cffi==1.15.0
-cryptography==37.0.2
+cryptography==38.0.3
 pycparser==2.21
