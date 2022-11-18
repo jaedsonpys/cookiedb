@@ -51,7 +51,7 @@ class CookieDB:
         Initializes the **JSONHandler** class and prepares the
         encryption key.
 
-        :param key: Encryption key (or password);
+        :param key: Fernet key or any plain text as password;
         :param database_local: Database directory.
         """
 
