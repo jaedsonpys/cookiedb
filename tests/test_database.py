@@ -1,9 +1,8 @@
 import os
-import sys
 import shutil
+import sys
 
 import bupytest
-from cryptography.fernet import Fernet
 
 sys.path.insert(0, './')
 
@@ -90,7 +89,7 @@ class TestDatabase(bupytest.UnitTest):
 
         self.cookiedb = CookieDB(database_local='./tests/databases')
         self.cookiedb_2 = CookieDB(
-            key=Fernet.generate_key(),
+            key='my-secret-key',
             database_local='./tests/databases'
         )
 
