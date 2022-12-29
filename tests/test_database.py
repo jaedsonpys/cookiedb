@@ -87,11 +87,12 @@ class TestDatabase(bupytest.UnitTest):
 
         os.mkdir('./tests/databases')
 
-        self.cookiedb = CookieDB(database_local='./tests/databases')
-        self.cookiedb_2 = CookieDB(
+        self.cookiedb = CookieDB(
             key='my-secret-key',
             database_local='./tests/databases'
         )
+
+        self.cookiedb_2 = CookieDB(database_local='./tests/databases')
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
@@ -167,7 +168,11 @@ class TestDatabase(bupytest.UnitTest):
 class TestDatabasePersistence(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
-        self.cookiedb = CookieDB(database_local='./tests/databases')
+        self.cookiedb = CookieDB(
+            key='my-secret-key',
+            database_local='./tests/databases'
+        )
+
         self.cookiedb.open('MyDatabase')
 
     def test_add_new_data(self):
