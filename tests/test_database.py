@@ -122,15 +122,15 @@ class TestDatabase(bupytest.UnitTest):
 
         self.cookiedb.open('MyDatabase')
 
-    def test_add_items_1(self):
-        self.cookiedb.add('languages/programming', programming_languages)
-        self.cookiedb.add('languages/markup', MARKUP_LANGS)
-
     def test_invalid_key_exception(self):
         try:
             self.cookiedb_2.open('MyDatabase')
         except exceptions.InvalidDatabaseKeyError:
             self.assert_true(True, message='CookieDB not detected invalid key')
+
+    def test_add_items_1(self):
+        self.cookiedb.add('languages/programming', programming_languages)
+        self.cookiedb.add('languages/markup', MARKUP_LANGS)
 
     def test_get_items_1(self):
         languages_db = self.cookiedb.get('languages/programming')
