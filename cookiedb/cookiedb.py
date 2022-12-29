@@ -48,10 +48,10 @@ class CookieDB:
         database_local: str = None
     ):
         """
-        Initializes the **JSONHandler** class and prepares the
+        Initializes the `JSONHandler` class and prepares the
         encryption key.
 
-        :param key: Fernet key or any plain text as password;
+        :param key: Any plain text;
         :param database_local: Database directory.
         """
 
@@ -59,18 +59,12 @@ class CookieDB:
             database_local = './'
 
         if not key:
-            key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
+            b64_key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
         else:
-            try:
-                decoded_key = urlsafe_b64decode(key)
-            except binascii.Error:
-                key = generate_fernet_key(key)
-            else:
-                if len(decoded_key) != 32 or len(key) != 44:
-                    key = generate_fernet_key()
+            b64_key = generate_fernet_key(key)
 
         self._open_database = None
-        self._document = JSONHandler(key, database_local)
+        self._document = JSONHandler(b64_key, database_local)
 
     def checkout(self) -> str:
         """Return opened databsase name
