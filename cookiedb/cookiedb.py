@@ -35,7 +35,7 @@ def required_database(method):
     return decorator
 
 
-def generate_fernet_key(text: str):
+def _generate_fernet_key(text: str):
     key_hash = hashlib.md5(text.encode()).hexdigest()
     key = urlsafe_b64encode(key_hash.encode()).decode()
     return key
@@ -61,7 +61,7 @@ class CookieDB:
         if not key:
             b64_key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
         else:
-            b64_key = generate_fernet_key(key)
+            b64_key = _generate_fernet_key(key)
 
         self._open_database = None
         self._document = JSONHandler(b64_key, database_local)
