@@ -1,6 +1,6 @@
 from cookiedb import CookieDB
 
-db = CookieDB()
+db = CookieDB(key='secret')
 db.create_database('languages', if_not_exists=True)
 db.open('languages')
 

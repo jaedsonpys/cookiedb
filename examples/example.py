@@ -1,6 +1,6 @@
 from cookiedb import CookieDB
 
-database = CookieDB()
+database = CookieDB(key='secret')
 database.create_database('MyDatabase', if_not_exists=True)
 database.open('MyDatabase')
 
