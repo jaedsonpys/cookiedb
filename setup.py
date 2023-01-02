@@ -11,7 +11,7 @@ setup(
     version='6.0.0',
     long_description_content_type='text/markdown',
     long_description=readme,
-    license='GPL',
+    license='Apache License',
     install_requires=['cryptography==38.0.3'],
     packages=['cookiedb'],
     url='https://github.com/jaedsonpys/cookiedb',
