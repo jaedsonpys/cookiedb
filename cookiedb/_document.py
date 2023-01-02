@@ -15,11 +15,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-import json
 from datetime import datetime
 from typing import Union
 
-import secpickle
+import pickle
 from cryptography import fernet
 from secpickle import exceptions as sp_exceptions
 
@@ -42,14 +41,14 @@ class Document:
         return os.path.isfile(document_path)
 
     def _encrypt(self, obj: dict) -> str:
-        pickle_file = secpickle.dumps(obj, self._key)
+        pickle_file = pickle.dumps(obj)
         encrypted_data = self._fernet.encrypt(pickle_file)
         return encrypted_data
 
     def _decrypt(self, encrypted: bytes) -> dict:
         decrypted_data = self._fernet.decrypt(encrypted)
         try:
-            data = secpickle.loads(decrypted_data, self._key)
+            data = pickle.loads(decrypted_data)
         except sp_exceptions.IntegrityUnconfirmedError:
             raise exceptions.InvalidDatabaseKeyError(f'Invalid key to database')
 
