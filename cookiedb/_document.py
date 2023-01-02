@@ -42,14 +42,17 @@ class Document:
         return os.path.isfile(document_path)
 
     def _encrypt(self, obj: dict) -> str:
-        data_str = json.dumps(obj)
-        encrypted_data = self._fernet.encrypt(data_str.encode())
-        pickle_file = secpickle.dumps(encrypted_data, self._key)
-        return pickle_file
+        pickle_file = secpickle.dumps(obj, self._key)
+        encrypted_data = self._fernet.encrypt(pickle_file)
+        return encrypted_data
 
     def _decrypt(self, encrypted: bytes) -> dict:
         decrypted_data = self._fernet.decrypt(encrypted)
-        data = json.loads(decrypted_data)
+        try:
+            data = secpickle.loads(decrypted_data, self._key)
+        except sp_exceptions.IntegrityUnconfirmedError:
+            raise exceptions.InvalidDatabaseKeyError(f'Invalid key to database')
+
         return data
 
     def create_document(self, name: str) -> dict:
@@ -73,11 +76,9 @@ class Document:
 
         try:
             with open(document_path, 'rb') as reader:
-                data = secpickle.load(reader, self._key)
+                data = reader.read()
         except FileNotFoundError:
             raise exceptions.DatabaseNotFoundError(f'Database "{database}" not found')
-        except sp_exceptions.IntegrityUnconfirmedError:
-            raise exceptions.InvalidDatabaseKeyError(f'Invalid key to "{database}" database')
         else:
             document = self._decrypt(data)
 
