@@ -16,21 +16,25 @@
 
 import json
 import os
-
-from typing import Union
 from datetime import datetime
+from typing import Union
 
+import secpickle
 from cryptography import fernet
+from secpickle import exceptions as sp_exceptions
+
+from . import exceptions
 
 
 class Document:
     def __init__(self, key: bytes, database_local: str):
         self._fernet = fernet.Fernet(key)
         self._document_local = database_local
+        self._key = key
 
     @staticmethod
     def _save_file(file_content: str, filepath: str) -> None:
-        with open(filepath, 'w') as writer:
+        with open(filepath, 'wb') as writer:
             writer.write(file_content)
 
     def exists_document(self, database: str) -> bool:
@@ -38,14 +42,15 @@ class Document:
         return os.path.isfile(document_path)
 
     def encrypt_json(self, obj: dict) -> str:
-        dict_str = json.dumps(obj)
-        encrypted_dict = self._fernet.encrypt(dict_str.encode())
-        return encrypted_dict.decode()
+        dict_str = str(obj)
+        encrypted_data = self._fernet.encrypt(dict_str.encode())
+        pickle_file = secpickle.dumps(encrypted_data, self._key)
+        return pickle_file
 
     def decrypt_json(self, encrypted: bytes) -> dict:
-        decrypted_json = self._fernet.decrypt(encrypted)
-        json_data = json.loads(decrypted_json)
-        return json_data
+        decrypted_data = self._fernet.decrypt(encrypted)
+        data = str(decrypted_data)
+        return data
 
     def create_document(self, name: str) -> dict:
         document_path = os.path.join(self._document_local, name + '.cookiedb')
@@ -59,7 +64,7 @@ class Document:
         }
 
         encrypted_data = self.encrypt_json(document)
-        self._save_file(encrypted_data, document_path)
+        self._save_file(pickle_file, document_path)
 
         return document
 
@@ -68,11 +73,13 @@ class Document:
 
         try:
             with open(document_path, 'rb') as reader:
-                encrypted_data = reader.read()
+                data = secpickle.load(reader, self._key)
         except FileNotFoundError:
             document = None
+        except sp_exceptions.IntegrityUnconfirmedError:
+            raise exceptions.InvalidDatabaseKeyError(f'Invalid key to "{database}" database')
         else:
-            document = self.decrypt_json(encrypted_data)
+            document = self.decrypt_json(data)
 
         return document
 
