@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
+import ast
 from datetime import datetime
 from typing import Union
 
@@ -48,7 +49,7 @@ class Document:
 
     def _decrypt(self, encrypted: bytes) -> dict:
         decrypted_data = self._fernet.decrypt(encrypted)
-        data = str(decrypted_data)
+        data = ast.literal_eval(decrypted_data.decode())
         return data
 
     def create_document(self, name: str) -> dict:
