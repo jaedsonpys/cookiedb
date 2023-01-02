@@ -41,13 +41,13 @@ class Document:
         document_path = os.path.join(self._document_local, database + '.cookiedb')
         return os.path.isfile(document_path)
 
-    def encrypt_json(self, obj: dict) -> str:
+    def _encrypt(self, obj: dict) -> str:
         dict_str = str(obj)
         encrypted_data = self._fernet.encrypt(dict_str.encode())
         pickle_file = secpickle.dumps(encrypted_data, self._key)
         return pickle_file
 
-    def decrypt_json(self, encrypted: bytes) -> dict:
+    def _decrypt(self, encrypted: bytes) -> dict:
         decrypted_data = self._fernet.decrypt(encrypted)
         data = str(decrypted_data)
         return data
@@ -63,7 +63,7 @@ class Document:
             'items': {}
         }
 
-        data = self.encrypt_json(document)
+        data = self._encrypt(document)
         self._save_file(data, document_path)
 
         return document
@@ -79,7 +79,7 @@ class Document:
         except sp_exceptions.IntegrityUnconfirmedError:
             raise exceptions.InvalidDatabaseKeyError(f'Invalid key to "{database}" database')
         else:
-            document = self.decrypt_json(data)
+            document = self._decrypt(data)
 
         return document
 
@@ -92,5 +92,5 @@ class Document:
         document['items'] = items
         document['updated_at'] = str(update_time)
 
-        encrypted_json = self.encrypt_json(document)
+        encrypted_json = self._encrypt(document)
         self._save_file(encrypted_json, document_path)
