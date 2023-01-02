@@ -92,7 +92,10 @@ class TestDatabase(bupytest.UnitTest):
             database_local='./tests/databases'
         )
 
-        self.cookiedb_2 = CookieDB(database_local='./tests/databases')
+        self.cookiedb_2 = CookieDB(
+            key='other-key',
+            database_local='./tests/databases'
+        )
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
