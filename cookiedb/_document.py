@@ -42,8 +42,7 @@ class Document:
         return os.path.isfile(document_path)
 
     def _encrypt(self, obj: dict) -> str:
-        dict_str = str(obj)
-        encrypted_data = self._fernet.encrypt(dict_str.encode())
+        encrypted_data = self._fernet.encrypt(str(obj).encode())
         pickle_file = secpickle.dumps(encrypted_data, self._key)
         return pickle_file
 
