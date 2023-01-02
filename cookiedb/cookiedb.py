@@ -128,7 +128,12 @@ class CookieDB:
                 raise exceptions.DatabaseExistsError(f'Database {database_name} already exists.')
 
     def _get_database_items(self):
-        database = self._document.get_document(self._open_database)
+        try:
+            database = self._document.get_document(self._open_database)
+        except exceptions.DatabaseNotFoundError:
+            self._open_database = None
+            raise exceptions.DatabaseNotFoundError
+
         return database.get('items')
 
     def _filter_path_list(self, path_list: list) -> str:

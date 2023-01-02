@@ -74,7 +74,7 @@ class Document:
             with open(document_path, 'rb') as reader:
                 data = secpickle.load(reader, self._key)
         except FileNotFoundError:
-            document = None
+            raise exceptions.DatabaseNotFoundError(f'Database "{database}" not found')
         except sp_exceptions.IntegrityUnconfirmedError:
             raise exceptions.InvalidDatabaseKeyError(f'Invalid key to "{database}" database')
         else:
