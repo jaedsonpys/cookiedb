@@ -213,3 +213,26 @@
 
 - [`9a55821`](https://github.com/jaedsonpys/cookiedb/commit/9a55821): Removing `Fernet` key support;
 - [`3579138`](https://github.com/jaedsonpys/cookiedb/commit/3579138): Change `generate_fernet_key` function to private.
+
+# 6.0.0
+
+- [CookieDB 6.0.0 in PyPi](https://pypi.org/project/cookiedb/6.0.0/)
+- [CookieDB 6.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v6.0.0)
+
+## Improves
+
+- [`4136012`](https://github.com/jaedsonpys/cookiedb/commit/4136012): Create `InvalidKeyError` exception;
+- [`b7e57f2`](https://github.com/jaedsonpys/cookiedb/commit/b7e57f2): Remove default key from `__init__()` method;
+- [`4a9c283`](https://github.com/jaedsonpys/cookiedb/commit/4a9c283): Remove key decode from base64;
+- [`a237527`](https://github.com/jaedsonpys/cookiedb/commit/a237527): Rename "key" argument in `JSONHandler.__init__()`;
+- [`6165e18`](https://github.com/jaedsonpys/cookiedb/commit/6165e18): Rename `JSONHandler` class to Document;
+- [`daa70c1`](https://github.com/jaedsonpys/cookiedb/commit/daa70c1): SecPickle library pre-implementation;
+- [`715d0af`](https://github.com/jaedsonpys/cookiedb/commit/715d0af): Fix variable name in `create_document()` method;
+- [`c2deb00`](https://github.com/jaedsonpys/cookiedb/commit/c2deb00): Rename encrypt and decrypt methods;
+- [`da28691`](https://github.com/jaedsonpys/cookiedb/commit/da28691): Rename `_document.py` module import;
+- [`c915a28`](https://github.com/jaedsonpys/cookiedb/commit/c915a28): Thrown `DatabaseNotFoundError` exception if document is not found;
+- [`d270260`](https://github.com/jaedsonpys/cookiedb/commit/d270260): Implement faster method for writing and reading database files;
+- [`c1b918e`](https://github.com/jaedsonpys/cookiedb/commit/c1b918e): Use `picke` module instead of `secpickle`;
+- [`3bcf91d`](https://github.com/jaedsonpys/cookiedb/commit/3bcf91d): Improve condition in `create_database()` method;
+- [`833a8d2`](https://github.com/jaedsonpys/cookiedb/commit/833a8d2): Change `_get_path_list()` method for more perfomance;
+- [`fdd4a76`](https://github.com/jaedsonpys/cookiedb/commit/fdd4a76): Use `strftime` to format time.
