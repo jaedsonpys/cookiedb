@@ -20,7 +20,7 @@ from functools import wraps
 from typing import Any
 
 from . import exceptions
-from ._document import JSONHandler, fernet
+from . import _document as document
 
 
 def required_database(method):
@@ -63,7 +63,7 @@ class CookieDB:
             b64_key = _generate_fernet_key(key)
 
         self._open_database = None
-        self._document = JSONHandler(b64_key, database_local)
+        self._document = document.Document(b64_key, database_local)
 
     def checkout(self) -> str:
         """Return opened databsase name
@@ -93,7 +93,7 @@ class CookieDB:
 
         try:
             self._document.get_document(database_name)
-        except fernet.InvalidToken:
+        except document.fernet.InvalidToken:
             raise exceptions.InvalidDatabaseKeyError('Invalid database key')
 
     def close(self) -> None:
