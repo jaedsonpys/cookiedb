@@ -36,7 +36,7 @@ def required_database(method):
 
 def _generate_fernet_key(text: str):
     key_hash = hashlib.md5(text.encode()).hexdigest()
-    key = urlsafe_b64encode(key_hash.encode()).decode()
+    key = urlsafe_b64encode(key_hash.encode())
     return key
 
 
