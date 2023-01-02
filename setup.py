@@ -20,7 +20,7 @@ setup(
         'Documentation': 'https://github.com/jaedsonpys/cookiedb/tree/master/DOCS'
     },
     classifiers=[
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'License :: OSI Approved :: Apache Software License',
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
@@ -28,7 +28,6 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
-        'Topic :: Database',
         'Topic :: Database :: Database Engines/Servers'
     ],
     keywords=['database', 'noSQL', 'document', 'JSON', 'sql']
