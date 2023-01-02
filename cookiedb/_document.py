@@ -20,7 +20,6 @@ from typing import Union
 
 import pickle
 from cryptography import fernet
-from secpickle import exceptions as sp_exceptions
 
 from . import exceptions
 
@@ -47,11 +46,7 @@ class Document:
 
     def _decrypt(self, encrypted: bytes) -> dict:
         decrypted_data = self._fernet.decrypt(encrypted)
-        try:
-            data = pickle.loads(decrypted_data)
-        except sp_exceptions.IntegrityUnconfirmedError:
-            raise exceptions.InvalidDatabaseKeyError(f'Invalid key to database')
-
+        data = pickle.loads(decrypted_data)
         return data
 
     def create_document(self, name: str) -> dict:
