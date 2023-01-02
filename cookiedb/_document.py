@@ -27,7 +27,7 @@ from . import exceptions
 
 
 class Document:
-    def __init__(self, key: bytes, database_local: str):
+    def __init__(self, key: bytes, database_local: str) -> None:
         self._fernet = fernet.Fernet(key)
         self._document_local = database_local
         self._key = key.decode()
@@ -82,7 +82,7 @@ class Document:
 
         return document
 
-    def update_document(self, database: str, items: dict):
+    def update_document(self, database: str, items: dict) -> None:
         document_path = os.path.join(self._document_local, database + '.cookiedb')
 
         document = self.get_document(database)
