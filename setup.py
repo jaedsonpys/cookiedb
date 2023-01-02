@@ -16,7 +16,6 @@ setup(
     packages=['cookiedb'],
     url='https://github.com/jaedsonpys/cookiedb',
     project_urls={
-        'Source code': 'https://github.com/jaedsonpys/cookiedb',
         'License': 'https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE',
         'Documentation': 'https://github.com/jaedsonpys/cookiedb/tree/master/DOCS'
     },
