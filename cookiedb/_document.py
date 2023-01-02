@@ -24,12 +24,8 @@ from cryptography import fernet
 
 
 class JSONHandler:
-    def __init__(
-        self,
-        enc_key: Union[bytes, str],
-        database_local: str
-    ):
-        self._fernet = fernet.Fernet(enc_key)
+    def __init__(self, key: bytes, database_local: str):
+        self._fernet = fernet.Fernet(key)
         self._document_local = database_local
 
     @staticmethod
