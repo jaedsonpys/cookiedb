@@ -135,9 +135,14 @@ class CookieDB:
 
         return database.get('items')
 
-    def _filter_path_list(self, path_list: list) -> str:
-        path_list_filtered = [i for i in path_list if i != '']
-        return path_list_filtered
+    def _get_path_list(self, path: str) -> str:
+        path_list = path.split('/')
+        if path.startswith('/'):
+            path_list.pop(0)
+        if path.endswith('/'):
+            path_list.pop(-1)
+
+        return path_list
 
     @required_database
     def add(self, path: str, value: Any) -> None:
@@ -153,7 +158,7 @@ class CookieDB:
         database_items = self._get_database_items()
         items = database_items
 
-        path_list = self._filter_path_list(path.split('/'))
+        path_list = self._get_path_list(path)
 
         for c, i in enumerate(path_list):
             if c == (len(path_list) - 1):
@@ -173,7 +178,7 @@ class CookieDB:
         None if nothing is found.
         """
 
-        path_list = self._filter_path_list(path.split('/'))
+        path_list = self._get_path_list(path)
         last_items = {}
 
         database_items = self._get_database_items()
@@ -202,7 +207,7 @@ class CookieDB:
         database_items = self._get_database_items()
         df = database_items
 
-        path_list = self._filter_path_list(path.split('/'))
+        path_list = self._get_path_list(path)
 
         for c, i in enumerate(path_list):
             if c == (len(path_list) - 1):
@@ -229,7 +234,7 @@ class CookieDB:
             database_items = self._get_database_items()
             items = database_items
 
-            path_list = self._filter_path_list(path.split('/'))
+            path_list = self._get_path_list(path)
 
             for c, i in enumerate(path_list):
                 if c == (len(path_list) - 1):
