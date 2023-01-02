@@ -63,8 +63,8 @@ class Document:
             'items': {}
         }
 
-        encrypted_data = self.encrypt_json(document)
-        self._save_file(pickle_file, document_path)
+        data = self.encrypt_json(document)
+        self._save_file(data, document_path)
 
         return document
 
