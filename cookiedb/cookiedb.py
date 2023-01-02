@@ -123,9 +123,8 @@ class CookieDB:
 
         if not self._document.exists_document(database_name):
             self._document.create_document(database_name)
-        else:
-            if not if_not_exists:
-                raise exceptions.DatabaseExistsError(f'Database {database_name} already exists.')
+        elif not if_not_exists:
+            raise exceptions.DatabaseExistsError(f'Database {database_name} already exists.')
 
     def _get_database_items(self):
         try:
