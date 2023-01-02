@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-import ast
+import json
 from datetime import datetime
 from typing import Union
 
@@ -42,13 +42,14 @@ class Document:
         return os.path.isfile(document_path)
 
     def _encrypt(self, obj: dict) -> str:
-        encrypted_data = self._fernet.encrypt(str(obj).encode())
+        data_str = json.dumps(obj)
+        encrypted_data = self._fernet.encrypt(data_str.encode())
         pickle_file = secpickle.dumps(encrypted_data, self._key)
         return pickle_file
 
     def _decrypt(self, encrypted: bytes) -> dict:
         decrypted_data = self._fernet.decrypt(encrypted)
-        data = ast.literal_eval(decrypted_data.decode())
+        data = json.loads(decrypted_data)
         return data
 
     def create_document(self, name: str) -> dict:
