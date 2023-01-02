@@ -1,5 +1,6 @@
-argeasy==2.0.1
-bupytest==1.0.3
+argeasy==3.0.0
+bupytest==1.2.0
 cffi==1.15.0
 cryptography==38.0.3
 pycparser==2.21
+secpickle==0.1.0
