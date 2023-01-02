@@ -51,7 +51,7 @@ class Document:
 
     def create_document(self, name: str) -> dict:
         document_path = os.path.join(self._document_local, name + '.cookiedb')
-        created_time = str(datetime.now().replace(microsecond=0))
+        created_time = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
 
         document = {
             'name': name,
