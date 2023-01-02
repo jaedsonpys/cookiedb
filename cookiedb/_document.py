@@ -23,7 +23,7 @@ from datetime import datetime
 from cryptography import fernet
 
 
-class JSONHandler:
+class Document:
     def __init__(self, key: bytes, database_local: str):
         self._fernet = fernet.Fernet(key)
         self._document_local = database_local
