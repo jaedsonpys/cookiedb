@@ -43,7 +43,7 @@ def _generate_fernet_key(text: str):
 class CookieDB:
     def __init__(
         self,
-        key: str = None,
+        key: str,
         database_local: str = None
     ):
         """
@@ -57,8 +57,8 @@ class CookieDB:
         if not database_local:
             database_local = './'
 
-        if not key:
-            b64_key = 't45tc90GyT4f4Qim0xt3BsSsZ5oEEgPbM9VstlGwfdg='
+        if not key or type(key) != str:
+            raise exceptions.InvalidKeyError(f'Argument "key" must be of type "str", not "{type(key)}"')
         else:
             b64_key = _generate_fernet_key(key)
 
