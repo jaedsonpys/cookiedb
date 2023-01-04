@@ -1,8 +1,6 @@
 # 🍪 CookieDB database
 
-**CookieDB** is a noSQL document database developed in Python. Using `JSON` as the document where all data is stored.
-
-See a little about:
+**CookieDB** is a noSQL document database developed in Python. Using `JSON` as the document where all data is stored. See a little about:
 
 - Store information in various types of data;
 - Encrypted database;
