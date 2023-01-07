@@ -151,9 +151,10 @@ class CookieDB:
         items = database_items
 
         path_list = self._get_path_list(path)
+        path_list_items = len(path_list) - 1
 
         for c, i in enumerate(path_list):
-            if c == (len(path_list) - 1):
+            if c == path_list_items:
                 items[i] = value
             else:
                 items = items.setdefault(i, {})
@@ -200,9 +201,10 @@ class CookieDB:
         df = database_items
 
         path_list = self._get_path_list(path)
+        path_list_items = len(path_list) - 1
 
         for c, i in enumerate(path_list):
-            if c == (len(path_list) - 1):
+            if c == path_list_items:
                 if i in df:
                     df = df.pop(i)
             else:
@@ -227,9 +229,10 @@ class CookieDB:
             items = database_items
 
             path_list = self._get_path_list(path)
+            path_list_items = len(path_list) - 1
 
             for c, i in enumerate(path_list):
-                if c == (len(path_list) - 1):
+                if c == path_list_items:
                     items[i] = value
                 else:
                     items = items.setdefault(i, {})
