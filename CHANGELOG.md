@@ -236,3 +236,13 @@
 - [`3bcf91d`](https://github.com/jaedsonpys/cookiedb/commit/3bcf91d): Improve condition in `create_database()` method;
 - [`833a8d2`](https://github.com/jaedsonpys/cookiedb/commit/833a8d2): Change `_get_path_list()` method for more perfomance;
 - [`fdd4a76`](https://github.com/jaedsonpys/cookiedb/commit/fdd4a76): Use `strftime` to format time.
+
+# 6.0.1
+
+- [CookieDB 6.0.1 in PyPi](https://pypi.org/project/cookiedb/6.0.1/)
+- [CookieDB 6.0.1 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v6.0.1)
+
+## Improves
+
+- [`577ef81`](https://github.com/jaedsonpys/cookiedb/commit/577ef81): Store length of list instead of calculating every iteration;
+- [`3b861ed`](https://github.com/jaedsonpys/cookiedb/commit/3b861ed): Update `cryptography` library version.
