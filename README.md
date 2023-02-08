@@ -6,7 +6,7 @@ CookieDB is an *extremely optimized* noSQL database using the **key-value** mode
 pip install cookiedb
 ```
 
-- [Documentation](https://github.com/jaedsonpys/cookiedb/tree/master/DOCS)
+- [Documentation](https://jaedsonpys.github.io/cookiedb)
 - [PyPI Project](https://pypi.org/project/cookiedb)
 
 ## Demonstration of use
