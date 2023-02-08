@@ -23,8 +23,7 @@ pip install cookiedb
 ```python
 from cookiedb import CookieDB
 
-database = CookieDB()
-
+database = CookieDB(key='secret')
 database.create_database('MyDatabase')
 database.open('MyDatabase')
 
