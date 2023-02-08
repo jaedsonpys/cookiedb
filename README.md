@@ -1,20 +1,13 @@
 # 🍪 CookieDB database
 
-**CookieDB** is a noSQL document database developed in Python. Using `JSON` as the document where all data is stored. See a little about:
-
-- Store information in various types of data;
-- Encrypted database;
-- Easy access to data;
-- Data search by path.
-
-To install **CookieDB**, use the `pip` package manager:
+CookieDB is an *extremely optimized* noSQL database using the **key-value** model, with encrypted databases, you can enjoy the performance, security and ease of using CookieDB. To install **CookieDB**, use the `pip` package manager:
 
 ```
 pip install cookiedb
 ```
 
-- [CookieDB Documentation](https://github.com/jaedsonpys/cookiedb/tree/master/DOCS)
-- [CookieDB PyPI Project](https://pypi.org/project/cookiedb)
+- [Documentation](https://github.com/jaedsonpys/cookiedb/tree/master/DOCS)
+- [PyPI Project](https://pypi.org/project/cookiedb)
 
 ## Demonstration of use
 
