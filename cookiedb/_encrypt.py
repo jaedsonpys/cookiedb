@@ -46,3 +46,17 @@ class Cryptography:
         )
 
         return result
+
+    def decrypt(self, token: bytes) -> bytes:
+        random_iv = token[4:16]
+        mac = token[16:48]
+        encrypted_data = token[48:]
+
+        cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
+        
+        if self._valid_hmac(mac, encrypted_data):
+            decrypted_data = cipher.decrypt(encrypted_data)
+            unpad_data = Padding.unpad(decrypted_data, AES.block_size)
+            return unpad_data
+        else:
+            raise Exception('InvalidSignature')
