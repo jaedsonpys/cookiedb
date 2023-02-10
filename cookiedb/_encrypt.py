@@ -16,3 +16,22 @@ class Cryptography:
         hmac = HMAC.new(self._signature_key, digestmod=SHA256)
         hmac.update(data)
         return hmac.digest()
+    
+    def encrypt(self, data: bytes) -> bytes:
+        random_iv = secrets.token_bytes(16)
+        padding_data = Padding.pad(data, AES.block_size)
+
+        cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
+        encrypted_data = cipher.encrypt(padding_data)
+        hmac = self._get_hmac(encrypted_data)
+
+        encrypted_data_len = len(encrypted_data).to_bytes(4, 'big')
+
+        result = (
+            encrypted_data_len
+            + random_iv
+            + hmac
+            + encrypted_data
+        )
+
+        return result
