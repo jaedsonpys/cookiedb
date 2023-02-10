@@ -16,6 +16,17 @@ class Cryptography:
         hmac = HMAC.new(self._signature_key, digestmod=SHA256)
         hmac.update(data)
         return hmac.digest()
+
+    def _valid_hmac(self, mac: bytes, data: bytes) -> bool:
+        hmac = HMAC.new(self._signature_key, digestmod=SHA256)
+        hmac.update(data)
+
+        try:
+            hmac.verify(mac)
+        except ValueError:
+            return False
+        else:
+            return True
     
     def encrypt(self, data: bytes) -> bytes:
         random_iv = secrets.token_bytes(16)
