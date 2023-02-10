@@ -63,3 +63,7 @@ class Cryptography:
             return unpad_data
         else:
             raise Exception('InvalidSignature')
+
+    def get_token_size(self, token: bytes) -> int:
+        size = int.from_bytes(token[:4], 'big')
+        return size
