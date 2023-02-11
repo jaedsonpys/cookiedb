@@ -1,12 +1,9 @@
 import hashlib
 import secrets
-import time
 
 from Crypto.Cipher import AES
 from Crypto.Util import Padding
 from Crypto.Hash import HMAC, SHA256
-
-from cryptography import fernet
 
 
 class Cryptography:
