@@ -257,5 +257,4 @@
 - [`32bfd2e`](https://github.com/jaedsonpys/cookiedb/commit/32bfd2e): Create `Cryptography` class;
 - [`94b8e9a`](https://github.com/jaedsonpys/cookiedb/commit/94b8e9a): Raise custom `InvalidTokenError` and `InvalidSignatureError` exceptions;
 - [`b319915`](https://github.com/jaedsonpys/cookiedb/commit/b319915): Use `Cryptography` in `_document` module;
-- [`190167b`](https://github.com/jaedsonpys/cookiedb/commit/190167b): Remove key base64 encode from `CookieDB.__init__`;
-- [`190167b`](https://github.com/jaedsonpys/cookiedb/commit/190167b): Remove key base64 encode from `CookieDB.__init__`;
+- [`190167b`](https://github.com/jaedsonpys/cookiedb/commit/190167b): Remove key base64 encode from `CookieDB.__init__`.
