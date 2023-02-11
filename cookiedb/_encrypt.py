@@ -54,10 +54,9 @@ class Cryptography:
 
         cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
         encrypted_data = cipher.encrypt(padding_data)
-        encrypted_data_len = len(encrypted_data).to_bytes(4, 'big')
 
         result = (
-            encrypted_data_len
+            len(data).to_bytes(4, 'big')
             + random_iv
             + encrypted_data
         )
