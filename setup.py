@@ -12,7 +12,7 @@ setup(
     long_description_content_type='text/markdown',
     long_description=readme,
     license='Apache License',
-    install_requires=['cryptography==39.0.0'],
+    install_requires=['pycryptodome==3.17'],
     packages=['cookiedb'],
     url='https://github.com/jaedsonpys/cookiedb',
     project_urls={
