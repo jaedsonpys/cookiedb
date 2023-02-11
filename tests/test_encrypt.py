@@ -32,7 +32,7 @@ class TestEncryption(bupytest.UnitTest):
             self.assert_true(False, message='Expected a InvalidTokenError exception')
 
     def test_get_data_size(self):
-        data_size = self._enc.get_token_size(self.encrypted)
+        data_size = self._enc.get_data_size(self.encrypted)
         self.assert_expected(data_size, len(self._data))
 
 

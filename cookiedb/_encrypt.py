@@ -91,8 +91,8 @@ class Cryptography:
         else:
             raise exceptions.InvalidSignatureError('Token signature don\'t match')
 
-    def get_token_size(self, token: bytes) -> int:
-        """Return the encrypted token size.
+    def get_data_size(self, token: bytes) -> int:
+        """Return the encrypted data size.
 
         :param token: Encrypted token
         :type token: bytes
