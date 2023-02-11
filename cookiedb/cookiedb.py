@@ -6,8 +6,6 @@
 
 # http://www.apache.org/licenses/LICENSE-2.0
 
-import hashlib
-from base64 import urlsafe_b64encode
 from functools import wraps
 from typing import Any
 
@@ -24,12 +22,6 @@ def required_database(method):
             return method(ref, *args, **kwargs)
 
     return decorator
-
-
-def _generate_fernet_key(text: str):
-    key_hash = hashlib.md5(text.encode()).hexdigest()
-    key = urlsafe_b64encode(key_hash.encode())
-    return key
 
 
 class CookieDB:
@@ -51,11 +43,9 @@ class CookieDB:
 
         if not key or type(key) != str:
             raise exceptions.InvalidKeyError(f'Argument "key" must be of type "str", not "{type(key)}"')
-        else:
-            b64_key = _generate_fernet_key(key)
 
         self._open_database = None
-        self._document = document.Document(b64_key, database_local)
+        self._document = document.Document(key, database_local)
 
     def checkout(self) -> str:
         """Return opened databsase name
