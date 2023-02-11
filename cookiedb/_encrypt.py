@@ -5,6 +5,8 @@ from Crypto.Cipher import AES
 from Crypto.Util import Padding
 from Crypto.Hash import HMAC, SHA256
 
+from . import exceptions
+
 
 class Cryptography:
     def __init__(self, key: str) -> None:
@@ -85,10 +87,10 @@ class Cryptography:
                 decrypted_data = cipher.decrypt(encrypted_data)
                 unpad_data = Padding.unpad(decrypted_data, AES.block_size)
             except ValueError:
-                raise Exception('InvalidToken') from None
+                raise exceptions.InvalidTokenError('The token is invalid') from None
             return unpad_data
         else:
-            raise Exception('InvalidSignature')
+            raise exceptions.InvalidSignatureError('Token signature don\'t match')
 
     def get_token_size(self, token: bytes) -> int:
         """Return the encrypted token size.
