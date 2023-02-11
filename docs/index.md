@@ -61,6 +61,10 @@ pip install cookiedb
     - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v6.0.0)
     - [PyPI Package](https://pypi.org/project/cookiedb/6.0.0/)
 
+* [7.0.0 (Fev 11, 2023)](https://jaedsonpys.github.io/cookiedb/7.0.0)
+    - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v7.0.0)
+    - [PyPI Package](https://pypi.org/project/cookiedb/7.0.0/)
+
 ## License
 
 ```
