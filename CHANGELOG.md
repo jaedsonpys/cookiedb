@@ -246,3 +246,16 @@
 
 - [`577ef81`](https://github.com/jaedsonpys/cookiedb/commit/577ef81): Store length of list instead of calculating every iteration;
 - [`3b861ed`](https://github.com/jaedsonpys/cookiedb/commit/3b861ed): Update `cryptography` library version.
+
+# 7.0.0
+
+- [CookieDB 7.0.0 in PyPi](https://pypi.org/project/cookiedb/7.0.0/)
+- [CookieDB 7.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v7.0.0)
+
+## Features
+
+- [`32bfd2e`](https://github.com/jaedsonpys/cookiedb/commit/32bfd2e): Create `Cryptography` class;
+- [`94b8e9a`](https://github.com/jaedsonpys/cookiedb/commit/94b8e9a): Raise custom `InvalidTokenError` and `InvalidSignatureError` exceptions;
+- [`b319915`](https://github.com/jaedsonpys/cookiedb/commit/b319915): Use `Cryptography` in `_document` module;
+- [`190167b`](https://github.com/jaedsonpys/cookiedb/commit/190167b): Remove key base64 encode from `CookieDB.__init__`;
+- [`190167b`](https://github.com/jaedsonpys/cookiedb/commit/190167b): Remove key base64 encode from `CookieDB.__init__`;
