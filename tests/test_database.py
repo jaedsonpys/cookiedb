@@ -82,26 +82,21 @@ class TestDatabase(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
 
-        if os.path.isdir('./tests/databases'):
-            shutil.rmtree('./tests/databases')
+        self.dbpath = './tests/databases'
 
-        os.mkdir('./tests/databases')
+        if os.path.isdir(self.dbpath):
+            shutil.rmtree(self.dbpath)
+
+        os.mkdir(self.dbpath)
 
         self.cookiedb = CookieDB(
             key='my-secret-key',
-            database_local='./tests/databases'
-        )
-
-        self.cookiedb_2 = CookieDB(
-            key='other-key',
-            database_local='./tests/databases'
+            database_local=self.dbpath
         )
 
     def test_create_database(self):
         self.cookiedb.create_database('MyDatabase', if_not_exists=True)
-        self.cookiedb_2.create_database('TestKeyDatabase', if_not_exists=True)
-
-        self.assert_true(os.path.isfile('./tests/databases/MyDatabase.cookiedb'), message='"MyDatabase" not created')
+        self.assert_true(os.path.isfile(f'{self.dbpath}/MyDatabase.cookiedb'), message='"MyDatabase" not created')
 
     def test_no_open_database_error_1(self):
         try:
@@ -126,8 +121,11 @@ class TestDatabase(bupytest.UnitTest):
         self.cookiedb.open('MyDatabase')
 
     def test_invalid_key_exception(self):
+        db_2 = CookieDB(key='other-key', database_local=self.dbpath)
+        db_2.create_database('TestKeyDatabase', if_not_exists=True)
+
         try:
-            self.cookiedb_2.open('MyDatabase')
+            db_2.open('MyDatabase')
         except exceptions.InvalidDatabaseKeyError:
             self.assert_true(True, message='CookieDB not detected invalid key')
 
