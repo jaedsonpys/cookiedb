@@ -19,7 +19,6 @@ class Document:
     def __init__(self, key: bytes, database_local: str) -> None:
         self._crypt = Cryptography(key)
         self._document_local = database_local
-        self._key = key.decode()
 
     @staticmethod
     def _save_file(file_content: str, filepath: str) -> None:
