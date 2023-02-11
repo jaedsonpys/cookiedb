@@ -15,8 +15,12 @@ class TestEncryption(bupytest.UnitTest):
         self._data = b'My name is John'
 
     def test_encrypt_data(self):
-        encrypted = self._enc.encrypt(self._data)
-        self.assert_true(encrypted != self._data)
+        self.encrypted = self._enc.encrypt(self._data)
+        self.assert_true(self.encrypted != self._data)
+
+    def test_decrypt_data(self):
+        decrypted = self._enc.decrypt(self.encrypted)
+        self.assert_expected(decrypted, self._data)
 
 
 if __name__ == '__main__':
