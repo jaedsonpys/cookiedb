@@ -75,8 +75,8 @@ class CookieDB:
 
         try:
             self._document.get_document(database_name)
-        except document.fernet.InvalidToken:
-            raise exceptions.InvalidDatabaseKeyError('Invalid database key')
+        except (exceptions.InvalidTokenError, exceptions.InvalidSignatureError):
+            raise exceptions.InvalidDatabaseKeyError('Invalid database encryption key')
 
     def close(self) -> None:
         """Close a open database.
