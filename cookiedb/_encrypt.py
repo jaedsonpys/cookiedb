@@ -8,6 +8,12 @@ from Crypto.Hash import HMAC, SHA256
 
 class Cryptography:
     def __init__(self, key: str) -> None:
+        """initialize a Cryptography instance.
+
+        :param key: Key to encrypt and decrypt
+        :type key: str
+        """
+
         hash_key = hashlib.sha256(key.encode()).digest()
         self._encryption_key = hash_key[:128]
         self._signature_key = hash_key[128:]
@@ -29,6 +35,18 @@ class Cryptography:
             return True
     
     def encrypt(self, data: bytes) -> bytes:
+        """Encrypt a data in bytes.
+
+        The result will be a string in bytes containing
+        the length of the encrypted data, initialization
+        vector (IV), encrypted data and a MAC hash.
+
+        :param data: Any data in bytes
+        :type data: bytes
+        :return: Encrypted data
+        :rtype: bytes
+        """
+
         random_iv = secrets.token_bytes(16)
         padding_data = Padding.pad(data, AES.block_size)
 
@@ -46,6 +64,16 @@ class Cryptography:
         return (result + hmac)
 
     def decrypt(self, token: bytes) -> bytes:
+        """Decrypt a token in bytes.
+
+        :param token: Encrypted token
+        :type token: bytes
+        :raises Exception: If token is invalid
+        :raises Exception: If token has a invalid signature
+        :return: Decrypted data
+        :rtype: bytes
+        """
+
         random_iv = token[4:20]
         mac = token[-32:]
         encrypted_data = token[20:-32]
@@ -63,5 +91,13 @@ class Cryptography:
             raise Exception('InvalidSignature')
 
     def get_token_size(self, token: bytes) -> int:
+        """Return the encrypted token size.
+
+        :param token: Encrypted token
+        :type token: bytes
+        :return: Data size in bytes
+        :rtype: int
+        """
+
         size = int.from_bytes(token[:4], 'big')
         return size
