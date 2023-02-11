@@ -1,9 +1,12 @@
 import hashlib
 import secrets
+import time
 
 from Crypto.Cipher import AES
 from Crypto.Util import Padding
 from Crypto.Hash import HMAC, SHA256
+
+from cryptography import fernet
 
 
 class Cryptography:
@@ -34,27 +37,25 @@ class Cryptography:
 
         cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
         encrypted_data = cipher.encrypt(padding_data)
-        hmac = self._get_hmac(encrypted_data)
-
         encrypted_data_len = len(encrypted_data).to_bytes(4, 'big')
 
         result = (
             encrypted_data_len
             + random_iv
-            + hmac
             + encrypted_data
         )
 
-        return result
+        hmac = self._get_hmac(result)
+        return (result + hmac)
 
     def decrypt(self, token: bytes) -> bytes:
         random_iv = token[4:20]
-        mac = token[20:52]
-        encrypted_data = token[52:]
+        mac = token[-32:]
+        encrypted_data = token[20:-32]
 
         cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
         
-        if self._valid_hmac(mac, encrypted_data):
+        if self._valid_hmac(mac, token[:-32]):
             try:
                 decrypted_data = cipher.decrypt(encrypted_data)
                 unpad_data = Padding.unpad(decrypted_data, AES.block_size)
