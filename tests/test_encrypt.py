@@ -9,9 +9,8 @@ from cookiedb import _encrypt
 
 class TestEncryption(bupytest.UnitTest):
     def __init__(self) -> None:
-        self._key = 'secret-key'
-        self._fake_key = 'my-fake-secret-key'
-        self._enc = _encrypt.Cryptography(self._key)
+        self._enc = _encrypt.Cryptography('secret-key')
+        self._fake_enc = _encrypt.Cryptography('fake-secret-key')
 
         self._data = b'My name is John'
 
