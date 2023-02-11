@@ -17,22 +17,12 @@ pip install cookiedb
 from cookiedb import CookieDB
 
 database = CookieDB(key='secret')
-database.create_database('MyDatabase')
 database.open('MyDatabase')
 
-database.add('languages', {
-    'python': {
-        'name': 'Python',
-        'ext': '.py'
-    },
-    'cpp': {
-        'name': 'C++',
-        'ext': '.cpp'
-    }
-})
+database.add('languages/python', {'name': 'Python', 'ext': '.py'})
+python_ext = database.get('languages/python/ext')
 
-languages = database.get('languages')
-print(f'All languages: {languages}')
+print(f'Python extension: {python_ext}')
 ```
 
 ## License

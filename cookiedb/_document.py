@@ -7,20 +7,18 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 
 import os
+import pickle
 from datetime import datetime
 from typing import Union
 
-import pickle
-from cryptography import fernet
-
 from . import exceptions
+from ._encrypt import Cryptography
 
 
 class Document:
     def __init__(self, key: bytes, database_local: str) -> None:
-        self._fernet = fernet.Fernet(key)
+        self._crypt = Cryptography(key)
         self._document_local = database_local
-        self._key = key.decode()
 
     @staticmethod
     def _save_file(file_content: str, filepath: str) -> None:
@@ -33,11 +31,11 @@ class Document:
 
     def _encrypt(self, obj: dict) -> str:
         pickle_file = pickle.dumps(obj)
-        encrypted_data = self._fernet.encrypt(pickle_file)
+        encrypted_data = self._crypt.encrypt(pickle_file)
         return encrypted_data
 
     def _decrypt(self, encrypted: bytes) -> dict:
-        decrypted_data = self._fernet.decrypt(encrypted)
+        decrypted_data = self._crypt.decrypt(encrypted)
         data = pickle.loads(decrypted_data)
         return data
 

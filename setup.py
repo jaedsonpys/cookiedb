@@ -8,16 +8,16 @@ setup(
     author_email='imunknowuser@protonmail.com',
     name='cookiedb',
     description='CookieDB is a noSQL document database.',
-    version='6.0.1',
+    version='7.0.0',
     long_description_content_type='text/markdown',
     long_description=readme,
     license='Apache License',
-    install_requires=['cryptography==39.0.0'],
+    install_requires=['pycryptodome==3.17'],
     packages=['cookiedb'],
     url='https://github.com/jaedsonpys/cookiedb',
     project_urls={
         'License': 'https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE',
-        'Documentation': 'https://github.com/jaedsonpys/cookiedb/tree/master/DOCS'
+        'Documentation': 'https://jaedsonpys.github.io/cookiedb/'
     },
     classifiers=[
         'License :: OSI Approved :: Apache Software License',
@@ -30,5 +30,5 @@ setup(
         'Programming Language :: Python :: 3',
         'Topic :: Database :: Database Engines/Servers'
     ],
-    keywords=['database', 'noSQL', 'document', 'JSON', 'sql']
+    keywords=['database', 'noSQL', 'document', 'JSON', 'key-value']
 )

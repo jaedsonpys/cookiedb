@@ -34,3 +34,13 @@ class InvalidDatabaseKeyError(Exception):
 class InvalidKeyError(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+
+class InvalidTokenError(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+
+class InvalidSignatureError(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
