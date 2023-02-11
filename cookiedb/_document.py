@@ -35,7 +35,7 @@ class Document:
         return encrypted_data
 
     def _decrypt(self, encrypted: bytes) -> dict:
-        decrypted_data = self._fernet.decrypt(encrypted)
+        decrypted_data = self._crypt.decrypt(encrypted)
         data = pickle.loads(decrypted_data)
         return data
 
