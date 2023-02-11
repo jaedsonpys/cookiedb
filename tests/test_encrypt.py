@@ -4,6 +4,7 @@ import bupytest
 
 sys.path.insert(0, './')
 
+import cookiedb
 from cookiedb import _encrypt
 
 
@@ -21,6 +22,14 @@ class TestEncryption(bupytest.UnitTest):
     def test_decrypt_data(self):
         decrypted = self._enc.decrypt(self.encrypted)
         self.assert_expected(decrypted, self._data)
+
+    def test_decrypt_with_invalid_key(self):
+        try:
+            self._fake_enc.decrypt(self.encrypted)
+        except cookiedb.exceptions.InvalidTokenError:
+            self.assert_true(True)
+        else:
+            self.assert_true(False, message='Expected a InvalidTokenError exception')
 
 
 if __name__ == '__main__':
