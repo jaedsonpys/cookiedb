@@ -56,25 +56,25 @@ class CookieDB:
 
         return self._open_database
 
-    def open(self, database_name: str) -> None:
+    def open(self, database: str) -> None:
         """
         Stores the name of the database if it exists,
         otherwise an exception `DatabaseNotFoundError`
         is thrown.
 
-        :param database_name: Database name;
+        :param database: Database name;
         :return: None.
         """
 
-        database_exists = self._document.exists_document(database_name)
+        database_exists = self._document.exists_document(database)
 
         if not database_exists:
-            raise exceptions.DatabaseNotFoundError(f'Database {database_name} not found.')
+            raise exceptions.DatabaseNotFoundError(f'Database {database} not found.')
         else:
-            self._open_database = database_name
+            self._open_database = database
 
         try:
-            self._document.get_document(database_name)
+            self._document.get_document(database)
         except (exceptions.InvalidTokenError, exceptions.InvalidSignatureError):
             raise exceptions.InvalidDatabaseKeyError('Invalid database encryption key')
 
@@ -90,23 +90,23 @@ class CookieDB:
         else:
             raise exceptions.NoOpenDatabaseError('No open database.')
 
-    def create_database(self, database_name, if_not_exists: bool = False) -> None:
+    def create_database(self, name: str, if_not_exists: bool = False) -> None:
         """
         Create a database at the location specified
         in **database local** in the `CookieDB`
         class instance.
 
-        :param database_name: Database name;
+        :param name: Database name;
         :param if_not_exists: If "True", exceptions will
         not be thrown if you are trying to create a
         database that already exists;
         :return: None.
         """
 
-        if not self._document.exists_document(database_name):
-            self._document.create_document(database_name)
+        if not self._document.exists_document(name):
+            self._document.create_document(name)
         elif not if_not_exists:
-            raise exceptions.DatabaseExistsError(f'Database {database_name} already exists.')
+            raise exceptions.DatabaseExistsError(f'Database {name} already exists.')
 
     def _get_database_items(self):
         try:
