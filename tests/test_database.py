@@ -160,6 +160,22 @@ class TestDatabase(bupytest.UnitTest):
         python_lang = self.cookiedb.get('languages/programming/python')
         self.assert_false(python_lang, message='"languages/programming/python" not deleted')
 
+    def test_append_item(self):
+        user = {
+            'name': 'Maria',
+            'age': 17,
+            'email': 'test@mail.com',
+            'languages': [
+                'javascript', 'css', 'html',
+                'golang'
+            ]
+        }
+
+        USERS.append(user)
+        self.cookiedb.append('users/', user)
+        users_db = self.cookiedb.get('users/')
+        self.assert_expected(users_db, USERS, message='"append" failed')
+
     def test_delete_item_2(self):
         self.cookiedb.delete('languages/markup')
         markup_langs = self.cookiedb.get('languages/markup')
