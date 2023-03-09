@@ -230,3 +230,26 @@ class CookieDB:
             self._document.update_document(self._open_database, database_items)
         else:
             raise exceptions.ItemNotExistsError(f'Item "{path}" not exists')
+
+    def append(self, path: str, value: Any) -> None:
+        """Append to a list from database. The path item
+        must be a list, otherwise an exception will be thrown.
+
+        :param path: Item path
+        :type path: str
+        :param value: Any value to append
+        :type value: Any
+        :raises exceptions.ItemIsNotAListError: If the path item is not a list
+        :raises exceptions.ItemNotExistsError: If item not exists
+        """
+
+        data = self.get(path)
+
+        if data is not None:
+            if isinstance(data, list):
+                data.append(value)
+                self.add(path, data)
+            else:
+                raise exceptions.ItemIsNotAListError(f'Item "{path}" is not a list to append')
+        else:
+            raise exceptions.ItemNotExistsError(f'Item "{path}" not exists')
