@@ -1,16 +1,16 @@
 <h1 align="center">CookieDB database</h1>
 
-<div style="display: flex; justify-content: center; margin-bottom: 15px">
-    <div align="center">
+<p align="center" style="margin-bottom: 15px">
+    <a href="https://github.com/jaedsonpys/cookiedb/releases">
         <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/jaedsonpys/cookiedb?include_prereleases">
-    </div>
-    <div align="center" style="margin-right: 5px; margin-left: 5px">
+    </a>
+    <a href="https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE" style="margin-right: 5px; margin-left: 5px">
         <img alt="PyPI - License" src="https://img.shields.io/pypi/l/cookiedb">
-    </div>
-    <div align="center">
+    </a>
+    <a href="https://pypi.org/project/cookiedb">
         <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/cookiedb">
-    </div>
-</div>
+    </a>
+</p>
 
 CookieDB is a noSQL database that uses the `document` model with all data encrypted, take advantage of the *performance and security* to create your projects that need a **quick storage** and are simple to use. Read the [CookieDB full documentation](https://jaedsonpys.github.io/cookiedb) to understand the methods available for creating, reading, updating and deleting data in the database.
 
