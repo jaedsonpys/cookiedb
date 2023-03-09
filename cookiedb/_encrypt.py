@@ -55,14 +55,8 @@ class Cryptography:
         cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
         encrypted_data = cipher.encrypt(padding_data)
 
-        result = (
-            len(data).to_bytes(4, 'big')
-            + random_iv
-            + encrypted_data
-        )
-
-        hmac = self._get_hmac(result)
-        return (result + hmac)
+        result = b''.join((len(data).to_bytes(4, 'big'), random_iv, encrypted_data))
+        return b''.join((result, self._get_hmac(result)))
 
     def decrypt(self, token: bytes) -> bytes:
         """Decrypt a token in bytes.
