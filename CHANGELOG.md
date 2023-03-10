@@ -258,3 +258,15 @@
 - [`94b8e9a`](https://github.com/jaedsonpys/cookiedb/commit/94b8e9a): Raise custom `InvalidTokenError` and `InvalidSignatureError` exceptions;
 - [`b319915`](https://github.com/jaedsonpys/cookiedb/commit/b319915): Use `Cryptography` in `_document` module;
 - [`190167b`](https://github.com/jaedsonpys/cookiedb/commit/190167b): Remove key base64 encode from `CookieDB.__init__`.
+
+# 7.1.0
+
+- [CookieDB 7.1.0 in PyPi](https://pypi.org/project/cookiedb/7.1.0/)
+- [CookieDB 7.1.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v7.1.0)
+
+## Features
+
+- Use `bytes.join()` method to join encrypt data.
+- Create `append()` method.
+- Create a `Document` instance on open a database.
+- Import only what is needed in the code.
