@@ -9,8 +9,8 @@
 from functools import wraps
 from typing import Any
 
-from . import exceptions
 from . import _document as document
+from . import exceptions
 
 
 def required_database(method):
@@ -25,17 +25,12 @@ def required_database(method):
 
 
 class CookieDB:
-    def __init__(
-        self,
-        key: str,
-        database_local: str = None
-    ):
+    def __init__(self, key: str, database_local: str = None) -> None:
         """
-        Initializes the `JSONHandler` class and prepares the
-        encryption key.
+        Initializes an instance for CookieDB database manipulation.
 
-        :param key: Any plain text;
-        :param database_local: Database directory.
+        :param key: Any plain text key
+        :param database_local: Database directory
         """
 
         if not database_local:
