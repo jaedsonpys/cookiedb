@@ -6,11 +6,13 @@
 
 # http://www.apache.org/licenses/LICENSE-2.0
 
+import os
 from functools import wraps
 from typing import Any
 
-from . import _document as document
 from . import exceptions
+from ._document import Document
+from ._encrypt import Cryptography
 
 
 def required_database(method):
@@ -39,8 +41,10 @@ class CookieDB:
         if not key or type(key) != str:
             raise exceptions.InvalidKeyError(f'Argument "key" must be of type "str", not "{type(key)}"')
 
+        self._crypto = Cryptography(key)
+        self._database_local = database_local
         self._open_database = None
-        self._document = document.Document(key, database_local)
+        self._document = None
 
     def checkout(self) -> str:
         """Return opened databsase name
@@ -61,15 +65,17 @@ class CookieDB:
         :return: None.
         """
 
-        database_exists = self._document.exists_document(database)
+        database_path = os.path.join(self._database_local, database + '.cookiedb')
 
-        if not database_exists:
+        if not os.path.isfile(database_path):
             raise exceptions.DatabaseNotFoundError(f'Database {database} not found.')
         else:
             self._open_database = database
 
+        self._document = Document(self._crypto, database_path)
+
         try:
-            self._document.get_document(database)
+            self._document.get_document()
         except (exceptions.InvalidTokenError, exceptions.InvalidSignatureError):
             raise exceptions.InvalidDatabaseKeyError('Invalid database encryption key')
 
@@ -82,6 +88,7 @@ class CookieDB:
 
         if self._open_database:
             self._open_database = None
+            self._document = None
         else:
             raise exceptions.NoOpenDatabaseError('No open database.')
 
@@ -98,14 +105,17 @@ class CookieDB:
         :return: None.
         """
 
-        if not self._document.exists_document(name):
-            self._document.create_document(name)
+        database_path = os.path.join(self._database_local, name + '.cookiedb')
+
+        if not os.path.isfile(database_path):
+            self._document = Document(self._crypto, database_path)
+            self._document.create_document()
         elif not if_not_exists:
             raise exceptions.DatabaseExistsError(f'Database {name} already exists.')
 
     def _get_database_items(self):
         try:
-            database = self._document.get_document(self._open_database)
+            database = self._document.get_document()
         except exceptions.DatabaseNotFoundError:
             self._open_database = None
             raise exceptions.DatabaseNotFoundError
@@ -144,7 +154,7 @@ class CookieDB:
             else:
                 items = items.setdefault(i, {})
 
-        self._document.update_document(self._open_database, database_items)
+        self._document.update_document(database_items)
 
     @required_database
     def get(self, path: str) -> Any:
@@ -195,7 +205,7 @@ class CookieDB:
             else:
                 df = df.setdefault(i, {})
 
-        self._document.update_document(self._open_database, database_items)
+        self._document.update_document(database_items)
 
     def update(self, path: str, value: Any) -> None:
         """Update a item from database.
@@ -222,7 +232,7 @@ class CookieDB:
                 else:
                     items = items.setdefault(i, {})
 
-            self._document.update_document(self._open_database, database_items)
+            self._document.update_document(database_items)
         else:
             raise exceptions.ItemNotExistsError(f'Item "{path}" not exists')
 
