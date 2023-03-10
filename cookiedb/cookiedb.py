@@ -6,7 +6,7 @@
 
 # http://www.apache.org/licenses/LICENSE-2.0
 
-import os
+from os import path
 from functools import wraps
 from typing import Any
 
@@ -65,9 +65,9 @@ class CookieDB:
         :return: None.
         """
 
-        database_path = os.path.join(self._database_local, database + '.cookiedb')
+        database_path = path.join(self._database_local, database + '.cookiedb')
 
-        if not os.path.isfile(database_path):
+        if not path.isfile(database_path):
             raise exceptions.DatabaseNotFoundError(f'Database {database} not found.')
         else:
             self._open_database = database
@@ -105,9 +105,9 @@ class CookieDB:
         :return: None.
         """
 
-        database_path = os.path.join(self._database_local, name + '.cookiedb')
+        database_path = path.join(self._database_local, name + '.cookiedb')
 
-        if not os.path.isfile(database_path):
+        if not path.isfile(database_path):
             self._document = Document(self._crypto, database_path)
             self._document.create_document()
         elif not if_not_exists:

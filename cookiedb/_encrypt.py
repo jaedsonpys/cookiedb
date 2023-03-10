@@ -1,5 +1,5 @@
-import hashlib
-import secrets
+from hashlib import sha256
+from secrets import token_bytes
 
 from Crypto.Cipher import AES
 from Crypto.Util import Padding
@@ -16,7 +16,7 @@ class Cryptography:
         :type key: str
         """
 
-        hash_key = hashlib.sha256(key.encode()).digest()
+        hash_key = sha256(key.encode()).digest()
         self._encryption_key = hash_key[:128]
         self._signature_key = hash_key[128:]
 
@@ -49,7 +49,7 @@ class Cryptography:
         :rtype: bytes
         """
 
-        random_iv = secrets.token_bytes(16)
+        random_iv = token_bytes(16)
         padding_data = Padding.pad(data, AES.block_size)
 
         cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
