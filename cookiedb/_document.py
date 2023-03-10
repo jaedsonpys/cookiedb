@@ -6,9 +6,7 @@
 
 # http://www.apache.org/licenses/LICENSE-2.0
 
-import os
 import pickle
-from datetime import datetime
 from typing import Union
 
 from . import exceptions
@@ -16,18 +14,14 @@ from ._encrypt import Cryptography
 
 
 class Document:
-    def __init__(self, key: bytes, database_local: str) -> None:
-        self._crypt = Cryptography(key)
-        self._document_local = database_local
+    def __init__(self, cryptography: Cryptography, document_path: str) -> None:
+        self._crypt = cryptography
+        self._document_path = document_path
 
     @staticmethod
     def _save_file(file_content: str, filepath: str) -> None:
         with open(filepath, 'wb') as writer:
             writer.write(file_content)
-
-    def exists_document(self, database: str) -> bool:
-        document_path = os.path.join(self._document_local, database + '.cookiedb')
-        return os.path.isfile(document_path)
 
     def _encrypt(self, obj: dict) -> str:
         pickle_file = pickle.dumps(obj)
@@ -39,43 +33,28 @@ class Document:
         data = pickle.loads(decrypted_data)
         return data
 
-    def create_document(self, name: str) -> dict:
-        document_path = os.path.join(self._document_local, name + '.cookiedb')
-        created_time = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
-
+    def create_document(self) -> dict:
         document = {
-            'name': name,
-            'created_at': created_time,
-            'updated_at': created_time,
             'items': {}
         }
 
         data = self._encrypt(document)
-        self._save_file(data, document_path)
-
+        self._save_file(data, self._document_path)
         return document
 
-    def get_document(self, database: str) -> Union[None, dict]:
-        document_path = os.path.join(self._document_local, database + '.cookiedb')
-
+    def get_document(self) -> Union[None, dict]:
         try:
-            with open(document_path, 'rb') as reader:
+            with open(self._document_path, 'rb') as reader:
                 data = reader.read()
         except FileNotFoundError:
-            raise exceptions.DatabaseNotFoundError(f'Database "{database}" not found')
+            raise exceptions.DatabaseNotFoundError(f'Database "{self._document_path}" not found')
         else:
             document = self._decrypt(data)
 
         return document
 
-    def update_document(self, database: str, items: dict) -> None:
-        document_path = os.path.join(self._document_local, database + '.cookiedb')
-
-        document = self.get_document(database)
-        update_time = datetime.now().replace(microsecond=0)
-
+    def update_document(self, items: dict) -> None:
+        document = self.get_document()
         document['items'] = items
-        document['updated_at'] = str(update_time)
-
         encrypted_json = self._encrypt(document)
-        self._save_file(encrypted_json, document_path)
+        self._save_file(encrypted_json, self._document_path)
