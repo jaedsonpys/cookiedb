@@ -82,7 +82,7 @@ class TestDatabase(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
 
-        self.dbpath = './tests/databases'
+        self.dbpath = os.path.join('tests', 'databases')
 
         if os.path.isdir(self.dbpath):
             shutil.rmtree(self.dbpath)
