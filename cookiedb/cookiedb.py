@@ -7,23 +7,11 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 
 from os import path
-from functools import wraps
 from typing import Any
 
 from . import exceptions
 from ._document import Document
 from ._encrypt import Cryptography
-
-
-def required_database(method):
-    @wraps(method)
-    def decorator(ref, *args, **kwargs):
-        if ref.checkout() is None:
-            raise exceptions.NoOpenDatabaseError('No open database.')
-        else:
-            return method(ref, *args, **kwargs)
-
-    return decorator
 
 
 class CookieDB:
@@ -70,7 +58,6 @@ class CookieDB:
 
         return path_list
 
-    @required_database
     def add(self, path: str, value: Any) -> None:
         """
         Creates an item in the database.
@@ -95,7 +82,6 @@ class CookieDB:
 
         self._document.update_document(database_items)
 
-    @required_database
     def get(self, path: str) -> Any:
         """
         Get a database item from the path.
