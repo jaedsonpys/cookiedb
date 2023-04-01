@@ -27,12 +27,10 @@ Take a look at this **simple example of using** the database, where we create an
 ```python
 from cookiedb import CookieDB
 
-database = CookieDB(key='secret')
-database.open('MyDatabase')
-
+database = CookieDB('MyDatabase', key='secret')
 database.add('languages/python', {'name': 'Python', 'ext': '.py'})
-python_ext = database.get('languages/python/ext')
 
+python_ext = database.get('languages/python/ext')
 print(f'Python extension: {python_ext}')
 ```
 

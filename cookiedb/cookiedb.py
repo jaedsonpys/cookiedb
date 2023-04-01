@@ -7,7 +7,6 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 
 from os import path
-from functools import wraps
 from typing import Any
 
 from . import exceptions
@@ -15,103 +14,31 @@ from ._document import Document
 from ._encrypt import Cryptography
 
 
-def required_database(method):
-    @wraps(method)
-    def decorator(ref, *args, **kwargs):
-        if ref.checkout() is None:
-            raise exceptions.NoOpenDatabaseError('No open database.')
-        else:
-            return method(ref, *args, **kwargs)
-
-    return decorator
-
-
 class CookieDB:
-    def __init__(self, key: str, database_local: str = None) -> None:
+    def __init__(self, database: str, key: str) -> None:
         """
         Initializes an instance for CookieDB database manipulation.
 
+        :param database: Database path/name
         :param key: Any plain text key
-        :param database_local: Database directory
         """
-
-        if not database_local:
-            database_local = './'
 
         if not key or type(key) != str:
             raise exceptions.InvalidKeyError(f'Argument "key" must be of type "str", not "{type(key)}"')
+        
+        if not database.endswith('.cookiedb'):
+            database = database + '.cookiedb'
 
-        self._crypto = Cryptography(key)
-        self._database_local = database_local
-        self._open_database = None
-        self._document = None
+        _crypto = Cryptography(key)
+        self._document = Document(_crypto, database)
 
-    def checkout(self) -> str:
-        """Return opened databsase name
-
-        :return: Database name
-        :rtype: str
-        """
-
-        return self._open_database
-
-    def open(self, database: str) -> None:
-        """
-        Stores the name of the database if it exists,
-        otherwise an exception `DatabaseNotFoundError`
-        is thrown.
-
-        :param database: Database name;
-        :return: None.
-        """
-
-        database_path = path.join(self._database_local, database + '.cookiedb')
-
-        if not path.isfile(database_path):
-            raise exceptions.DatabaseNotFoundError(f'Database {database} not found.')
-        else:
-            self._open_database = database
-
-        self._document = Document(self._crypto, database_path)
-
-        try:
-            self._document.get_document()
-        except (exceptions.InvalidTokenError, exceptions.InvalidSignatureError):
-            raise exceptions.InvalidDatabaseKeyError('Invalid database encryption key')
-
-    def close(self) -> None:
-        """Close a open database.
-
-        An exception `NoOpenDatabaseError` will be thrown
-        if no database is open.
-        """
-
-        if self._open_database:
-            self._open_database = None
-            self._document = None
-        else:
-            raise exceptions.NoOpenDatabaseError('No open database.')
-
-    def create_database(self, name: str, if_not_exists: bool = False) -> None:
-        """
-        Create a database at the location specified
-        in **database local** in the `CookieDB`
-        class instance.
-
-        :param name: Database name;
-        :param if_not_exists: If "True", exceptions will
-        not be thrown if you are trying to create a
-        database that already exists;
-        :return: None.
-        """
-
-        database_path = path.join(self._database_local, name + '.cookiedb')
-
-        if not path.isfile(database_path):
-            self._document = Document(self._crypto, database_path)
+        if not path.isfile(database):
             self._document.create_document()
-        elif not if_not_exists:
-            raise exceptions.DatabaseExistsError(f'Database {name} already exists.')
+        else:
+            try:
+                self._document.get_document()
+            except (exceptions.InvalidTokenError, exceptions.InvalidSignatureError):
+                raise exceptions.InvalidDatabaseKeyError('Invalid database encryption key')
 
     def _get_database_items(self):
         try:
@@ -131,7 +58,6 @@ class CookieDB:
 
         return path_list
 
-    @required_database
     def add(self, path: str, value: Any) -> None:
         """
         Creates an item in the database.
@@ -156,7 +82,6 @@ class CookieDB:
 
         self._document.update_document(database_items)
 
-    @required_database
     def get(self, path: str) -> Any:
         """
         Get a database item from the path.

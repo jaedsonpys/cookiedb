@@ -1,6 +1,20 @@
-# 🍪 CookieDB database
+<h1 align="center">CookieDB database</h1>
 
-CookieDB is an *extremely optimized* noSQL database using the **key-value** model, with encrypted databases, you can enjoy the performance, security and ease of using CookieDB. To install **CookieDB**, use the `pip` package manager:
+<p align="center" style="margin-bottom: 15px">
+    <a href="https://github.com/jaedsonpys/cookiedb/releases">
+        <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/jaedsonpys/cookiedb?include_prereleases">
+    </a>
+    <a href="https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE" style="margin-right: 5px; margin-left: 5px">
+        <img alt="PyPI - License" src="https://img.shields.io/pypi/l/cookiedb">
+    </a>
+    <a href="https://pypi.org/project/cookiedb">
+        <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/cookiedb">
+    </a>
+</p>
+
+CookieDB is a noSQL database that uses the `document` model with all data encrypted, take advantage of the *performance and security* to create your projects that need a **quick storage** and are simple to use. Read the [CookieDB full documentation](https://jaedsonpys.github.io/cookiedb) to understand the methods available for creating, reading, updating and deleting data in the database.
+
+To install CookieDB using PIP Package Manager:
 
 ```
 pip install cookiedb
@@ -64,6 +78,14 @@ pip install cookiedb
 * [7.0.0 (Fev 11, 2023)](https://jaedsonpys.github.io/cookiedb/7.0.0)
     - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v7.0.0)
     - [PyPI Package](https://pypi.org/project/cookiedb/7.0.0/)
+
+* [7.1.0 (Mar 10, 2023)](https://jaedsonpys.github.io/cookiedb/7.1.0)
+    - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v7.1.0)
+    - [PyPI Package](https://pypi.org/project/cookiedb/7.1.0/)
+
+* [8.0.0 (Apr 1, 2023)](https://jaedsonpys.github.io/cookiedb/8.0.0)
+    - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v8.0.0)
+    - [PyPI Package](https://pypi.org/project/cookiedb/8.0.0/)
 
 ## License
 

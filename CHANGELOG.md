@@ -270,3 +270,13 @@
 - Create `append()` method.
 - Create a `Document` instance on open a database.
 - Import only what is needed in the code.
+
+# 8.0.0
+
+- [CookieDB 8.0.0 in PyPi](https://pypi.org/project/cookiedb/8.0.0/)
+- [CookieDB 8.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v8.0.0)
+
+## Features
+
+- Remove `open()`, `create_database()` and `checkout()` methods.
+- Create database automatically if not exist.

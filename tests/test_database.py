@@ -82,50 +82,22 @@ class TestDatabase(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
 
-        self.dbpath = './tests/databases'
+        self.dbpath = os.path.join('tests', 'databases')
 
         if os.path.isdir(self.dbpath):
             shutil.rmtree(self.dbpath)
 
         os.mkdir(self.dbpath)
+        self._my_database_path = os.path.join(self.dbpath, 'MyDatabase')
 
         self.cookiedb = CookieDB(
-            key='my-secret-key',
-            database_local=self.dbpath
+            database=self._my_database_path,
+            key='my-secret-key'
         )
 
-    def test_create_database(self):
-        self.cookiedb.create_database('MyDatabase', if_not_exists=True)
-        self.assert_true(os.path.isfile(f'{self.dbpath}/MyDatabase.cookiedb'), message='"MyDatabase" not created')
-
-    def test_no_open_database_error_1(self):
-        try:
-            self.cookiedb.close()
-        except exceptions.NoOpenDatabaseError:
-            self.assert_true(True, message='NoOpenDatabaseError exception')
-        else:
-            self.assert_true(False, message='"NoOpenDatabaseError" exception was not thrown')
-
-    def test_open_database(self):
-        try:
-            self.cookiedb.open('MyDatabase')
-        except exceptions.DatabaseNotFoundError:
-            self.assert_true(False, message='DatabaseNotFoundError exception')
-
-    def test_no_open_database_error_2(self):
-        try:
-            self.cookiedb.close()
-        except exceptions.NoOpenDatabaseError:
-            self.assert_true(False, message='Non open database')
-
-        self.cookiedb.open('MyDatabase')
-
     def test_invalid_key_exception(self):
-        db_2 = CookieDB(key='other-key', database_local=self.dbpath)
-        db_2.create_database('TestKeyDatabase', if_not_exists=True)
-
         try:
-            db_2.open('MyDatabase')
+            CookieDB(database=self._my_database_path, key='other-key')
         except exceptions.InvalidDatabaseKeyError:
             self.assert_true(True, message='CookieDB not detected invalid key')
 
@@ -186,11 +158,9 @@ class TestDatabasePersistence(bupytest.UnitTest):
     def __init__(self):
         super().__init__()
         self.cookiedb = CookieDB(
-            key='my-secret-key',
-            database_local='./tests/databases'
+            database=os.path.join('tests', 'databases', 'MyDatabase'),
+            key='my-secret-key'
         )
-
-        self.cookiedb.open('MyDatabase')
 
     def test_add_new_data(self):
         self.cookiedb.add('test/a', {'foo': 'bar'})
