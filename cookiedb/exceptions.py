@@ -6,11 +6,7 @@
 
 # http://www.apache.org/licenses/LICENSE-2.0
 
-class DatabaseNotFoundError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
 
-    
 class ItemNotExistsError(Exception):
     def __init__(self, message):
         super().__init__(message)
@@ -22,11 +18,6 @@ class ItemIsNotAListError(Exception):
 
 
 class DatabaseExistsError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
-
-
-class NoOpenDatabaseError(Exception):
     def __init__(self, message):
         super().__init__(message)
 
