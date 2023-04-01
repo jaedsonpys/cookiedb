@@ -19,8 +19,8 @@ class CookieDB:
         """
         Initializes an instance for CookieDB database manipulation.
 
+        :param database: Database path/name
         :param key: Any plain text key
-        :param database_local: Database directory
         """
 
         if not key or type(key) != str:
