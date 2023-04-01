@@ -5,7 +5,7 @@ with open(f'README.md', 'r') as reader:
 
 setup(
     author='Jaedson Silva',
-    author_email='imunknowuser@protonmail.com',
+    author_email='jaedson.dev@proton.me',
     name='cookiedb',
     description='CookieDB is a noSQL document database.',
     version='7.1.0',
@@ -30,5 +30,5 @@ setup(
         'Programming Language :: Python :: 3',
         'Topic :: Database :: Database Engines/Servers'
     ],
-    keywords=['database', 'noSQL', 'document', 'JSON', 'key-value']
+    keywords=['database', 'noSQL', 'document', 'JSON']
 )
