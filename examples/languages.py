@@ -1,9 +1,6 @@
 from cookiedb import CookieDB
 
-db = CookieDB(key='secret')
-db.create_database('languages', if_not_exists=True)
-db.open('languages')
-
+db = CookieDB('languages', key='secret')
 data = {}
 
 while True:
