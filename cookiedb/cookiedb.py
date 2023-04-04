@@ -165,21 +165,20 @@ class CookieDB:
         """Append to a list from database. The path item
         must be a list, otherwise an exception will be thrown.
 
+        If the specified path does not exist, it will be created
+        automatically containing a list.
+
         :param path: Item path
         :type path: str
         :param value: Any value to append
         :type value: Any
         :raises exceptions.ItemIsNotAListError: If the path item is not a list
-        :raises exceptions.ItemNotExistsError: If item not exists
         """
 
-        data = self.get(path)
+        data = self.get(path) or []
 
-        if data is not None:
-            if isinstance(data, list):
-                data.append(value)
-                self.add(path, data)
-            else:
-                raise exceptions.ItemIsNotAListError(f'Item "{path}" is not a list to append')
+        if isinstance(data, list):
+            data.append(value)
+            self.add(path, data)
         else:
-            raise exceptions.ItemNotExistsError(f'Item "{path}" not exists')
+            raise exceptions.ItemIsNotAListError(f'Item "{path}" is not a list to append')
