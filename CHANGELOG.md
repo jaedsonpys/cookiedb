@@ -280,3 +280,12 @@
 
 - Remove `open()`, `create_database()` and `checkout()` methods.
 - Create database automatically if not exist.
+
+# 8.1.0
+
+- [CookieDB 8.1.0 in PyPi](https://pypi.org/project/cookiedb/8.1.0/)
+- [CookieDB 8.1.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v8.1.0)
+
+## Features
+
+- Create path if not exist in `CookieDB.append()` method.
