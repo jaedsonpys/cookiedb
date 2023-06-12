@@ -1,4 +1,5 @@
-<h1 align="center">CookieDB database</h1>
+<h1 align="center">CookieDB</h1>
+<p align="center">Safe. Fast. Simple</p>
 
 <p align="center" style="margin-bottom: 15px">
     <a href="https://github.com/jaedsonpys/cookiedb/releases">
@@ -12,7 +13,7 @@
     </a>
 </p>
 
-CookieDB is a noSQL database that uses the `document` model with all data encrypted, take advantage of the *performance and security* to create your projects that need a **quick storage** and are simple to use. Read the [CookieDB full documentation](https://jaedsonpys.github.io/cookiedb) to understand the methods available for creating, reading, updating and deleting data in the database.
+CookieDB is a noSQL database that uses the `document` model with all data encrypted using AES-256, take advantage of *performance and security* to create your projects that need **fast storage** and simple to use, where you have full control over the data. Read the [full CookieDB documentation](https://jaedsonpys.github.io/cookiedb) to understand the methods available to create, read, update, and delete data in the database.
 
 ## Getting started
 
