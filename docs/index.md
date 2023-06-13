@@ -12,7 +12,7 @@
     </a>
 </p>
 
-CookieDB is a noSQL database that uses the `document` model with all data encrypted, take advantage of the *performance and security* to create your projects that need a **quick storage** and are simple to use. Read the [CookieDB full documentation](https://jaedsonpys.github.io/cookiedb) to understand the methods available for creating, reading, updating and deleting data in the database.
+CookieDB is a noSQL database that uses the `document` model with all data encrypted, take advantage of the *performance and security* to create your projects that need a **quick storage** and are simple to use. Read the CookieDB full documentation here to understand the methods available for creating, reading, updating and deleting data in the database.
 
 To install CookieDB using PIP Package Manager:
 
@@ -20,7 +20,6 @@ To install CookieDB using PIP Package Manager:
 pip install cookiedb
 ```
 
-- [Documentation](https://github.com/jaedsonpys/cookiedb/tree/master/DOCS)
 - [PyPI Project](https://pypi.org/project/cookiedb)
 
 ## All documentation
