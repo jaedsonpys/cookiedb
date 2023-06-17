@@ -1,4 +1,4 @@
-<h1 align="center">CookieDB database</h1>
+<h1 align="center">CookieDB Documentation</h1>
 
 <p align="center" style="margin-bottom: 15px">
     <a href="https://github.com/jaedsonpys/cookiedb/releases">
