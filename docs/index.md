@@ -14,17 +14,11 @@
 
 CookieDB is a noSQL database that uses the `document` model with all data encrypted, take advantage of the *performance and security* to create your projects that need a **quick storage** and are simple to use. Read the CookieDB full documentation here to understand the methods available for creating, reading, updating and deleting data in the database.
 
-To install CookieDB using PIP Package Manager:
-
-```
-pip install cookiedb
-```
-
-- [PyPI Project](https://pypi.org/project/cookiedb)
+Documentation for released versions of CookieDB. If you have any issues or concerns, please [open an Issue](https://github.com/jaedsonpys/cookiedb/issues/new) on GitHub and report your issue.
 
 ## All documentation
 
-> Releases of fixes or security patches do not have documentation.
+> By default, fix releases or security patches do not have documentation unless that release changes compatibility.
 
 * [0.1.0 (June 27, 2022)](https://jaedsonpys.github.io/cookiedb/0.1.0)
     - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v0.1.0)
