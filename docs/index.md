@@ -88,7 +88,7 @@ Documentation for released versions of CookieDB. If you have any issues or conce
 
 ```
 Apache License
-Copyright 2023 Jaedson Silva
+Copyright © 2023 Jaedson Silva
 ```
 
-This project is licensed under Apache License (see [LICENSE](https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE) for details)
+This project uses the *Apache License*, anyone can use this project as long as the license conditions allow. [See more about the license](https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE).
