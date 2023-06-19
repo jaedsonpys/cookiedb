@@ -23,6 +23,16 @@ First, let's start by performing a quick installation of CookieDB using the PIP 
 pip install cookiedb
 ```
 
+If you prefer, you can perform the installation manually using Git. See below how to do this:
+
+```
+git clone https://github.com/jaedsonpys/cookiedb.git
+cd cookiedb/
+python3 setup.py install
+```
+
+### Usage example
+
 Take a look at this **simple example of using** the database, where we create and get some data (the complete example can be found in [examples/example.py](https://github.com/jaedsonpys/cookiedb/blob/master/examples/example.py))
 
 ```python
