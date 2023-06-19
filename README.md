@@ -3,13 +3,13 @@
 
 <p align="center" style="margin-bottom: 15px">
     <a href="https://github.com/jaedsonpys/cookiedb/releases">
-        <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/jaedsonpys/cookiedb?include_prereleases">
+        <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/jaedsonpys/cookiedb?include_prereleases&color=green&label=version">
     </a>
     <a href="https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE" style="margin-right: 5px; margin-left: 5px">
-        <img alt="PyPI - License" src="https://img.shields.io/pypi/l/cookiedb">
+        <img alt="PyPI - License" src="https://img.shields.io/pypi/l/cookiedb?color=yellow">
     </a>
     <a href="https://pypi.org/project/cookiedb">
-        <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/cookiedb">
+        <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/cookiedb?color=blue">
     </a>
 </p>
 
