@@ -1,5 +1,5 @@
 <h1 align="center">CookieDB</h1>
-<p align="center">Safe. Fast. Simple.</p>
+<p align="center">A safe, fast and simple database.</p>
 
 <p align="center" style="margin-bottom: 15px">
     <a href="https://github.com/jaedsonpys/cookiedb/releases">
