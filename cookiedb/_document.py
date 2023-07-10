@@ -40,3 +40,14 @@ class Document:
 
         with open(self._document_path, 'wb') as doc:
             doc.write(encrypted_item + b'\r\n')
+
+    def get(self, path: str) -> Union[Tuple[str, Any], None]:
+        path = path.encode()
+
+        with open(self._document_path, 'rb') as doc:
+            for line in doc:
+                item = Item(line)
+                item_path = item.get_path()
+
+                if item_path == path:
+                    return item_path, item.get_value()
