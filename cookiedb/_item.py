@@ -13,7 +13,8 @@ class Item:
     def __init__(self, item: bytes) -> None:
         self._item_io = BytesIO(item)
 
-    def _encode(path: str, value: Any) -> bytes:
+    @staticmethod
+    def create(path: str, value: Any) -> bytes:
         path_len = len(path)
         value_type, value_len, value_format = VALUE_MAP[type(value)]
 
