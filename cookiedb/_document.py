@@ -30,3 +30,6 @@ class Document:
 
     def _encrypt(self, data: bytes) -> bytes:
         return self._crypt.encrypt(data)
+
+    def _decrypt(self, encrypted: bytes) -> bytes:
+        return self._crypt.decrypt(encrypted)
