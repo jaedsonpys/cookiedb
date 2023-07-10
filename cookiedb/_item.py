@@ -27,12 +27,12 @@ class Item:
         _packv = (path_len, path.encode(), value_len, value_type, value)
         return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
 
-    def _decode_path(self) -> Tuple[int, str]:
+    def get_path(self) -> Tuple[int, str]:
         path_len, = struct.unpack('<H', self._item_io.read(2))
         path, = struct.unpack(f'<{path_len}s', self._item_io.read(path_len))
         return path_len, path
 
-    def _decode_value(self) -> Union[int, float, str]:
+    def get_value(self) -> Union[int, float, str]:
         value_len, value_type = struct.unpack('<HH', self._item_io.read(4))
         value_buffer = self._item_io.read(value_len)
 
