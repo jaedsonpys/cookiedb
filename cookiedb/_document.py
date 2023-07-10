@@ -68,7 +68,8 @@ class Document:
 
         with open(self._document_path, 'rb') as doc:
             for line in doc:
-                item = Item(line)
+                decrypted_item = self._decrypt(line.strip(b'\n'))
+                item = Item(decrypted_item)
                 item_path = item.get_path()
 
                 if item_path == path:
