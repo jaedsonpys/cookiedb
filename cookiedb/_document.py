@@ -13,7 +13,8 @@
 # limitations under the License.
 
 import struct
-from typing import Union, Any
+from io import BytesIO
+from typing import Union, Any, Tuple
 
 from . import exceptions
 from ._encrypt import Cryptography
@@ -42,3 +43,9 @@ class Document:
         # <path len> <path> :: <value len> <value type> <value>
         _packv = (path_len, path.encode(), value_len, value_type, value)
         return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
+
+    def _decode_path(item: bytes) -> Tuple[int, str]:
+        item_io = BytesIO(item)
+        path_len, = struct.unpack('<H', item_io.read(2))
+        path, = struct.unpack(f'<{path_len}s', item_io.read(path_len))
+        return path_len, path
