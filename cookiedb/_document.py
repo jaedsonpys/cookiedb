@@ -12,13 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Union
+import struct
+from typing import Union, Any
 
 from . import exceptions
 from ._encrypt import Cryptography
+
+VALUE_MAP = {
+    str: (1, None, lambda vlen: f'{vlen}s'),
+    int: (2, 4, 'i'),
+    float: (3, 4, 'f'),
+}
 
 
 class Document:
     def __init__(self, cryptography: Cryptography, document_path: str) -> None:
         self._crypt = cryptography
         self._document_path = document_path
+
+    def _encode(path: str, value: Any) -> bytes:
+        path_len = len(path)
+        value_type, value_len, value_format = VALUE_MAP[type(value)]
+
+        if value_type == 1:
+            value = value.encode()
+            value_len = len(value)
+            value_format = value_format(value_len)
+
+        # <path len> <path> :: <value len> <value type> <value>
+        _packv = (path_len, path.encode(), value_len, value_type, value)
+        return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
