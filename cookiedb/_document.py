@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import struct
-from io import BytesIO
 from typing import Union, Any, Tuple
 
 from . import exceptions
@@ -24,3 +22,7 @@ class Document:
     def __init__(self, cryptography: Cryptography, document_path: str) -> None:
         self._crypt = cryptography
         self._document_path = document_path
+
+    def create_document(self) -> None:
+        with open(self._document_path, 'w') as doc:
+            doc.write('')
