@@ -61,13 +61,9 @@ class Document:
                 new_items = self._dict_to_path(value, path)
                 for new_item in new_items:
                     path, value = new_item
-                    new_item = Item.create(path, value)
-                    encrypted_item = self._encrypt(new_item)
-                    doc.write(encrypted_item + b'\n')
+                    self._add_item(path, value, doc)
             else:
-                new_item = Item.create(path, value)
-                encrypted_item = self._encrypt(new_item)
-                doc.write(encrypted_item + b'\n')
+                self._add_item(path, value, doc)
 
     def get(self, path: str) -> Union[Tuple[str, Any], None]:
         path = path.encode()
