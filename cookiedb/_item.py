@@ -10,6 +10,9 @@ VALUE_MAP = {
 
 
 class Item:
+    def __init__(self, item: bytes) -> None:
+        self._item_io = BytesIO(item)
+
     def _encode(path: str, value: Any) -> bytes:
         path_len = len(path)
         value_type, value_len, value_format = VALUE_MAP[type(value)]
@@ -23,19 +26,14 @@ class Item:
         _packv = (path_len, path.encode(), value_len, value_type, value)
         return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
 
-    def _decode_path(item: bytes) -> Tuple[int, str]:
-        item_io = BytesIO(item)
-        path_len, = struct.unpack('<H', item_io.read(2))
-        path, = struct.unpack(f'<{path_len}s', item_io.read(path_len))
+    def _decode_path(self) -> Tuple[int, str]:
+        path_len, = struct.unpack('<H', self._item_io.read(2))
+        path, = struct.unpack(f'<{path_len}s', self._item_io.read(path_len))
         return path_len, path
 
-    def _decode_value(path_len: int, item: bytes) -> Union[int, float, str]:
-        item_io = BytesIO(item)
-        path_header_len = path_len + 2
-        item_io.seek(path_header_len)
-
-        value_len, value_type = struct.unpack('<HH', item_io.read(4))
-        value_buffer = item_io.read(value_len)
+    def _decode_value(self) -> Union[int, float, str]:
+        value_len, value_type = struct.unpack('<HH', self._item_io.read(4))
+        value_buffer = self._item_io.read(value_len)
 
         if value_type == 1:
             value, = struct.unpack(f'<{value_len}s', value_buffer)
