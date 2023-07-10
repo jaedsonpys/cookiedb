@@ -33,3 +33,10 @@ class Document:
 
     def _decrypt(self, encrypted: bytes) -> bytes:
         return self._crypt.decrypt(encrypted)
+
+    def add(self, path: str, value: Any) -> None:
+        new_item = Item.create(path, value)
+        encrypted_item = self._encrypt(new_item)
+
+        with open(self._document_path, 'wb') as doc:
+            doc.write(encrypted_item + b'\r\n')
