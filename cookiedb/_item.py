@@ -1,6 +1,6 @@
 import struct
 from io import BytesIO
-from typing import Any, Union, Tuple
+from typing import Any, Union
 
 VALUE_MAP = {
     str: (1, None, lambda vlen: f'{vlen}s'),
