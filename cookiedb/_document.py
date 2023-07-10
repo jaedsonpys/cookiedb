@@ -24,6 +24,21 @@ class Document:
         self._crypt = cryptography
         self._document_path = document_path
 
+    def _dict_to_path(self, data: dict, basepath: str = None) -> list:
+        items = []
+
+        for key, value in data.items():
+            if basepath:
+                key = '/'.join((str(basepath), str(key)))
+
+            if isinstance(value, dict):
+                v_items = self._dict_to_path(value, key)
+                items.extend(v_items)
+            else:
+                items.append((key, value))
+
+        return items
+
     def create_document(self) -> None:
         with open(self._document_path, 'w') as doc:
             doc.write('')
