@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from io import BufferedWriter
 from typing import Union, Any, Tuple
 
 from . import exceptions
@@ -48,6 +49,11 @@ class Document:
 
     def _decrypt(self, encrypted: bytes) -> bytes:
         return self._crypt.decrypt(encrypted)
+
+    def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
+        new_item = Item.create(path, value)
+        encrypted_item = self._encrypt(new_item)
+        fp.write(encrypted_item + b'\n')
 
     def add(self, path: str, value: Any) -> None:
         with open(self._document_path, 'wb') as doc:
