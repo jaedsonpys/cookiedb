@@ -16,6 +16,7 @@ from typing import Union, Any, Tuple
 
 from . import exceptions
 from ._encrypt import Cryptography
+from ._item import Item
 
 
 class Document:
@@ -26,3 +27,6 @@ class Document:
     def create_document(self) -> None:
         with open(self._document_path, 'w') as doc:
             doc.write('')
+
+    def _encrypt(self, data: bytes) -> bytes:
+        return self._crypt.encrypt(data)
