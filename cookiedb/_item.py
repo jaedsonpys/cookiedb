@@ -41,7 +41,7 @@ class Item:
         _packv = (path_len, path.encode(), value_len, value_type, value)
         return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
 
-    def get_path(self) -> str:
+    def get_path(self) -> bytes:
         path_len, = struct.unpack('<H', self._item_io.read(2))
         path, = struct.unpack(f'<{path_len}s', self._item_io.read(path_len))
         return path
