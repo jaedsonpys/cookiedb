@@ -82,11 +82,10 @@ class Document:
     def get(self, path: str) -> Union[Tuple[str, Any], None]:
         path = path.encode()
 
-        with open(self._document_path, 'rb') as doc:
-            for line in self._read_doc():
-                decrypted_item = self._decrypt(line)
-                item = Item(decrypted_item)
-                item_path = item.get_path()
+        for line in self._read_doc():
+            decrypted_item = self._decrypt(line)
+            item = Item(decrypted_item)
+            item_path = item.get_path()
 
-                if item_path == path:
-                    return item_path, item.get_value()
+            if item_path == path:
+                return item_path, item.get_value()
