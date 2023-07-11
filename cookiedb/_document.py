@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import struct
 from io import BufferedWriter
 from typing import Union, Any, Tuple
 
@@ -53,7 +54,8 @@ class Document:
     def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
         new_item = Item.create(path, value)
         encrypted_item = self._encrypt(new_item)
-        fp.write(encrypted_item + b'\n')
+        fp.write(struct.pack('<H', len(encrypted_item)))
+        fp.write(encrypted_item)
 
     def add(self, path: str, value: Any) -> None:
         with open(self._document_path, 'wb') as doc:
@@ -69,8 +71,15 @@ class Document:
         path = path.encode()
 
         with open(self._document_path, 'rb') as doc:
-            for line in doc:
-                decrypted_item = self._decrypt(line.strip(b'\n'))
+            while True:
+                _line_len = doc.read(2)
+
+                if not _line_len or _line_len == b'\x00':
+                    break
+
+                full_len, = struct.unpack('<H', _line_len)
+                decrypted_item = self._decrypt(doc.read(full_len))
+
                 item = Item(decrypted_item)
                 item_path = item.get_path()
 
