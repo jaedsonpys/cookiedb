@@ -41,6 +41,7 @@ class Document:
 
         return items
 
+    @staticmethod
     def create_document(self) -> None:
         with open(self._document_path, 'w') as doc:
             doc.write('')
