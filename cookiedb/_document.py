@@ -14,7 +14,7 @@
 
 import struct
 from io import BufferedWriter
-from typing import Union, Any, Tuple
+from typing import Union, Any, Tuple, Iterator
 
 from . import exceptions
 from ._encrypt import Cryptography
@@ -40,6 +40,17 @@ class Document:
                 items.append((key, value))
 
         return items
+
+    def _read_doc(self) -> Iterator[bytes]:
+        with open(self._document_path, 'rb') as doc:
+            while True:
+                _line_len = doc.read(2)
+
+                if not _line_len or _line_len == b'\x00':
+                    break
+
+                full_len, = struct.unpack('<H', _line_len)
+                yield doc.read(full_len)
 
     @staticmethod
     def create_document(self) -> None:
@@ -72,15 +83,8 @@ class Document:
         path = path.encode()
 
         with open(self._document_path, 'rb') as doc:
-            while True:
-                _line_len = doc.read(2)
-
-                if not _line_len or _line_len == b'\x00':
-                    break
-
-                full_len, = struct.unpack('<H', _line_len)
-                decrypted_item = self._decrypt(doc.read(full_len))
-
+            for line in self._read_doc():
+                decrypted_item = self._decrypt(line)
                 item = Item(decrypted_item)
                 item_path = item.get_path()
 
