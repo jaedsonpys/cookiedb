@@ -79,13 +79,12 @@ class Document:
             else:
                 self._add_item(path, value, doc)
 
-    def get(self, path: str) -> Union[Tuple[str, Any], None]:
+    def get(self, path: str) -> Union[Any, None]:
         path = path.encode()
 
         for line in self._read_doc():
             decrypted_item = self._decrypt(line)
             item = Item(decrypted_item)
-            item_path = item.get_path()
 
-            if item_path == path:
-                return item_path, item.get_value()
+            if item.get_path() == path:
+                return item.get_value()
