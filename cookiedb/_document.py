@@ -81,10 +81,15 @@ class Document:
 
     def get(self, path: str) -> Union[Any, None]:
         path = path.encode()
+        items = []
 
         for line in self._read_doc():
             decrypted_item = self._decrypt(line)
             item = Item(decrypted_item)
+            item_path = item.get_path()
 
-            if item.get_path() == path:
+            if item_path == path:
                 return item.get_value()
+            elif item_path.startswith(path):
+                sub_path = item_path.strip(path)
+                items.append((sub_path, item.get_value()))
