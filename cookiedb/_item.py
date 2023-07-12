@@ -23,6 +23,8 @@ VALUE_MAP = {
     bool: (4, 1, '?'),
 }
 
+INVERSE_VALUE_MAP = {v[0]: (k, v[2]) for k, v in VALUE_MAP.items()}
+
 
 class Item:
     def __init__(self, item: bytes) -> None:
@@ -48,17 +50,14 @@ class Item:
         return path
 
     def get_value(self) -> Union[int, float, str]:
-        value_len, value_type = struct.unpack('<HH', self._item_io.read(4))
+        value_len, value_type_n = struct.unpack('<HH', self._item_io.read(4))
         value_buffer = self._item_io.read(value_len)
+        value_type, value_format = INVERSE_VALUE_MAP[value_type_n]
 
-        if value_type == 1:
-            value, = struct.unpack(f'<{value_len}s', value_buffer)
+        if value_type == str:
+            value, = struct.unpack(f'<{value_format(value_len)}', value_buffer)
             value = value.decode()
-        elif value_type == 2:
-            value, = struct.unpack(f'<i', value_buffer)
-        elif value_type == 3:
-            value, = struct.unpack(f'<f', value_buffer)
-        elif value_type == 4:
-            value, = struct.unpack('<?', value_buffer)
+        else:
+            value, = struct.unpack(f'<{value_format}', value_buffer)
 
         return value
