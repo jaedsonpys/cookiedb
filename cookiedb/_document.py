@@ -14,7 +14,7 @@
 
 import struct
 from io import BufferedWriter
-from typing import Union, Any, Tuple, Iterator
+from typing import Union, Any, Tuple, Iterator, List
 
 from . import exceptions
 from ._encrypt import Cryptography
@@ -40,6 +40,23 @@ class Document:
                 items.append((key, value))
 
         return items
+
+    @staticmethod
+    def _to_dict_tree(items: List[Tuple[str, Any]]) -> dict:
+        result = {}
+
+        for sp, vl in items:
+            p_result = result
+            sp_split = [x for x in sp.split('/') if x]
+            max_i = len(sp_split) - 1
+
+            for i, p in enumerate(sp_split):
+                if max_i == i:
+                    p_result[p] = vl
+                else:
+                    p_result = p_result.setdefault(p, {})
+
+        return result
 
     def _read_doc(self) -> Iterator[bytes]:
         with open(self._document_path, 'rb') as doc:
@@ -95,17 +112,5 @@ class Document:
                 items.append((sub_path.decode(), item.get_value()))
 
         if items:
-            result = {}
-
-            for sp, vl in items:
-                p_result = result
-                sp_split = [x for x in sp.split('/') if x]
-                max_i = len(sp_split) - 1
-
-                for i, p in enumerate(sp_split):
-                    if max_i == i:
-                        p_result[p] = vl
-                    else:
-                        p_result = p_result.setdefault(p, {})
-
+            result = self._to_dict_tree(items)
             return result
