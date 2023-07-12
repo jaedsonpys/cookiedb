@@ -91,5 +91,21 @@ class Document:
             if item_path == path:
                 return item.get_value()
             elif item_path.startswith(path):
-                sub_path = item_path.strip(path)
-                items.append((sub_path, item.get_value()))
+                sub_path = item_path.replace(path, b'')
+                items.append((sub_path.decode(), item.get_value()))
+
+        if items:
+            result = {}
+
+            for sp, vl in items:
+                p_result = result
+                sp_split = [x for x in sp.split('/') if x]
+                max_i = len(sp_split) - 1
+
+                for i, p in enumerate(sp_split):
+                    if max_i == i:
+                        p_result[p] = vl
+                    else:
+                        p_result = p_result.setdefault(p, {})
+
+            return result
