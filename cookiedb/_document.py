@@ -69,7 +69,6 @@ class Document:
                 full_len, = struct.unpack('<H', _line_len)
                 yield doc.read(full_len)
 
-    @staticmethod
     def create_document(self) -> None:
         with open(self._document_path, 'w') as doc:
             doc.write('')
