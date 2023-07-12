@@ -20,6 +20,7 @@ VALUE_MAP = {
     str: (1, None, lambda vlen: f'{vlen}s'),
     int: (2, 4, 'i'),
     float: (3, 4, 'f'),
+    bool: (4, 1, '?'),
 }
 
 
@@ -57,5 +58,7 @@ class Item:
             value, = struct.unpack(f'<i', value_buffer)
         elif value_type == 3:
             value, = struct.unpack(f'<f', value_buffer)
+        elif value_type == 4:
+            value, = struct.unpack('<?', value_buffer)
 
         return value
