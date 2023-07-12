@@ -108,15 +108,3 @@ class Cryptography:
             return unpad_data
         else:
             raise exceptions.InvalidSignatureError('Token signature don\'t match')
-
-    def get_data_size(self, token: bytes) -> int:
-        """Return the encrypted data size.
-
-        :param token: Encrypted token
-        :type token: bytes
-        :return: Data size in bytes
-        :rtype: int
-        """
-
-        size = int.from_bytes(token[:4], 'big')
-        return size
