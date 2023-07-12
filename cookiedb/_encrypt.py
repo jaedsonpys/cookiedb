@@ -56,8 +56,8 @@ class Cryptography:
         """Encrypt a data in bytes.
 
         The result will be a string in bytes containing
-        the length of the encrypted data, initialization
-        vector (IV), encrypted data and a MAC hash.
+        the initialization vector (IV), encrypted data
+        and a MAC hash.
 
         :param data: Any data in bytes
         :type data: bytes
@@ -86,8 +86,8 @@ class Cryptography:
 
         :param token: Encrypted token
         :type token: bytes
-        :raises Exception: If token is invalid
-        :raises Exception: If token has a invalid signature
+        :raises InvalidTokenError: If token is invalid
+        :raises InvalidSignatureError: If token has a invalid signature
         :return: Decrypted data
         :rtype: bytes
         """
