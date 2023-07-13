@@ -38,14 +38,6 @@ class CookieDB:
         _crypto = Cryptography(key)
         self._document = Document(_crypto, database)
 
-        if not path.isfile(database):
-            self._document.create_document()
-        else:
-            try:
-                self._document.get_document()
-            except (exceptions.InvalidTokenError, exceptions.InvalidSignatureError):
-                raise exceptions.InvalidDatabaseKeyError('Invalid database encryption key')
-
     def _get_database_items(self):
         try:
             database = self._document.get_document()
