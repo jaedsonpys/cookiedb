@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import struct
 from io import BufferedWriter
 from typing import Union, Any, Tuple, Iterator, List
@@ -25,6 +26,16 @@ class Document:
     def __init__(self, cryptography: Cryptography, document_path: str) -> None:
         self._crypt = cryptography
         self._document_path = document_path
+
+        if not os.path.isfile(document_path):
+            self.create_document()
+        else:
+            first_item = next(self._read_doc())
+            
+            try:
+                self._crypt.decrypt(first_item)
+            except exceptions.InvalidTokenError:
+                raise exceptions.InvalidKeyError('Invalid database key') from None
 
     def _dict_to_path(self, data: dict, basepath: str = None) -> list:
         items = []
