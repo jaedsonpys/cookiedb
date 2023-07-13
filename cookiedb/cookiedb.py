@@ -59,10 +59,9 @@ class CookieDB:
     def add(self, path: str, value: Any) -> None:
         """
         Creates an item in the database.
-        Each path separated by "/" is a key in the JSON file.
 
-        :param path: Item path;
-        :param value: Item value;
+        :param path: Item path
+        :param value: Item value
         :return: None.
         """
 
@@ -73,9 +72,9 @@ class CookieDB:
         """
         Get a database item from the path.
 
-        :param path: Item path;
-        :return: Returns the obtained value.
-        None if nothing is found.
+        :param path: Item path
+        :return: Returns the obtained value. None if
+        nothing is found.
         """
 
         path = path.strip('/')
