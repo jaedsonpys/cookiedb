@@ -66,7 +66,7 @@ class CookieDB:
         :return: None.
         """
 
-        path = path.strip()
+        path = path.strip('/')
         self._document.add(path, value)
 
     def get(self, path: str) -> Any:
@@ -78,20 +78,8 @@ class CookieDB:
         None if nothing is found.
         """
 
-        path_list = self._get_path_list(path)
-        last_items = {}
-
-        database_items = self._get_database_items()
-
-        for i in path_list:
-            if not last_items:
-                db_item = database_items.get(i)
-                last_items = db_item
-            else:
-                sub_item = last_items.get(i)
-                last_items = sub_item
-
-        return last_items
+        path = path.strip('/')
+        return self._document.get(path)
 
     def delete(self, path: str) -> None:
         """Delete a item from database.
