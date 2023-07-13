@@ -73,15 +73,9 @@ class Document:
         with open(self._document_path, 'w') as doc:
             doc.write('')
 
-    def _encrypt(self, data: bytes) -> bytes:
-        return self._crypt.encrypt(data)
-
-    def _decrypt(self, encrypted: bytes) -> bytes:
-        return self._crypt.decrypt(encrypted)
-
     def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
         new_item = Item.create(path, value)
-        encrypted_item = self._encrypt(new_item)
+        encrypted_item = self._crypt.encrypt(new_item)
         fp.write(struct.pack('<H', len(encrypted_item)))
         fp.write(encrypted_item)
 
@@ -100,7 +94,7 @@ class Document:
         items = []
 
         for line in self._read_doc():
-            decrypted_item = self._decrypt(line)
+            decrypted_item = self._crypt.decrypt(line)
             item = Item(decrypted_item)
             item_path = item.get_path()
 
