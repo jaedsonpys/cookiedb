@@ -81,8 +81,8 @@ class Document:
                 yield doc.read(full_len)
 
     def create_document(self) -> None:
-        with open(self._document_path, 'w') as doc:
-            doc.write('')
+        with open(self._document_path, 'wb') as doc:
+            self._add_item('@checkEncrypt', True, doc)
 
     def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
         new_item = Item.create(path, value)
