@@ -66,19 +66,8 @@ class CookieDB:
         :return: None.
         """
 
-        database_items = self._get_database_items()
-        items = database_items
-
-        path_list = self._get_path_list(path)
-        path_list_items = len(path_list) - 1
-
-        for c, i in enumerate(path_list):
-            if c == path_list_items:
-                items[i] = value
-            else:
-                items = items.setdefault(i, {})
-
-        self._document.update_document(database_items)
+        path = path.strip()
+        self._document.add(path, value)
 
     def get(self, path: str) -> Any:
         """
