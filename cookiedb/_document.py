@@ -35,7 +35,7 @@ class Document:
             try:
                 self._crypt.decrypt(first_item)
             except exceptions.InvalidTokenError:
-                raise exceptions.InvalidKeyError('Invalid database key') from None
+                raise exceptions.InvalidDatabaseKeyError('Invalid database key') from None
 
     def _dict_to_path(self, data: dict, basepath: str = None) -> list:
         items = []
