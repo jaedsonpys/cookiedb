@@ -91,7 +91,7 @@ class Document:
         fp.write(encrypted_item)
 
     def add(self, path: str, value: Any) -> None:
-        with open(self._document_path, 'wb') as doc:
+        with open(self._document_path, 'ab') as doc:
             if isinstance(value, dict):
                 new_items = self._dict_to_path(value, path)
                 for new_item in new_items:
