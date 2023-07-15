@@ -15,4 +15,4 @@
 from .cookiedb import CookieDB
 from . import exceptions
 
-__version__ = '8.1.0'
+__version__ = '9.0.0'
