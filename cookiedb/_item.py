@@ -16,6 +16,8 @@ import struct
 from io import BytesIO
 from typing import Any, Union
 
+from .exceptions import ValueNotSupportedError
+
 VALUE_MAP = {
     str: (1, None, lambda vlen: f'{vlen}s'),
     int: (2, 4, 'i'),
@@ -32,8 +34,13 @@ class Item:
 
     @staticmethod
     def create(path: str, value: Any) -> bytes:
+        type_map = VALUE_MAP.get(type(value))
+        
+        if not type_map:
+            raise ValueNotSupportedError(f'Value type {repr(type(value))} not supported')
+
         path_len = len(path)
-        value_type, value_len, value_format = VALUE_MAP[type(value)]
+        value_type, value_len, value_format = type_map
 
         if value_type == 1:
             value = value.encode()
