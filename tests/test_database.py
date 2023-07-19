@@ -106,12 +106,12 @@ class TestDatabasePersistence(bupytest.UnitTest):
         self.cookiedb.add('test/b', {'bar': 'foo'})
 
     def test_get_previous_data(self):
-        previous_data = self.cookiedb.get('languages/programming')
+        previous_data = self.cookiedb.get('users/')
 
         self.assert_expected(
             previous_data,
-            programming_languages,
-            message='Incorrect "languages/programming" data'
+            users,
+            message='Previous data don\'t match'
         )
 
     def test_get_new_data(self):
