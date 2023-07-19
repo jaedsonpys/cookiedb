@@ -63,28 +63,28 @@ class TestDatabase(bupytest.UnitTest):
         except exceptions.InvalidDatabaseKeyError:
             self.assert_true(True, message='CookieDB not detected invalid key')
 
-    def test_add_items_1(self):
+    def test_add(self):
         self.cookiedb.add('users/', users)
 
-    def test_get_items_1(self):
+    def test_get(self):
         users_db = self.cookiedb.get('users/')
         self.assert_expected(users, users_db, message='"users/" not equal values')
 
-    def test_update_item(self):
+    def test_update(self):
         self.cookiedb.update('users/jaedson/age', 16)
         users['jaedson']['age'] = 16
 
         user_age = self.cookiedb.get('users/jaedson/age')
         self.assert_expected(16, user_age, message='"users/jaedson/age" value not updated')
 
-    def test_delete_item_1(self):
+    def test_delete(self):
         self.cookiedb.delete('users/maria/')
         users.pop('maria')
         
         maria_user = self.cookiedb.get('languages/programming/python')
         self.assert_false(maria_user, message='"users/maria/" not deleted')
 
-    def test_append_item(self):
+    def test_append(self):
         self.cookiedb.append('users/jaedson/languages', 'C#')
         users['jaedson']['languages'].append('C#')
 
