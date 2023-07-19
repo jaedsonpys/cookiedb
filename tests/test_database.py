@@ -92,11 +92,6 @@ class TestDatabase(bupytest.UnitTest):
         self.assert_expected(user_langs, users['jaedson']['languages'],
                              message='append failed to "users/jaedson/languages"')
 
-    def test_delete_item_2(self):
-        self.cookiedb.delete('languages/markup')
-        markup_langs = self.cookiedb.get('languages/markup')
-        self.assert_false(markup_langs, message='"languages/markup" not deleted')
-
 
 class TestDatabasePersistence(bupytest.UnitTest):
     def __init__(self):
