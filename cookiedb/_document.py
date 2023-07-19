@@ -28,10 +28,11 @@ class Document:
         self._document_path = document_path
 
         if not os.path.isfile(document_path):
-            self.create_document()
+            with open(self._document_path, 'wb') as doc:
+                self._add_item('@checkEncrypt', True, doc)
         else:
             first_item = next(self._read_doc())
-            
+
             try:
                 self._crypt.decrypt(first_item)
             except exceptions.InvalidTokenError:
@@ -79,10 +80,6 @@ class Document:
 
                 full_len, = struct.unpack('<H', _line_len)
                 yield doc.read(full_len)
-
-    def create_document(self) -> None:
-        with open(self._document_path, 'wb') as doc:
-            self._add_item('@checkEncrypt', True, doc)
 
     def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
         new_item = Item.create(path, value)
