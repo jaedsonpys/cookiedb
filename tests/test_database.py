@@ -8,46 +8,8 @@ sys.path.insert(0, './')
 
 from cookiedb import CookieDB, exceptions
 
-programming_languages = {
-    'python': {
-        'extension': '.py',
-        'name': 'Python'
-    },
-    'javascript': {
-        'extension': '.js',
-        'name': 'JavaScript'
-    },
-    'cpp': {
-        'extension': '.cpp',
-        'name': 'C++'
-    },
-    'typescript': {
-        'extension': '.ts',
-        'name': 'TypeScript'
-    },
-    'csharp': {
-        'extension': '.cs',
-        'name': 'C#'
-    }
-}
-
-MARKUP_LANGS = {
-    'html': {
-        'extension': '.html',
-        'name': 'HTML'
-    },
-    'xhtml': {
-        'extension': '.xhtml',
-        'name': 'XHTML'
-    },
-    'xml': {
-        'extension': '.xml',
-        'name': 'XML'
-    }
-}
-
-users = [
-    {
+users = {
+    'jaedson': {
         'name': 'Jaedson',
         'age': 15,
         'email': 'test@mail.com',
@@ -57,7 +19,7 @@ users = [
             'typescript'
         ]
     },
-    {
+    'pedro': {
         'name': 'Pedro',
         'age': 24,
         'email': 'test@mail.com',
@@ -66,7 +28,7 @@ users = [
             'typescript'
         ]
     },
-    {
+    'maria': {
         'name': 'Maria',
         'age': 17,
         'email': 'test@mail.com',
@@ -75,7 +37,7 @@ users = [
             'golang'
         ]
     }
-]
+}
 
 
 class TestDatabase(bupytest.UnitTest):
@@ -102,51 +64,33 @@ class TestDatabase(bupytest.UnitTest):
             self.assert_true(True, message='CookieDB not detected invalid key')
 
     def test_add_items_1(self):
-        self.cookiedb.add('languages/programming', programming_languages)
-        self.cookiedb.add('languages/markup', MARKUP_LANGS)
-
-    def test_get_items_1(self):
-        languages_db = self.cookiedb.get('languages/programming')
-        markup_languages = self.cookiedb.get('languages/markup')
-
-        self.assert_true(languages_db == programming_languages, message='"languages/programming" not equal values')
-        self.assert_true(markup_languages == MARKUP_LANGS, message='"languages/markup" not equal values')
-
-    def test_add_items_2(self):
         self.cookiedb.add('users/', users)
 
-    def test_get_items_2(self):
+    def test_get_items_1(self):
         users_db = self.cookiedb.get('users/')
-        self.assert_true(users_db == users, message='"users/" not equal values')
+        self.assert_expected(users, users_db, message='"users/" not equal values')
 
     def test_update_item(self):
-        self.cookiedb.update('languages/programming/python/name', 'CPython')
-        language_name = self.cookiedb.get('languages/programming/python/name')
+        self.cookiedb.update('users/jaedson/age', 16)
+        users['jaedson']['age'] = 16
 
-        self.assert_expected('CPython', language_name, message='Language name not updated')
+        user_age = self.cookiedb.get('users/jaedson/age')
+        self.assert_expected(16, user_age, message='"users/jaedson/age" value not updated')
 
     def test_delete_item_1(self):
-        self.cookiedb.delete('languages/programming/python')
-        programming_languages.pop('python')
+        self.cookiedb.delete('users/maria/')
+        users.pop('maria')
         
-        python_lang = self.cookiedb.get('languages/programming/python')
-        self.assert_false(python_lang, message='"languages/programming/python" not deleted')
+        maria_user = self.cookiedb.get('languages/programming/python')
+        self.assert_false(maria_user, message='"users/maria/" not deleted')
 
     def test_append_item(self):
-        user = {
-            'name': 'Maria',
-            'age': 17,
-            'email': 'test@mail.com',
-            'languages': [
-                'javascript', 'css', 'html',
-                'golang'
-            ]
-        }
+        self.cookiedb.append('users/jaedson/languages', 'C#')
+        users['jaedson']['languages'].append('C#')
 
-        users.append(user)
-        self.cookiedb.append('users/', user)
-        users_db = self.cookiedb.get('users/')
-        self.assert_expected(users_db, users, message='"append" failed')
+        user_langs = self.cookiedb.get('users/jaedson/languages')
+        self.assert_expected(user_langs, users['jaedson']['languages'],
+                             message='append failed to "users/jaedson/languages"')
 
     def test_delete_item_2(self):
         self.cookiedb.delete('languages/markup')
