@@ -46,7 +46,7 @@ MARKUP_LANGS = {
     }
 }
 
-USERS = [
+users = [
     {
         'name': 'Jaedson',
         'age': 15,
@@ -113,11 +113,11 @@ class TestDatabase(bupytest.UnitTest):
         self.assert_true(markup_languages == MARKUP_LANGS, message='"languages/markup" not equal values')
 
     def test_add_items_2(self):
-        self.cookiedb.add('users/', USERS)
+        self.cookiedb.add('users/', users)
 
     def test_get_items_2(self):
         users_db = self.cookiedb.get('users/')
-        self.assert_true(users_db == USERS, message='"users/" not equal values')
+        self.assert_true(users_db == users, message='"users/" not equal values')
 
     def test_update_item(self):
         self.cookiedb.update('languages/programming/python/name', 'CPython')
@@ -143,10 +143,10 @@ class TestDatabase(bupytest.UnitTest):
             ]
         }
 
-        USERS.append(user)
+        users.append(user)
         self.cookiedb.append('users/', user)
         users_db = self.cookiedb.get('users/')
-        self.assert_expected(users_db, USERS, message='"append" failed')
+        self.assert_expected(users_db, users, message='"append" failed')
 
     def test_delete_item_2(self):
         self.cookiedb.delete('languages/markup')
