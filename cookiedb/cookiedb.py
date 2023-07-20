@@ -106,22 +106,8 @@ class CookieDB:
         Raised if item does not exist
         """
 
-        if self.get(path) is not None:
-            database_items = self._get_database_items()
-            items = database_items
-
-            path_list = self._get_path_list(path)
-            path_list_items = len(path_list) - 1
-
-            for c, i in enumerate(path_list):
-                if c == path_list_items:
-                    items[i] = value
-                else:
-                    items = items.setdefault(i, {})
-
-            self._document.update_document(database_items)
-        else:
-            raise exceptions.ItemNotExistsError(f'Item "{path}" not exists')
+        path = path.strip('/')
+        self._document.update(path, value)
 
     def append(self, path: str, value: Any) -> None:
         """Append to a list from database. The path item
