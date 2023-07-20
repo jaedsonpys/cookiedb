@@ -115,3 +115,17 @@ class Document:
         if items:
             result = self._to_dict_tree(items)
             return result
+        
+    def delete(self, path: str) -> None:
+        with open(self._document_path + '.temp', 'wb') as _temp_doc:
+            for line_len, line in self._read_doc():
+                decrypted_item = self._crypt.decrypt(line)
+                item = Item(decrypted_item)
+                item_path = item.get_path()
+
+                if item_path != path or not item_path.startswith(path):
+                    _temp_doc.write(line_len)
+                    _temp_doc.write(line)
+
+        os.remove(self._document_path)
+        os.rename(self._document_path + '.temp', self._document_path)
