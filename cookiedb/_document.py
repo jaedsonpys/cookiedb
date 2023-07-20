@@ -31,7 +31,7 @@ class Document:
             with open(self._document_path, 'wb') as doc:
                 self._add_item('@checkEncrypt', True, doc)
         else:
-            first_item = next(self._read_doc())
+            first_item = next(self._read_doc())[1]
 
             try:
                 self._crypt.decrypt(first_item)
@@ -79,7 +79,7 @@ class Document:
                     break
 
                 full_len, = struct.unpack('<H', _line_len)
-                yield doc.read(full_len)
+                yield _line_len, doc.read(full_len)
 
     def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
         new_item = Item.create(path, value)
@@ -101,7 +101,7 @@ class Document:
         path = path.encode()
         items = []
 
-        for line in self._read_doc():
+        for __, line in self._read_doc():
             decrypted_item = self._crypt.decrypt(line)
             item = Item(decrypted_item)
             item_path = item.get_path()
