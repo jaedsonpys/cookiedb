@@ -129,3 +129,7 @@ class Document:
 
         os.remove(self._document_path)
         os.rename(self._document_path + '.temp', self._document_path)
+
+    def update(self, path: str, value: Any) -> None:
+        self.delete(path)
+        self.add(path, value)
