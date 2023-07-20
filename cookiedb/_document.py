@@ -70,7 +70,7 @@ class Document:
 
         return result
 
-    def _read_doc(self) -> Iterator[bytes]:
+    def _read_doc(self) -> Iterator[Tuple[bytes]]:
         with open(self._document_path, 'rb') as doc:
             while True:
                 _line_len = doc.read(2)
