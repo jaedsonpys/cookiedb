@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from os import path
 from typing import Any
 
 from . import exceptions
@@ -37,24 +36,6 @@ class CookieDB:
 
         _crypto = Cryptography(key)
         self._document = Document(_crypto, database)
-
-    def _get_database_items(self):
-        try:
-            database = self._document.get_document()
-        except exceptions.DatabaseNotFoundError:
-            self._open_database = None
-            raise exceptions.DatabaseNotFoundError
-
-        return database.get('items')
-
-    def _get_path_list(self, path: str) -> str:
-        path_list = path.split('/')
-        if path.startswith('/'):
-            path_list.pop(0)
-        if path.endswith('/'):
-            path_list.pop(-1)
-
-        return path_list
 
     def add(self, path: str, value: Any) -> None:
         """
