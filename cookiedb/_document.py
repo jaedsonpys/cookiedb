@@ -38,21 +38,6 @@ class Document:
             except exceptions.InvalidTokenError:
                 raise exceptions.InvalidDatabaseKeyError('Invalid database key') from None
 
-    def _dict_to_path(self, data: dict, basepath: str = None) -> list:
-        items = []
-
-        for key, value in data.items():
-            if basepath:
-                key = '/'.join((str(basepath), str(key)))
-
-            if isinstance(value, dict):
-                v_items = self._dict_to_path(value, key)
-                items.extend(v_items)
-            else:
-                items.append((key, value))
-
-        return items
-
     @staticmethod
     def _to_dict_tree(items: List[Tuple[str, Any]]) -> dict:
         result = {}
@@ -93,7 +78,7 @@ class Document:
 
         with open(self._document_path, 'ab') as doc:
             if isinstance(value, dict):
-                new_items = self._dict_to_path(value, path)
+                new_items = Item._dict_to_items(value, path)
                 for new_item in new_items:
                     path, value = new_item
                     self._add_item(path, value, doc)

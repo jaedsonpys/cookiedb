@@ -14,7 +14,7 @@
 
 import struct
 from io import BytesIO
-from typing import Any, Union
+from typing import Any, Union, Tuple, List, Any
 
 from .exceptions import ValueNotSupportedError
 
@@ -50,6 +50,22 @@ class Item:
         # <path len> <path> :: <value len> <value type> <value>
         _packv = (path_len, path.encode(), value_len, value_type, value)
         return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
+
+    @classmethod
+    def _dict_to_items(cls, _dict: dict, basepath: str = None) -> List[Tuple[str, Any]]:
+        items = []
+
+        for key, value in _dict.items():
+            if basepath:
+                key = '/'.join((str(basepath), str(key)))
+
+            if isinstance(value, dict):
+                v_items = cls._dict_to_items(value, key)
+                items.extend(v_items)
+            else:
+                items.append((key, value))
+
+        return items
 
     def get_path(self) -> bytes:
         path_len, = struct.unpack('<H', self._item_io.read(2))
