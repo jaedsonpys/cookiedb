@@ -52,6 +52,18 @@ class Item:
         return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
 
     @classmethod
+    def create_list(cls, path: str, value: list) -> bytes:
+        list_item = cls.create(path, len(value))
+        item_buf = BytesIO(list_item)
+
+        for index, val in enumerate(value):
+            val_path = f'@{path}/{index}'
+            item = cls.create(val_path, val)
+            item_buf.write(item)
+
+        return item_buf.getvalue()
+
+    @classmethod
     def _dict_to_items(cls, _dict: dict, basepath: str = None) -> List[Tuple[str, Any]]:
         items = []
 
