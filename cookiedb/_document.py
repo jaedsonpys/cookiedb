@@ -100,7 +100,7 @@ class Document:
             if item_path in required_items:
                 list_items.append(item.get_value())
 
-            if len(required_items) == _len:
+            if len(list_items) == _len:
                 break
 
         return list_items
