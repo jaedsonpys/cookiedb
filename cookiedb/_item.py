@@ -54,7 +54,7 @@ class Item:
     @classmethod
     def create_list(cls, path: str, value: list) -> List[bytes]:
         items = [cls.create(f'@list:{path}', len(value))]
-        items.extend([cls.create(f'{path}/#{i}', v) for i, v in enumerate(value)])
+        items.extend([cls.create(f'#{path}/{i}', v) for i, v in enumerate(value)])
         return items
 
     @classmethod
