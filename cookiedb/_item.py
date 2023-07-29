@@ -68,6 +68,8 @@ class Item:
             if isinstance(value, dict):
                 v_items = cls._dict_to_items(value, key)
                 items.extend(v_items)
+            elif isinstance(value, list):
+                items.extend(cls.create_list(key, value))
             else:
                 items.append(cls.create(key, value))
 
