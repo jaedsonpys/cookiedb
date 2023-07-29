@@ -88,6 +88,20 @@ class Document:
 
         return False
 
+    def _get_list(self, path: bytes, _len: int) -> list:
+        required_items = [path + f'/#{i}'.encode() for i in range(_len)]
+        list_items = []
+
+        for __, line in self._read_doc():
+            decrypted_item = self._crypt.decrypt(line)
+            item = Item(decrypted_item)
+            item_path = item.get_path()
+
+            if item_path in required_items:
+                list_items.append(item.get_value())
+
+        return list_items
+
     def add(self, path: str, value: Any) -> None:
         if self._exists(path):
             self.update(path, value)
