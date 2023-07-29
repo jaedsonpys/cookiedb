@@ -86,7 +86,7 @@ class Document:
         return False
 
     def add(self, path: str, value: Any) -> None:
-        if self.get(path):
+        if self._exists(path):
             self.update(path, value)
         else:
             with open(self._document_path, 'ab') as doc:
