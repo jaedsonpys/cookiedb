@@ -91,10 +91,11 @@ class Document:
         else:
             with open(self._document_path, 'ab') as doc:
                 if isinstance(value, dict):
-                    new_items = Item._dict_to_items(value, path)
-                    for new_item in new_items:
-                        path, value = new_item
-                        self._add_item(path, value, doc)
+                    items = Item._dict_to_items(value, path)
+                    for item in items:
+                        encrypted_item = self._crypt.encrypt(item)
+                        doc.write(struct.pack('<H', len(encrypted_item)))
+                        doc.write(encrypted_item)
                 else:
                     self._add_item(path, value, doc)
 
