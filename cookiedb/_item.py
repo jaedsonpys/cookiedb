@@ -64,7 +64,7 @@ class Item:
         return item_buf.getvalue()
 
     @classmethod
-    def _dict_to_items(cls, _dict: dict, basepath: str = None) -> List[Tuple[str, Any]]:
+    def _dict_to_items(cls, _dict: dict, basepath: str = None) -> List[bytes]:
         items = []
 
         for key, value in _dict.items():
@@ -75,7 +75,7 @@ class Item:
                 v_items = cls._dict_to_items(value, key)
                 items.extend(v_items)
             else:
-                items.append((key, value))
+                items.append(cls.create(key, value))
 
         return items
 
