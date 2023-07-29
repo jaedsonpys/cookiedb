@@ -105,6 +105,8 @@ class Document:
             return result
         
     def delete(self, path: str) -> None:
+        path = path.encode()
+
         with open(self._document_path + '.temp', 'wb') as _temp_doc:
             for line_len, line in self._read_doc():
                 decrypted_item = self._crypt.decrypt(line)
