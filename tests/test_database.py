@@ -78,10 +78,10 @@ class TestDatabase(bupytest.UnitTest):
         self.assert_expected(16, user_age, message='"users/jaedson/age" value not updated')
 
     def test_delete(self):
-        self.cookiedb.delete('users/maria/')
+        self.cookiedb.delete('users/maria')
         users.pop('maria')
         
-        maria_user = self.cookiedb.get('languages/programming/python')
+        maria_user = self.cookiedb.get('users/maria')
         self.assert_false(maria_user, message='"users/maria/" not deleted')
 
     def test_append(self):
