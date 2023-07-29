@@ -113,7 +113,7 @@ class Document:
                 item = Item(decrypted_item)
                 item_path = item.get_path()
 
-                if item_path != path or not item_path.startswith(path):
+                if item_path != path and not item_path.startswith(path):
                     _temp_doc.write(line_len)
                     _temp_doc.write(line)
 
