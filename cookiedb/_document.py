@@ -66,11 +66,14 @@ class Document:
                 full_len, = struct.unpack('<H', _line_len)
                 yield _line_len, doc.read(full_len)
 
-    def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
-        new_item = Item.create(path, value)
-        encrypted_item = self._crypt.encrypt(new_item)
+    def _write_item(self, item: bytes, fp: BufferedWriter) -> None:
+        encrypted_item = self._crypt.encrypt(item)
         fp.write(struct.pack('<H', len(encrypted_item)))
         fp.write(encrypted_item)
+
+    def _add_item(self, path: str, value: Any, fp: BufferedWriter) -> None:
+        new_item = Item.create(path, value)
+        self._write_item(new_item, fp)
 
     def _exists(self, path: str) -> bool:
         path = path.encode()
@@ -93,9 +96,7 @@ class Document:
                 if isinstance(value, dict):
                     items = Item._dict_to_items(value, path)
                     for item in items:
-                        encrypted_item = self._crypt.encrypt(item)
-                        doc.write(struct.pack('<H', len(encrypted_item)))
-                        doc.write(encrypted_item)
+                        self._write_item(item, doc)
                 else:
                     self._add_item(path, value, doc)
 
