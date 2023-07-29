@@ -57,7 +57,7 @@ class Item:
         item_buf = BytesIO(list_item)
 
         for index, val in enumerate(value):
-            val_path = f'@{path}/{index}'
+            val_path = f'{path}/#{index}'
             item = cls.create(val_path, val)
             item_buf.write(item)
 
