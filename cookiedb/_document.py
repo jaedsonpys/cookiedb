@@ -88,8 +88,8 @@ class Document:
 
         return False
 
-    def _get_list(self, path: bytes, _len: int) -> list:
-        required_items = [path + f'/#{i}'.encode() for i in range(_len)]
+    def _get_list(self, path: str, _len: int) -> list:
+        required_items = [f'#{path}/{i}'.encode() for i in range(_len)]
         list_items = []
 
         for __, line in self._read_doc():
@@ -135,7 +135,7 @@ class Document:
             elif item_path.startswith(b'@list:' + path):
                 path_without_prefix = item_path[6:]
                 sub_path = path_without_prefix.replace(path, b'')
-                item_value = self._get_list(path_without_prefix, item.get_value())
+                item_value = self._get_list(path_without_prefix.decode(), item.get_value())
                 items.append((sub_path.decode(), item_value))
             elif item_path.startswith(path):
                 sub_path = item_path.replace(path, b'')
