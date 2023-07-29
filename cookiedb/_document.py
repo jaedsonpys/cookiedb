@@ -97,6 +97,10 @@ class Document:
                     items = Item._dict_to_items(value, path)
                     for item in items:
                         self._write_item(item, doc)
+                elif isinstance(value, list):
+                    items = Item.create_list(path, value)
+                    for item in items:
+                        self._write_item(item, doc)
                 else:
                     self._add_item(path, value, doc)
 
