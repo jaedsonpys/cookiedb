@@ -74,16 +74,16 @@ class Document:
 
     def add(self, path: str, value: Any) -> None:
         if self.get(path):
-            self.delete(path)
-
-        with open(self._document_path, 'ab') as doc:
-            if isinstance(value, dict):
-                new_items = Item._dict_to_items(value, path)
-                for new_item in new_items:
-                    path, value = new_item
+            self.update(path, value)
+        else:
+            with open(self._document_path, 'ab') as doc:
+                if isinstance(value, dict):
+                    new_items = Item._dict_to_items(value, path)
+                    for new_item in new_items:
+                        path, value = new_item
+                        self._add_item(path, value, doc)
+                else:
                     self._add_item(path, value, doc)
-            else:
-                self._add_item(path, value, doc)
 
     def get(self, path: str) -> Union[Any, None]:
         path = path.encode()
