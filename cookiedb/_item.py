@@ -53,7 +53,7 @@ class Item:
 
     @classmethod
     def create_list(cls, path: str, value: list) -> bytes:
-        list_item = cls.create(path, len(value))
+        list_item = cls.create(f'@list:{path}', len(value))
         item_buf = BytesIO(list_item)
 
         for index, val in enumerate(value):
