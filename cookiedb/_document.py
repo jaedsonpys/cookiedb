@@ -132,7 +132,7 @@ class Document:
 
             if item_path == path:
                 return item.get_value()
-            elif item_path.startswith(b'@list') and item_path.endswith(path):
+            elif item_path.startswith(b'@list:' + path):
                 return self._get_list()
             elif item_path.startswith(path):
                 sub_path = item_path.replace(path, b'')
