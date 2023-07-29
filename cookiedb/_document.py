@@ -72,6 +72,19 @@ class Document:
         fp.write(struct.pack('<H', len(encrypted_item)))
         fp.write(encrypted_item)
 
+    def _exists(self, path: str) -> bool:
+        path = path.encode()
+
+        for __, line in self._read_doc():
+            decrypted_item = self._crypt.decrypt(line)
+            item = Item(decrypted_item)
+            item_path = item.get_path()
+
+            if item_path == path or item_path.startswith(path):
+                return True
+
+        return False
+
     def add(self, path: str, value: Any) -> None:
         if self.get(path):
             self.update(path, value)
