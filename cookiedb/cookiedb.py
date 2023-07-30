@@ -104,6 +104,7 @@ class CookieDB:
         :raises exceptions.ItemIsNotAListError: If the path item is not a list
         """
 
+        path = path.strip('/')
         data = self.get(path) or []
 
         if isinstance(data, list):
