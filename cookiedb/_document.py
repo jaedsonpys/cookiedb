@@ -132,10 +132,14 @@ class Document:
 
             if item_path == path:
                 return item.get_value()
-            elif item_path.startswith(b'@list:' + path):
+            elif item_path.startswith(b''.join((b'@list:', path))):
                 path_without_prefix = item_path[6:]
                 sub_path = path_without_prefix.replace(path, b'')
                 item_value = self._get_list(path_without_prefix.decode(), item.get_value())
+
+                if item_path == b''.join((b'@list:', path)):
+                    return item_value
+
                 items.append((sub_path.decode(), item_value))
             elif item_path.startswith(path):
                 sub_path = item_path.replace(path, b'')
