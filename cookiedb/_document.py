@@ -85,6 +85,10 @@ class Document:
 
             if item_path == path or item_path.startswith(path):
                 return True
+            elif item_path.startswith(b''.join((b'@list:', path))):
+                return True
+            elif item_path.startswith(b''.join((b'#', path))):
+                return True
 
         return False
 
