@@ -155,8 +155,12 @@ class Document:
                 item_path = item.get_path()
 
                 if item_path != path and not item_path.startswith(path):
-                    _temp_doc.write(line_len)
-                    _temp_doc.write(line)
+                    lpath = b''.join((b'@list:', path))
+                    lepath = b''.join((b'#', path))
+
+                    if not item_path.startswith(lpath) and not item_path.startswith(lepath):
+                        _temp_doc.write(line_len)
+                        _temp_doc.write(line)
 
         os.remove(self._document_path)
         os.rename(self._document_path + '.temp', self._document_path)
