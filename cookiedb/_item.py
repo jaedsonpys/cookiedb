@@ -56,7 +56,14 @@ class Item:
         yield cls.create(f'@list:{path}', len(value))
 
         for i, v in enumerate(value):
-            yield cls.create(f'#{path}/{i}', v)
+            list_element_path = f'#{path}/{i}'
+
+            if isinstance(v, dict):
+                items = cls._dict_to_items(v, list_element_path)
+                for item in items:
+                    yield item
+            else:
+                yield cls.create(list_element_path, v)
 
     @classmethod
     def _dict_to_items(cls, _dict: dict, basepath: str = None) -> List[bytes]:
