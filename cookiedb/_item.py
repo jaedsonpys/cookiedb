@@ -14,7 +14,7 @@
 
 import struct
 from io import BytesIO
-from typing import Any, Union, Tuple, List, Any
+from typing import Any, Union, Iterator, List, Any
 
 from .exceptions import ValueNotSupportedError
 
@@ -52,10 +52,11 @@ class Item:
         return struct.pack(f'<H{path_len}s HH{value_format}', *_packv)
 
     @classmethod
-    def create_list(cls, path: str, value: list) -> List[bytes]:
-        items = [cls.create(f'@list:{path}', len(value))]
-        items.extend([cls.create(f'#{path}/{i}', v) for i, v in enumerate(value)])
-        return items
+    def create_list(cls, path: str, value: list) -> Iterator[List[bytes]]:
+        yield cls.create(f'@list:{path}', len(value))
+
+        for i, v in enumerate(value):
+            yield cls.create(f'#{path}/{i}', v)
 
     @classmethod
     def _dict_to_items(cls, _dict: dict, basepath: str = None) -> List[bytes]:
