@@ -96,13 +96,35 @@ class Document:
         required_items = [f'#{path}/{i}'.encode() for i in range(_len)]
         list_items = []
 
+        def _in_required(ipath: bytes) -> bool:
+            for req_item in required_items:
+                if ipath == req_item or ipath.startswith(req_item):
+                    return True
+
+            return False
+
+        def _get_dict_path(ipath: bytes) -> str:
+            ipsplit = ipath.split(b'/')
+            for p in ipsplit:
+                if p.isdigit():
+                    i = ipsplit.index(p)
+                    dict_path = b'/'.join(ipsplit[i + 1:])
+                    return dict_path.strip(b'/').decode()
+
         for __, line in self._read_doc():
             decrypted_item = self._crypt.decrypt(line)
             item = Item(decrypted_item)
             item_path = item.get_path()
 
-            if item_path in required_items:
-                list_items.append(item.get_value())
+            if _in_required(item_path):
+                value = item.get_value()
+
+                if not item_path.decode()[-1].isdigit():
+                    dict_value_path = _get_dict_path(item_path)
+                    dict_value = self._to_dict_tree([(dict_value_path, value)])
+                    list_items.append(dict_value)
+                else:
+                    list_items.append(value)
 
             if len(list_items) == _len:
                 break
