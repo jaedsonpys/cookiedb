@@ -88,9 +88,7 @@ class Document:
     def _exists(self, path: str) -> bool:
         path = path.encode()
 
-        for __, line in self._read_doc():
-            decrypted_item = self._crypt.decrypt(line)
-            item = Item(decrypted_item)
+        for item in self._read_items():
             item_path = item.get_path()
 
             if item_path == path or item_path.startswith(path):
@@ -121,9 +119,7 @@ class Document:
                     dict_path = b'/'.join(ipsplit[i + 1:])
                     return dict_path.strip(b'/').decode()
 
-        for __, line in self._read_doc():
-            decrypted_item = self._crypt.decrypt(line)
-            item = Item(decrypted_item)
+        for item in self._read_items():
             item_path = item.get_path()
 
             if _in_required(item_path):
@@ -161,9 +157,7 @@ class Document:
         path = path.encode()
         items = []
 
-        for __, line in self._read_doc():
-            decrypted_item = self._crypt.decrypt(line)
-            item = Item(decrypted_item)
+        for item in self._read_items():
             item_path = item.get_path()
 
             if item_path == path:
