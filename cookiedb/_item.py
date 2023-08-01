@@ -53,6 +53,7 @@ class Item:
 
     @classmethod
     def create_list(cls, path: str, value: list) -> Iterator[List[bytes]]:
+        path = path.strip('#')
         yield cls.create(f'@list:{path}', len(value))
 
         for i, v in enumerate(value):
