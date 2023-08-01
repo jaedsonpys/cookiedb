@@ -49,7 +49,12 @@ class Document:
 
             for i, p in enumerate(sp_split):
                 if max_i == i:
-                    p_result[p] = vl
+                    if isinstance(p_result, list):
+                        p_result[int(p)].append(vl)
+                    else:
+                        p_result[p] = vl
+                elif isinstance(p_result, list) and p.isdigit():
+                    p_result = p_result[int(p)]
                 else:
                     p_result = p_result.setdefault(p, {})
 
