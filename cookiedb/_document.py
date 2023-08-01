@@ -71,6 +71,11 @@ class Document:
                 full_len, = struct.unpack('<H', _line_len)
                 yield _line_len, doc.read(full_len)
 
+    def _read_items(self) -> Iterator[Item]:
+        for __, line in self._read_doc():
+            decrypted_line = self._crypt.decrypt(line)
+            yield Item(decrypted_line)
+
     def _write_item(self, item: bytes, fp: BufferedWriter) -> None:
         encrypted_item = self._crypt.encrypt(item)
         fp.write(struct.pack('<H', len(encrypted_item)))
