@@ -42,21 +42,28 @@ class Document:
     def _to_dict_tree(items: List[Tuple[str, Any]]) -> dict:
         result = {}
 
-        for sp, vl in items:
-            p_result = result
-            sp_split = [x for x in sp.split('/') if x]
-            max_i = len(sp_split) - 1
+        for path, value in items:
+            result_ref = result
+            parts = path.strip('/').split('/')
+            max_index = len(parts) - 1
+            last_index = None
 
-            for i, p in enumerate(sp_split):
-                if max_i == i:
-                    if isinstance(p_result, list):
-                        p_result[int(p)].append(vl)
+            for i, part in enumerate(parts):
+                if i == max_index:
+                    if isinstance(result_ref, list):
+                        result_ref[last_index][part] = value
                     else:
-                        p_result[p] = vl
-                elif isinstance(p_result, list) and p.isdigit():
-                    p_result = p_result[int(p)]
+                        result_ref[part] = value
+                elif parts[i + 1].isdigit():
+                    result_ref = result_ref.setdefault(part, [])
+                elif part.isdigit():
+                    last_index = int(part)
+                    try:
+                        result_ref[last_index]
+                    except IndexError:
+                        result_ref.insert(last_index, {})
                 else:
-                    p_result = p_result.setdefault(p, {})
+                    result_ref = result_ref.setdefault(part, {})
 
         return result
 
