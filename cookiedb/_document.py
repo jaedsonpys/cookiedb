@@ -50,7 +50,9 @@ class Document:
 
             for i, part in enumerate(parts):
                 if i == max_index:
-                    if isinstance(result_ref, list):
+                    if isinstance(result_ref, list) and part.isdigit():
+                        result_ref.append(value)
+                    elif isinstance(result_ref, list):
                         result_ref[last_index][part] = value
                     else:
                         result_ref[part] = value
@@ -59,9 +61,10 @@ class Document:
                 elif part.isdigit():
                     last_index = int(part)
                     try:
-                        result_ref[last_index]
+                        result_ref = result_ref[last_index]
                     except IndexError:
                         result_ref.insert(last_index, {})
+                        result_ref = result_ref[last_index]
                 else:
                     result_ref = result_ref.setdefault(part, {})
 
