@@ -56,15 +56,20 @@ class Document:
                         result_ref[last_index][part] = value
                     else:
                         result_ref[part] = value
-                elif parts[i + 1].isdigit():
-                    result_ref = result_ref.setdefault(part, [])
                 elif part.isdigit():
                     last_index = int(part)
                     try:
                         result_ref = result_ref[last_index]
                     except IndexError:
-                        result_ref.insert(last_index, {})
+                        if parts[i + 1].isdigit():
+                            dtype = []
+                        else:
+                            dtype = {}
+
+                        result_ref.insert(last_index, dtype)
                         result_ref = result_ref[last_index]
+                elif parts[i + 1].isdigit():
+                    result_ref = result_ref.setdefault(part, [])
                 else:
                     result_ref = result_ref.setdefault(part, {})
 
