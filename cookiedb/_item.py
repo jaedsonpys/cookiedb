@@ -19,9 +19,10 @@ from typing import Any, Union, Iterator, List, Any
 from .exceptions import ValueNotSupportedError
 
 VALUE_MAP = {
+    # id, length, struct type
     str: (1, None, lambda vlen: f'{vlen}s'),
     int: (2, 4, 'i'),
-    float: (3, 4, 'f'),
+    float: (3, 8, 'd'),
     bool: (4, 1, '?'),
 }
 
