@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import struct
+from io import BytesIO
 from hashlib import sha256
 from secrets import token_bytes
 
@@ -54,8 +56,8 @@ class Cryptography:
         """Encrypt a data in bytes.
 
         The result will be a string in bytes containing
-        the length of the encrypted data, initialization
-        vector (IV), encrypted data and a MAC hash.
+        the initialization vector (IV), encrypted data
+        and a MAC hash.
 
         :param data: Any data in bytes
         :type data: bytes
@@ -69,27 +71,35 @@ class Cryptography:
         cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
         encrypted_data = cipher.encrypt(padding_data)
 
-        result = b''.join((len(data).to_bytes(4, 'big'), random_iv, encrypted_data))
-        return b''.join((result, self._get_hmac(result)))
+        enc_data_mac = self._get_hmac(encrypted_data)
+        enc_data_len = len(encrypted_data)
+        enc_data_mac_len = len(enc_data_mac)
+
+        pack_values = (enc_data_len, enc_data_mac_len,
+                       random_iv, encrypted_data, enc_data_mac)
+        result = struct.pack(f'<HH 16s {enc_data_len}s {enc_data_mac_len}s', *pack_values)
+
+        return result
 
     def decrypt(self, token: bytes) -> bytes:
         """Decrypt a token in bytes.
 
         :param token: Encrypted token
         :type token: bytes
-        :raises Exception: If token is invalid
-        :raises Exception: If token has a invalid signature
+        :raises InvalidTokenError: If token is invalid
+        :raises InvalidSignatureError: If token has a invalid signature
         :return: Decrypted data
         :rtype: bytes
         """
 
-        random_iv = token[4:20]
-        mac = token[-32:]
-        encrypted_data = token[20:-32]
+        token_buf = BytesIO(token)
+        enc_len, mac_len = struct.unpack('<HH', token_buf.read(4))
+        flen = (enc_len + mac_len) + 16
+        iv, encrypted_data, mac = struct.unpack(f'<16s {enc_len}s {mac_len}s', token_buf.read(flen))
 
-        cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=random_iv)
+        cipher = AES.new(self._encryption_key, AES.MODE_CBC, iv=iv)
         
-        if self._valid_hmac(mac, token[:-32]):
+        if self._valid_hmac(mac, encrypted_data):
             try:
                 decrypted_data = cipher.decrypt(encrypted_data)
                 unpad_data = Padding.unpad(decrypted_data, AES.block_size)
@@ -98,15 +108,3 @@ class Cryptography:
             return unpad_data
         else:
             raise exceptions.InvalidSignatureError('Token signature don\'t match')
-
-    def get_data_size(self, token: bytes) -> int:
-        """Return the encrypted data size.
-
-        :param token: Encrypted token
-        :type token: bytes
-        :return: Data size in bytes
-        :rtype: int
-        """
-
-        size = int.from_bytes(token[:4], 'big')
-        return size

@@ -84,6 +84,10 @@ Documentation for released versions of CookieDB. If you have any issues or conce
     - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v8.1.0)
     - [PyPI Package](https://pypi.org/project/cookiedb/8.1.0/)
 
+* [9.0.0 (Aug 6, 2023)](https://jaedsonpys.github.io/cookiedb/9.0.0)
+    - [Source code](https://github.com/jaedsonpys/cookiedb/releases/tag/v9.0.0)
+    - [PyPI Package](https://pypi.org/project/cookiedb/9.0.0/)
+
 ## License
 
 ```

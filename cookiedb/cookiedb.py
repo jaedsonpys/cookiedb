@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from os import path
 from typing import Any
 
 from . import exceptions
@@ -38,79 +37,29 @@ class CookieDB:
         _crypto = Cryptography(key)
         self._document = Document(_crypto, database)
 
-        if not path.isfile(database):
-            self._document.create_document()
-        else:
-            try:
-                self._document.get_document()
-            except (exceptions.InvalidTokenError, exceptions.InvalidSignatureError):
-                raise exceptions.InvalidDatabaseKeyError('Invalid database encryption key')
-
-    def _get_database_items(self):
-        try:
-            database = self._document.get_document()
-        except exceptions.DatabaseNotFoundError:
-            self._open_database = None
-            raise exceptions.DatabaseNotFoundError
-
-        return database.get('items')
-
-    def _get_path_list(self, path: str) -> str:
-        path_list = path.split('/')
-        if path.startswith('/'):
-            path_list.pop(0)
-        if path.endswith('/'):
-            path_list.pop(-1)
-
-        return path_list
-
     def add(self, path: str, value: Any) -> None:
         """
         Creates an item in the database.
-        Each path separated by "/" is a key in the JSON file.
 
-        :param path: Item path;
-        :param value: Item value;
+        :param path: Item path
+        :param value: Item value
         :return: None.
         """
 
-        database_items = self._get_database_items()
-        items = database_items
-
-        path_list = self._get_path_list(path)
-        path_list_items = len(path_list) - 1
-
-        for c, i in enumerate(path_list):
-            if c == path_list_items:
-                items[i] = value
-            else:
-                items = items.setdefault(i, {})
-
-        self._document.update_document(database_items)
+        path = path.strip('/')
+        self._document.add(path, value)
 
     def get(self, path: str) -> Any:
         """
         Get a database item from the path.
 
-        :param path: Item path;
-        :return: Returns the obtained value.
-        None if nothing is found.
+        :param path: Item path
+        :return: Returns the obtained value. None if
+        nothing is found.
         """
 
-        path_list = self._get_path_list(path)
-        last_items = {}
-
-        database_items = self._get_database_items()
-
-        for i in path_list:
-            if not last_items:
-                db_item = database_items.get(i)
-                last_items = db_item
-            else:
-                sub_item = last_items.get(i)
-                last_items = sub_item
-
-        return last_items
+        path = path.strip('/')
+        return self._document.get(path)
 
     def delete(self, path: str) -> None:
         """Delete a item from database.
@@ -123,20 +72,8 @@ class CookieDB:
         :return: None
         """
 
-        database_items = self._get_database_items()
-        df = database_items
-
-        path_list = self._get_path_list(path)
-        path_list_items = len(path_list) - 1
-
-        for c, i in enumerate(path_list):
-            if c == path_list_items:
-                if i in df:
-                    df = df.pop(i)
-            else:
-                df = df.setdefault(i, {})
-
-        self._document.update_document(database_items)
+        path = path.strip('/')
+        self._document.delete(path)
 
     def update(self, path: str, value: Any) -> None:
         """Update a item from database.
@@ -150,22 +87,8 @@ class CookieDB:
         Raised if item does not exist
         """
 
-        if self.get(path) is not None:
-            database_items = self._get_database_items()
-            items = database_items
-
-            path_list = self._get_path_list(path)
-            path_list_items = len(path_list) - 1
-
-            for c, i in enumerate(path_list):
-                if c == path_list_items:
-                    items[i] = value
-                else:
-                    items = items.setdefault(i, {})
-
-            self._document.update_document(database_items)
-        else:
-            raise exceptions.ItemNotExistsError(f'Item "{path}" not exists')
+        path = path.strip('/')
+        self._document.update(path, value)
 
     def append(self, path: str, value: Any) -> None:
         """Append to a list from database. The path item
@@ -181,6 +104,7 @@ class CookieDB:
         :raises exceptions.ItemIsNotAListError: If the path item is not a list
         """
 
+        path = path.strip('/')
         data = self.get(path) or []
 
         if isinstance(data, list):

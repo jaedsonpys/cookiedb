@@ -46,3 +46,8 @@ class InvalidTokenError(Exception):
 class InvalidSignatureError(Exception):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
+
+
+class ValueNotSupportedError(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)

@@ -289,3 +289,16 @@
 ## Features
 
 - Create path if not exist in `CookieDB.append()` method.
+
+# 9.0.0
+
+- [CookieDB 9.0.0 in PyPi](https://pypi.org/project/cookiedb/9.0.0/)
+- [CookieDB 9.0.0 in GitHub Release](https://github.com/jaedsonpys/cookiedb/releases/tag/v9.0.0)
+
+## Features
+
+- Remove all methods that use `pickle`.
+- Create self method to store data and read database by lines.
+- Loading only necessary data when getting, adding, deleting and updating.
+- Encode and decode data using `struct` in `Cryptography` class.
+- Raise `ValueNotSupportedError` to not suported values (supported data types: str, int, float, bool, dict and list).
