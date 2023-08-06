@@ -30,5 +30,5 @@ setup(
         'Programming Language :: Python :: 3',
         'Topic :: Database :: Database Engines/Servers'
     ],
-    keywords=['database', 'noSQL', 'document', 'JSON']
+    keywords=['database', 'noSQL', 'document', 'db', 'engine']
 )
