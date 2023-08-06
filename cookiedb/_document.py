@@ -39,8 +39,8 @@ class Document:
                 raise exceptions.InvalidDatabaseKeyError('Invalid database key') from None
 
     @staticmethod
-    def _to_dict_tree(items: List[Tuple[str, Any]]) -> dict:
-        result = {}
+    def _to_dict_tree(items: List[Tuple[str, Any]], _list: bool = False) -> dict:
+        result = [] if _list else {}
 
         for path, value in items:
             result_ref = result
@@ -126,31 +126,24 @@ class Document:
 
             return False
 
-        def _get_dict_path(ipath: bytes) -> str:
-            ipsplit = ipath.split(b'/')
-            for p in ipsplit:
-                if p.isdigit():
-                    i = ipsplit.index(p)
-                    dict_path = b'/'.join(ipsplit[i + 1:])
-                    return dict_path.strip(b'/').decode()
+        _encoded_path = path.encode()
+        _enc_path_elem = b''.join((b'#', _encoded_path))
+        _get_basepath = lambda p: p.replace(_enc_path_elem, b'')
 
         for item in self._read_items():
             item_path = item.get_path()
 
             if _in_required(item_path):
                 value = item.get_value()
+                basepath = _get_basepath(item_path).decode()
 
                 if not item_path.decode()[-1].isdigit():
-                    dict_value_path = _get_dict_path(item_path)
-                    dict_value = self._to_dict_tree([(dict_value_path, value)])
-                    list_items.append(dict_value)
+                    list_items.append((basepath, value))
                 else:
-                    list_items.append(value)
+                    list_items.append((basepath, value))
 
-            if len(list_items) == _len:
-                break
-
-        return list_items
+        tree_items = self._to_dict_tree(list_items, _list=True)
+        return tree_items
 
     def add(self, path: str, value: Any) -> None:
         if self._exists(path):
