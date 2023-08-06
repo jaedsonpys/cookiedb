@@ -11,8 +11,9 @@ from cookiedb import CookieDB, exceptions
 users = {
     'jaedson': {
         'name': 'Jaedson',
-        'age': 15,
-        'email': 'test@mail.com',
+        'weight': 52.248,
+        'working': False,
+        'age': 16,
         'languages': [
             'python', 'javascript',
             'cpp', 'css', 'html',
@@ -21,8 +22,9 @@ users = {
     },
     'pedro': {
         'name': 'Pedro',
+        'weight': 70.479,
+        'working': True,
         'age': 24,
-        'email': 'test@mail.com',
         'languages': [
             'javascript', 'css', 'html',
             'typescript'
@@ -30,8 +32,9 @@ users = {
     },
     'maria': {
         'name': 'Maria',
-        'age': 17,
-        'email': 'test@mail.com',
+        'weight': 67.342,
+        'working': False,
+        'age': 70,
         'languages': [
             'javascript', 'css', 'html',
             'golang'
