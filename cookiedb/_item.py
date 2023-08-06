@@ -65,6 +65,10 @@ class Item:
                 items = cls._dict_to_items(v, list_element_path)
                 for item in items:
                     yield item
+            elif isinstance(v, list):
+                items = cls.create_list(list_element_path, v)
+                for item in items:
+                    yield item
             else:
                 yield cls.create(list_element_path, v)
 
