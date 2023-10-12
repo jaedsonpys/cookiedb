@@ -45,7 +45,7 @@ python_ext = database.get('languages/python/ext')
 print(f'Python extension: {python_ext}')
 ```
 
-You can find more usage examples in the [examples/ directory](https://github.com/jaedsonpys/cookiedb/tree/master/examples)
+You can find more usage examples in the [examples/directory](https://github.com/jaedsonpys/cookiedb/tree/master/examples)
 
 # License
 
